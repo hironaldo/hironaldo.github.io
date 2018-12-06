@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="一、Hexo安装及初始化123456npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化``` ### 二、常用指令+ 新建草稿 hexo new draft &amp;quot;文章名称&amp;quot; 1+ 新建文章 hexo n &amp;quot;文章名称&amp;quot; === hexo new &amp;quot;文章名称&amp;quot; 1+ 发">
+<meta name="description" content="一、Hexo安装及初始化123npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化">
 <meta name="keywords" content="学习笔记,Hexo指令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo常用指令">
 <meta property="og:url" content="http://yoursite.com/2018/12/06/hexo/hexo-order/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="一、Hexo安装及初始化123456npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化``` ### 二、常用指令+ 新建草稿 hexo new draft &amp;quot;文章名称&amp;quot; 1+ 新建文章 hexo n &amp;quot;文章名称&amp;quot; === hexo new &amp;quot;文章名称&amp;quot; 1+ 发">
+<meta property="og:description" content="一、Hexo安装及初始化123npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T02:48:52.075Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/06/FljIpt.png">
+<meta property="og:updated_time" content="2018-12-06T03:06:52.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo常用指令">
-<meta name="twitter:description" content="一、Hexo安装及初始化123456npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化``` ### 二、常用指令+ 新建草稿 hexo new draft &amp;quot;文章名称&amp;quot; 1+ 新建文章 hexo n &amp;quot;文章名称&amp;quot; === hexo new &amp;quot;文章名称&amp;quot; 1+ 发">
+<meta name="twitter:description" content="一、Hexo安装及初始化123npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/12/06/FljIpt.png">
 
 
 
@@ -352,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  243
+                  268
                 </span>
               
 
@@ -389,30 +391,65 @@
       
 
       
-        <h3 id="一、Hexo安装及初始化"><a href="#一、Hexo安装及初始化" class="headerlink" title="一、Hexo安装及初始化"></a>一、Hexo安装及初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g #安装</span><br><span class="line">npm update hexo -g #升级</span><br><span class="line">hexo init #初始化</span><br><span class="line">``` </span><br><span class="line">### 二、常用指令</span><br><span class="line">+ 新建草稿</span><br></pre></td></tr></table></figure>
-<pre><code>hexo new draft &quot;文章名称&quot;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 新建文章</span><br></pre></td></tr></table></figure>
-<pre><code>hexo n &quot;文章名称&quot; === hexo new &quot;文章名称&quot;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 发布文章</span><br></pre></td></tr></table></figure>
-<pre><code>hexo publish &quot;文章名称&quot;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 启动服务</span><br></pre></td></tr></table></figure>
-<pre><code>hexo s === hexo server
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 部署至服务器</span><br></pre></td></tr></table></figure>
-<pre><code>hexo d === hexo deploy
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 清楚缓存</span><br></pre></td></tr></table></figure>
-<pre><code>hexo clean
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 更改端口</span><br></pre></td></tr></table></figure>
-<pre><code>hexo server -p 端口号
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 自定义IP</span><br></pre></td></tr></table></figure>
-<pre><code>hexo s -i ip地址
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 生成静态页面至public目录</span><br></pre></td></tr></table></figure>
-<pre><code>hexo g === hexo generate Ps:可与hexo g 合并为 hexo d -g / hexo g -d
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">![Image text](https://s1.ax1x.com/2018/12/06/FljIpt.png)</span><br><span class="line">### 三、报错异常</span><br><span class="line">+ 1 </span><br><span class="line">    + 找不到git部署</span><br></pre></td></tr></table></figure>
-<pre><code>ERROR Deployer not found: git
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 解决方法</span><br></pre></td></tr></table></figure>
-<pre><code>npm install hexo-deployer-git --save
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ 2 </span><br><span class="line">    + 部署类型设置git --&gt;打开你博客的根目录，找到 _config.yml配置文件</span><br></pre></td></tr></table></figure>
-<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-https-hexo-io-docs-deployment-html"><a href="#Docs-https-hexo-io-docs-deployment-html" class="headerlink" title="Docs: https://hexo.io/docs/deployment.html"></a>Docs: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: git<br>  repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:RONALDO-FAN/RONALDO-FAN.github.io<br>  branch: master<br><code>`</code></p>
+        <h3 id="一、Hexo安装及初始化"><a href="#一、Hexo安装及初始化" class="headerlink" title="一、Hexo安装及初始化"></a>一、Hexo安装及初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g #安装</span><br><span class="line">npm update hexo -g #升级</span><br><span class="line">hexo init #初始化</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="二、常用指令"><a href="#二、常用指令" class="headerlink" title="二、常用指令"></a>二、常用指令</h3><ul>
+<li><p>新建草稿</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new draft &quot;文章名称&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建文章</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;文章名称&quot; === hexo new &quot;文章名称&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发布文章</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo publish &quot;文章名称&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s === hexo server</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署至服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d === hexo deploy</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清楚缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更改端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server -p 端口号</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义IP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -i ip地址</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成静态页面至public目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g === hexo generate Ps:可与hexo g 合并为 hexo d -g / hexo g -d</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/12/06/FljIpt.png" alt="Image text"></p>
+<h3 id="三、报错异常"><a href="#三、报错异常" class="headerlink" title="三、报错异常"></a>三、报错异常</h3><ul>
+<li><p>1 </p>
+<ul>
+<li>找不到git部署及解决方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>2 </p>
+<ul>
+<li>部署类型设置git –&gt;打开你博客的根目录，找到 _config.yml配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:github用户名/github用户名.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、查看更多详情"><a href="#四、查看更多详情" class="headerlink" title="四、查看更多详情"></a>四、查看更多详情</h3><ul>
+<li>Hexo官方文档<ul>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a></li>
+</ul>
+</li>
+<li>大佬们的教程<ul>
+<li><a href="https://segmentfault.com/a/1190000002632530" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002632530</a></li>
+<li><a href="https://www.cnblogs.com/fengxiongZz/p/7707219.html" target="_blank" rel="noopener">https://www.cnblogs.com/fengxiongZz/p/7707219.html</a></li>
+<li><a href="https://www.bilibili.com/video/av17653359" target="_blank" rel="noopener">https://www.bilibili.com/video/av17653359</a></li>
+</ul>
+</li>
+</ul>
+<p>END🙈</p>
 
       
     </div>
@@ -455,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/06/asd/" rel="prev" title="asd">
-                asd <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/06/article/一切准时/" rel="prev" title="一切准时">
+                一切准时 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -575,7 +612,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -632,7 +669,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Hexo安装及初始化"><span class="nav-number">1.</span> <span class="nav-text">一、Hexo安装及初始化</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Deployment"><span class="nav-number"></span> <span class="nav-text">Deployment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docs-https-hexo-io-docs-deployment-html"><span class="nav-number"></span> <span class="nav-text">Docs: https://hexo.io/docs/deployment.html</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Hexo安装及初始化"><span class="nav-number">1.</span> <span class="nav-text">一、Hexo安装及初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、常用指令"><span class="nav-number">2.</span> <span class="nav-text">二、常用指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、报错异常"><span class="nav-number">3.</span> <span class="nav-text">三、报错异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、查看更多详情"><span class="nav-number">4.</span> <span class="nav-text">四、查看更多详情</span></a></li></ol></div>
             
 
           </div>
@@ -666,7 +703,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.3k</span>
+    <span title="Site words total count">1.7k</span>
   
 </div>
 
