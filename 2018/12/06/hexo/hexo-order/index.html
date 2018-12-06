@@ -53,16 +53,16 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/football.svg?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/football.svg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-foot.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/football.svg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-foot.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/football.svg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/logo1.svg?v=5.1.4" color="#222">
 
 
 
@@ -88,7 +88,10 @@
 <meta property="og:description" content="一、Hexo安装及初始化123npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/06/FljIpt.png">
-<meta property="og:updated_time" content="2018-12-06T03:06:52.188Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/06/F1iFYD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/06/F1V9iV.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/06/F1Ved1.png">
+<meta property="og:updated_time" content="2018-12-06T05:56:46.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo常用指令">
 <meta name="twitter:description" content="一、Hexo安装及初始化123npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化">
@@ -102,7 +105,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -354,7 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  268
+                  339
                 </span>
               
 
@@ -409,7 +412,7 @@
 <li><p>部署至服务器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d === hexo deploy</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>清楚缓存</p>
+<li><p>清除缓存</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>更改端口</p>
@@ -423,7 +426,23 @@
 </li>
 </ul>
 <p><img src="https://s1.ax1x.com/2018/12/06/FljIpt.png" alt="Image text"></p>
-<h3 id="三、报错异常"><a href="#三、报错异常" class="headerlink" title="三、报错异常"></a>三、报错异常</h3><ul>
+<h3 id="三、插件推荐"><a href="#三、插件推荐" class="headerlink" title="三、插件推荐"></a>三、插件推荐</h3><ul>
+<li>1<ul>
+<li>文章置顶<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>文章添加top值即可<br><img src="https://s1.ax1x.com/2018/12/06/F1iFYD.png" alt="Image text"></p>
+<ul>
+<li>2<ul>
+<li>文章封面<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-less</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>一张图片外链和less标签即可,该封面图不会出现在正文<br><img src="https://s1.ax1x.com/2018/12/06/F1V9iV.png" alt="Image text"><br>效果图如下<br><img src="https://s1.ax1x.com/2018/12/06/F1Ved1.png" alt="Image text"></p>
+<h3 id="四、报错异常"><a href="#四、报错异常" class="headerlink" title="四、报错异常"></a>四、报错异常</h3><ul>
 <li><p>1 </p>
 <ul>
 <li>找不到git部署及解决方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
@@ -437,7 +456,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="四、查看更多详情"><a href="#四、查看更多详情" class="headerlink" title="四、查看更多详情"></a>四、查看更多详情</h3><ul>
+<h3 id="五、查看更多详情"><a href="#五、查看更多详情" class="headerlink" title="五、查看更多详情"></a>五、查看更多详情</h3><ul>
 <li>Hexo官方文档<ul>
 <li><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a></li>
 </ul>
@@ -482,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/05/mybatis/mybatis1/" rel="next" title="Mybatis学习笔记(一)">
-                <i class="fa fa-chevron-left"></i> Mybatis学习笔记(一)
+              <a href="/2018/12/06/article/一切准时/" rel="next" title="一切都准时">
+                <i class="fa fa-chevron-left"></i> 一切都准时
               </a>
             
           </div>
@@ -491,10 +510,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/06/article/一切准时/" rel="prev" title="一切准时">
-                一切准时 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -626,7 +641,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://github.com/RONALDO-FAN" target="_blank" title="GitHub">
+                    <a href="https://github.com/crbug" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
@@ -669,7 +684,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Hexo安装及初始化"><span class="nav-number">1.</span> <span class="nav-text">一、Hexo安装及初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、常用指令"><span class="nav-number">2.</span> <span class="nav-text">二、常用指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、报错异常"><span class="nav-number">3.</span> <span class="nav-text">三、报错异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、查看更多详情"><span class="nav-number">4.</span> <span class="nav-text">四、查看更多详情</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Hexo安装及初始化"><span class="nav-number">1.</span> <span class="nav-text">一、Hexo安装及初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、常用指令"><span class="nav-number">2.</span> <span class="nav-text">二、常用指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、插件推荐"><span class="nav-number">3.</span> <span class="nav-text">三、插件推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、报错异常"><span class="nav-number">4.</span> <span class="nav-text">四、报错异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、查看更多详情"><span class="nav-number">5.</span> <span class="nav-text">五、查看更多详情</span></a></li></ol></div>
             
 
           </div>
@@ -677,6 +692,13 @@ var jiathis_config={
       <!--/noindex-->
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
       
 
     </div>
@@ -703,7 +725,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.7k</span>
+    <span title="Site words total count">1.8k</span>
   
 </div>
 
@@ -753,11 +775,6 @@ var jiathis_config={
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     

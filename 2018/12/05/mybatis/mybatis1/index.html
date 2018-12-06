@@ -53,16 +53,16 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/football.svg?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/football.svg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-foot.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/football.svg?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-foot.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/football.svg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/logo1.svg?v=5.1.4" color="#222">
 
 
 
@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ronaldo">
 <meta property="og:description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T13:13:36.906Z">
+<meta property="og:updated_time" content="2018-12-06T04:01:22.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis学习笔记(一)">
 <meta name="twitter:description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -416,7 +416,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="四、代码案例"><a href="#四、代码案例" class="headerlink" title="四、代码案例"></a>四、代码案例</h3><p>1、编写Mybatis核心配置文件【 mybatis-core.xml 】<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;typeAliases&gt;</span><br><span class="line">    &lt;typeAlias type=&quot;com.fan.entity.StudentEntity&quot; alias=&quot;StudentEntity&quot;/&gt;</span><br><span class="line">&lt;/typeAliases&gt;</span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">            &lt;transactionManager type=&quot;JDBC&quot;/&gt;</span><br><span class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://127.0.0.1:3306/public&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper resource=&quot;StudentMapper.xml&quot;/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="四、代码案例"><a href="#四、代码案例" class="headerlink" title="四、代码案例"></a>四、代码案例</h3><p>1、编写Mybatis核心配置文件【 mybatis-core.xml 】<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;com.fan.entity.StudentEntity&quot; alias=&quot;StudentEntity&quot;/&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">            &lt;transactionManager type=&quot;JDBC&quot;/&gt;</span><br><span class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://127.0.0.1:3306/public&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper resource=&quot;xxx.xml&quot;/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
 <p>释意: </p>
 <ul>
 <li>typeAlias用于存放实体类别名的集合 — typeAlias中的type代表实体类 — alias我们自己自定义的别名</li>
@@ -475,8 +475,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/06/hexo/hexo-order/" rel="prev" title="Hexo常用指令">
-                Hexo常用指令 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/06/article/一切准时/" rel="prev" title="一切都准时">
+                一切都准时 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -609,7 +609,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://github.com/RONALDO-FAN" target="_blank" title="GitHub">
+                    <a href="https://github.com/crbug" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
@@ -661,6 +661,13 @@ var jiathis_config={
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -686,7 +693,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.7k</span>
+    <span title="Site words total count">1.8k</span>
   
 </div>
 
@@ -736,11 +743,6 @@ var jiathis_config={
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
