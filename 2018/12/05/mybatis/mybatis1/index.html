@@ -56,19 +56,19 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-foot.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-foot.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo1.svg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
 
 
-  <meta name="keywords" content="学习笔记,mybatis,">
+  <meta name="keywords" content="原创,后端,学习笔记,mybatis,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
-<meta name="keywords" content="学习笔记,mybatis">
+<meta name="keywords" content="原创,后端,学习笔记,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis学习笔记(一)">
 <meta property="og:url" content="http://yoursite.com/2018/12/05/mybatis/mybatis1/index.html">
 <meta property="og:site_name" content="Ronaldo">
 <meta property="og:description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T04:01:22.319Z">
+<meta property="og:updated_time" content="2018-12-06T13:07:42.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis学习笔记(一)">
 <meta name="twitter:description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
@@ -352,7 +352,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1k
                 </span>
               
 
@@ -416,7 +416,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="四、代码案例"><a href="#四、代码案例" class="headerlink" title="四、代码案例"></a>四、代码案例</h3><p>1、编写Mybatis核心配置文件【 mybatis-core.xml 】<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;com.fan.entity.StudentEntity&quot; alias=&quot;StudentEntity&quot;/&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">            &lt;transactionManager type=&quot;JDBC&quot;/&gt;</span><br><span class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://127.0.0.1:3306/public&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper resource=&quot;xxx.xml&quot;/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="四、代码案例"><a href="#四、代码案例" class="headerlink" title="四、代码案例"></a>四、代码案例</h3><p>1、编写Mybatis核心配置文件【 mybatis-core.xml 】<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">"com.fan.entity.StudentEntity"</span> <span class="attr">alias</span>=<span class="string">"StudentEntity"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/public"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"xxx.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>释意: </p>
 <ul>
 <li>typeAlias用于存放实体类别名的集合 — typeAlias中的type代表实体类 — alias我们自己自定义的别名</li>
@@ -425,7 +425,7 @@
 <li>dataSource是数据库连接的基本信息</li>
 <li>mapper中的resource代表应用实体类的Mapper</li>
 </ul>
-<p>2、编写Mybatis核心配置文件【 mybatis-core.xml 】<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;mapper namespace=&quot;StuMapper&quot;&gt;</span><br><span class="line">    &lt;select id=&quot;selCount&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">      select count(*) from student</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id=&quot;selById&quot; parameterType=&quot;int&quot; resultType=&quot;StudentEntity&quot;&gt;</span><br><span class="line">        SELECT * FROM student WHERE student.stuId = #&#123;id&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;insert id=&quot;addOne&quot; parameterType=&quot;StudentEntity&quot;&gt;</span><br><span class="line">        INSERT INTO student VALUES(NULL,#&#123;stuName&#125;,#&#123;gender&#125;,#&#123;age&#125;,#&#123;address&#125;,NULL)</span><br><span class="line">    &lt;/insert&gt;</span><br><span class="line"></span><br><span class="line">    &lt;delete id=&quot;delOne&quot; parameterType=&quot;int&quot;&gt;</span><br><span class="line">        DELETE FROM student WHERE student.stuId = #&#123;id&#125;</span><br><span class="line">    &lt;/delete&gt;</span><br><span class="line"></span><br><span class="line">    &lt;update id=&quot;modifyOne&quot; parameterType=&quot;StudentEntity&quot;&gt;</span><br><span class="line">        UPDATE student SET stuName = #&#123;stuName&#125; WHERE stuId = #&#123;stuId&#125;</span><br><span class="line">    &lt;/update&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2、编写Mybatis核心配置文件【 mybatis-core.xml 】<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"StuMapper"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selCount"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span></span><br><span class="line"><span class="xml">      select count(*) from student</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"StudentEntity"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        SELECT * FROM student WHERE student.stuId = #</span><span class="template-variable">&#123;id&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addOne"</span> <span class="attr">parameterType</span>=<span class="string">"StudentEntity"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        INSERT INTO student VALUES(NULL,#</span><span class="template-variable">&#123;stuName&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;gender&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;age&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;address&#125;</span><span class="xml">,NULL)</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delOne"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        DELETE FROM student WHERE student.stuId = #</span><span class="template-variable">&#123;id&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"modifyOne"</span> <span class="attr">parameterType</span>=<span class="string">"StudentEntity"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        UPDATE student SET stuName = #</span><span class="template-variable">&#123;stuName&#125;</span><span class="xml"> WHERE stuId = #</span><span class="template-variable">&#123;stuId&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>释意: </p>
 <ul>
 <li>mapper中的namespace是独立唯一的</li>
@@ -435,7 +435,7 @@
 <li>resultType代表返回值</li>
 <li>#{xxx} 可以理解为占位符</li>
 </ul>
-<p>3、简单的使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Reader reader = null;</span><br><span class="line">		SqlSessionFactoryBuilder builder = null;</span><br><span class="line">		SqlSessionFactory factory = null;</span><br><span class="line">		SqlSession session = null;</span><br><span class="line">		try &#123;</span><br><span class="line">			//1.加载配置文件</span><br><span class="line">			reader = Resources.getResourceAsReader(&quot;mybatis-core.xml&quot;);</span><br><span class="line">			//2.得到工厂的创建对象</span><br><span class="line">			builder = new SqlSessionFactoryBuilder();</span><br><span class="line">			//3.得到工厂对象</span><br><span class="line">			factory = builder.build(reader);</span><br><span class="line">			//4.得到session</span><br><span class="line">			session = factory.openSession();</span><br><span class="line">			//5.执行语句</span><br><span class="line">			StudentEntity student = session.selectOne(&quot;StuMapper.selById&quot;, 100);</span><br><span class="line">			//StuMapper--&gt; StudentMapper.xml中的namespace。 selById--&gt; 为其中的id 。 100--&gt; 实参</span><br><span class="line">			System.out.println(&quot;学生名为--&gt;&quot; + student.getStuName());</span><br><span class="line">			session.commit();</span><br><span class="line">			//修改、新增语句记得提交事务</span><br><span class="line">		&#125;</span><br><span class="line">		catch (Exception e) &#123;</span><br><span class="line">			session.rollback();</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		finally &#123;</span><br><span class="line">			if (session != null) &#123;</span><br><span class="line">				session.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、简单的使用<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">		Reader reader = <span class="literal">null</span>;</span><br><span class="line">		SqlSessionFactoryBuilder builder = <span class="literal">null</span>;</span><br><span class="line">		SqlSessionFactory factory = <span class="literal">null</span>;</span><br><span class="line">		SqlSession session = <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1.加载配置文件</span></span><br><span class="line">			reader = Resources.getResourceAsReader(<span class="string">"mybatis-core.xml"</span>);</span><br><span class="line">			<span class="comment">//2.得到工厂的创建对象</span></span><br><span class="line">			builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">			<span class="comment">//3.得到工厂对象</span></span><br><span class="line">			factory = builder.build(reader);</span><br><span class="line">			<span class="comment">//4.得到session</span></span><br><span class="line">			session = factory.openSession();</span><br><span class="line">			<span class="comment">//5.执行语句</span></span><br><span class="line">			StudentEntity student = session.selectOne(<span class="string">"StuMapper.selById"</span>, <span class="number">100</span>);</span><br><span class="line">			<span class="comment">//StuMapper--&gt; StudentMapper.xml中的namespace。 selById--&gt; 为其中的id 。 100--&gt; 实参</span></span><br><span class="line">			System.<span class="keyword">out</span>.println(<span class="string">"学生名为--&gt;"</span> + student.getStuName());</span><br><span class="line">			session.commit();</span><br><span class="line">			<span class="comment">//修改、新增语句记得提交事务</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			session.rollback();</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (session != <span class="literal">null</span>) &#123;</span><br><span class="line">				session.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>END🙈</p>
 
       
@@ -453,6 +453,10 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+            <a href="/tags/后端/" rel="tag"># 后端</a>
           
             <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
@@ -475,8 +479,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/06/article/一切准时/" rel="prev" title="一切都准时">
-                一切都准时 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/06/hexo/hexo-order/" rel="prev" title="Hexo常用指令">
+                Hexo常用指令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -595,7 +599,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -605,16 +609,6 @@ var jiathis_config={
 
           
 
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/crbug" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-            </div>
           
 
           
@@ -630,7 +624,7 @@ var jiathis_config={
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://strgeon.com/" title="Strgeon" target="_blank">Strgeon</a>
+                    <a href="https://esbug.github.io/" title="q" target="_blank">q</a>
                   </li>
                 
               </ul>
