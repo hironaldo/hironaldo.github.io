@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="一、什么是Pjax?">
+<meta name="description" content="Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。">
 <meta name="keywords" content="转载,学习笔记,前端,jquery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pjax学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/12/06/jquery/pjax/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="一、什么是Pjax?">
+<meta property="og:description" content="Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T13:33:28.498Z">
+<meta property="og:updated_time" content="2018-12-07T13:00:54.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pjax学习笔记">
-<meta name="twitter:description" content="一、什么是Pjax?">
+<meta name="twitter:description" content="Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。">
 
 
 
@@ -352,7 +352,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  987
+                  977
                 </span>
               
 
@@ -389,17 +389,8 @@
       
 
       
-        <h3 id="一、什么是Pjax"><a href="#一、什么是Pjax" class="headerlink" title="一、什么是Pjax?"></a>一、什么是Pjax?</h3><a id="more"></a>
-<ul>
-<li>中文文档解释<ul>
-<li>pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。</li>
-</ul>
-</li>
-<li>自己理解<ul>
-<li>Pjax === PushState(修改地址栏的Url) + Ajax(异步无刷新技术)。简单的来说pjax是这两个技术的结合，执行原理ajax负责去后端请求部分html片段或者json数据，通过渲染到指定的div容器中，再由pushstate刷新当前的url地址，但是并不会造成页面的闪动，因此提升用户网页浏览体验。</li>
-</ul>
-</li>
-</ul>
+        <p>Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。<br><a id="more"></a></p>
+<h3 id="一、我眼中的Pjax"><a href="#一、我眼中的Pjax" class="headerlink" title="一、我眼中的Pjax"></a>一、我眼中的Pjax</h3><p>Pjax === PushState(修改地址栏的Url) + Ajax(异步无刷新技术)。简单的来说pjax是这两个技术的结合，执行原理ajax负责去后端请求部分html片段或者json数据，通过渲染到指定的div容器中，再由pushstate刷新当前的url地址，但是并不会造成页面的闪动，因此提升用户网页浏览体验。</p>
 <h3 id="二、Pjax的工作原理"><a href="#二、Pjax的工作原理" class="headerlink" title="二、Pjax的工作原理"></a>二、Pjax的工作原理</h3><p>pjax的工作原理是通过ajax从服务器端获取HTML，在页面中用获取到的HTML替换指定容器元素中的内容。然后使用pushState技术更新浏览器地址栏中的当前地址。</p>
 <h3 id="三、Pjax的优缺点"><a href="#三、Pjax的优缺点" class="headerlink" title="三、Pjax的优缺点"></a>三、Pjax的优缺点</h3><ul>
 <li>优点：<ul>
@@ -570,6 +561,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/12/07/mybatis/mybatis2/" rel="prev" title="Mybatis学习笔记(二)">
+                Mybatis学习笔记(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -673,7 +668,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -733,7 +728,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是Pjax"><span class="nav-number">1.</span> <span class="nav-text">一、什么是Pjax?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Pjax的工作原理"><span class="nav-number">2.</span> <span class="nav-text">二、Pjax的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Pjax的优缺点"><span class="nav-number">3.</span> <span class="nav-text">三、Pjax的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Pjax起步"><span class="nav-number">4.</span> <span class="nav-text">四、Pjax起步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Pjax方法"><span class="nav-number">5.</span> <span class="nav-text">五、Pjax方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、事件"><span class="nav-number">6.</span> <span class="nav-text">六、事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、文档"><span class="nav-number">7.</span> <span class="nav-text">七、文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、我眼中的Pjax"><span class="nav-number">1.</span> <span class="nav-text">一、我眼中的Pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Pjax的工作原理"><span class="nav-number">2.</span> <span class="nav-text">二、Pjax的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Pjax的优缺点"><span class="nav-number">3.</span> <span class="nav-text">三、Pjax的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Pjax起步"><span class="nav-number">4.</span> <span class="nav-text">四、Pjax起步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Pjax方法"><span class="nav-number">5.</span> <span class="nav-text">五、Pjax方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、事件"><span class="nav-number">6.</span> <span class="nav-text">六、事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、文档"><span class="nav-number">7.</span> <span class="nav-text">七、文档</span></a></li></ol></div>
             
 
           </div>
@@ -774,7 +769,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">2.7k</span>
+    <span title="Site words total count">2.8k</span>
   
 </div>
 
