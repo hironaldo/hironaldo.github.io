@@ -1820,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e0ff1a;
+  background: #9854bf;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2352,13 +2352,6 @@ pre .javascript .function {
 .site-pv .busuanzi-value,
 .page-pv .busuanzi-value {
   margin: 0 5px;
-}
-.site-uv {
-  margin-right: 10px;
-}
-.site-uv::after {
-  content: "|";
-  padding-left: 10px;
 }
 .page-archive .archive-page-counter {
   position: relative;
@@ -3181,4 +3174,13 @@ pre .javascript .function {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
+}
+code {
+  background-color: #f8f8f8;
+  border-radius: 2px;
+  color: #e96900;
+  margin: 0 3px;
+  padding: 3px 5px;
+  white-space: nowrap;
+  font-size: 14px;
 }
