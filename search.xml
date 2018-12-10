@@ -44,21 +44,21 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo常用指令]]></title>
-    <url>%2F2018%2F12%2F06%2Fhexo%2Fhexo-order%2F</url>
-    <content type="text"><![CDATA[一、Hexo安装及初始化123npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化 二、常用指令 新建草稿 1hexo new draft "文章名称" 新建文章 1hexo n "文章名称" === hexo new "文章名称" 发布文章 1hexo publish "文章名称" 启动服务 1hexo s === hexo server 部署至服务器 1hexo d === hexo deploy 清除缓存 1hexo clean 更改端口 1hexo server -p 端口号 自定义IP 1hexo s -i ip地址 生成静态页面至public目录 1hexo g === hexo generate Ps:可与hexo g 合并为 hexo d -g / hexo g -d 三、插件推荐 1 文章置顶12$ npm uninstall hexo-generator-index --save$ npm install hexo-generator-index-pin-top --save 文章添加top值即可 2 文章封面1npm install --save hexo-less 一张图片外链和less标签即可,该封面图不会出现在正文效果图如下 四、报错异常 1 找不到git部署及解决方法12ERROR Deployer not found: gitnpm install hexo-deployer-git --save 2 部署类型设置git –&gt;打开你博客的根目录，找到 _config.yml配置文件123456# Deployment## Docs: https://hexo.io/docs/deployment.htmldeploy: type: git repository: git@github.com:github用户名/github用户名.github.io branch: master 五、查看更多详情 Hexo官方文档 https://hexo.io/zh-cn/ 大佬们的教程 https://segmentfault.com/a/1190000002632530 https://www.cnblogs.com/fengxiongZz/p/7707219.html https://www.bilibili.com/video/av17653359 END🙈]]></content>
-      <tags>
-        <tag>原创</tag>
-        <tag>Hexo指令</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[活在你的时区]]></title>
     <url>%2F2018%2F12%2F06%2Farticle%2F%E6%B4%BB%E5%9C%A8%E4%BD%A0%E7%9A%84%E6%97%B6%E5%8C%BA%2F</url>
     <content type="text"><![CDATA[纽约时间比加州时间早三个小时，New York is 3 hours ahead of California但加州时间并没有变慢。but it does not make California slow有人22岁就毕业了，Someone graduated at the age of 22但等了五年才找到好的工作！but waited 5 years before securing a good job有人25岁就当上CEO，却在50岁去世。Someone became a CEO at 25，and died at 50也有人迟到50岁才当上CEO，然后活到90岁。While another became a CEO at 50 and lived to 90 years.有人依然单身，同时也有人已婚。Someone is still single，while someone else got married.奥巴马55岁就退休，川普70岁才开始当总统。Obama retires at 55，but Trump starts at 70世上每个人本来就有自己的发展时区。Absolutely everyone in this world works based on their Time Zone身边有些人看似走在你前面，People around you might seem to go ahead of you也有人看似走在你后面。some might seem to be behind you但其实每个人在自己的时区都有自己的步伐。But everyone is running their own RACE, in their own TIME.不用嫉妒或嘲笑他们。Don’t envy them or mock them他们都在自己的时区里，你也是！They are in their TIME ZONE, and you are in yours生命就是等待正确的行动时机。Life is about waiting for the right moment to act所以，放轻松、你没有落后、你没有领先。So, RELAX、You’re not LATE、You’re not EARLY在命运为你安排的属于自己的时区里，一切都准时。You are very much ON TIME, and in your TIME ZONE Destiny set up for you. 文章来源作者：HIGO链接：https://www.zhihu.com/question/38874036/answer/458029368来源：知乎END🙈]]></content>
       <tags>
         <tag>转载</tag>
         <tag>文章推荐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo常用指令]]></title>
+    <url>%2F2018%2F12%2F06%2Fhexo%2Fhexo-order%2F</url>
+    <content type="text"><![CDATA[一、Hexo安装及初始化123npm install hexo-cli -g #安装npm update hexo -g #升级hexo init #初始化 二、常用指令 新建草稿 1hexo new draft "文章名称" 新建文章 1hexo n "文章名称" === hexo new "文章名称" 发布文章 1hexo publish "文章名称" 启动服务 1hexo s === hexo server 部署至服务器 1hexo d === hexo deploy 清除缓存 1hexo clean 更改端口 1hexo server -p 端口号 自定义IP 1hexo s -i ip地址 生成静态页面至public目录 1hexo g === hexo generate Ps:可与hexo g 合并为 hexo d -g / hexo g -d 三、插件推荐 1 文章置顶12$ npm uninstall hexo-generator-index --save$ npm install hexo-generator-index-pin-top --save 文章添加top值即可 2 文章封面1npm install --save hexo-less 一张图片外链和less标签即可,该封面图不会出现在正文效果图如下 四、报错异常 1 找不到git部署及解决方法12ERROR Deployer not found: gitnpm install hexo-deployer-git --save 2 部署类型设置git –&gt;打开你博客的根目录，找到 _config.yml配置文件123456# Deployment## Docs: https://hexo.io/docs/deployment.htmldeploy: type: git repository: git@github.com:github用户名/github用户名.github.io branch: master 五、查看更多详情 Hexo官方文档 https://hexo.io/zh-cn/ 大佬们的教程 https://segmentfault.com/a/1190000002632530 https://www.cnblogs.com/fengxiongZz/p/7707219.html https://www.bilibili.com/video/av17653359 END🙈]]></content>
+      <tags>
+        <tag>原创</tag>
+        <tag>Hexo指令</tag>
       </tags>
   </entry>
   <entry>
