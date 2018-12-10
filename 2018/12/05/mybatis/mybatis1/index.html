@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Ronaldo">
 <meta property="og:description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-10T07:31:06.402Z">
+<meta property="og:updated_time" content="2018-12-10T08:32:46.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis学习笔记(一)">
 <meta name="twitter:description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
@@ -400,26 +400,26 @@
         <p>MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。</p>
 <a id="more"></a>
 <h3 id="一、了解Mybatis"><a href="#一、了解Mybatis" class="headerlink" title="一、了解Mybatis"></a>一、了解Mybatis</h3><ul>
-<li>MyBatis 是<code>支持定制化SQL</code>、<code>存储过程</code>以及<code>高级映射</code>的优秀的持久层框架。</li>
-<li>MyBatis 避免了几乎所有的 <code>JDBC 代码</code>和<code>手工设置参数</code>以及<code>抽取结果集</code>。</li>
-<li>MyBatis 使用简单的<code> XML </code>或<code>注解来配置和映射基本体</code>，将<code>接口</code>和 <code>Java 的 POJOs</code>(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</li>
+<li>MyBatis 是<code>支持定制化SQL</code>、<code>存储过程</code>以及<code>高级映射</code>的优秀的持久层框架</li>
+<li>MyBatis 避免了几乎所有的 <code>JDBC 代码</code>和<code>手工设置参数</code>以及<code>抽取结果集</code></li>
+<li>MyBatis 使用简单的<code> XML </code>或<code>注解来配置和映射基本体</code>，将<code>接口</code>和 <code>Java 的 POJOs</code>(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录</li>
 </ul>
 <h3 id="二、与Hibernate对比"><a href="#二、与Hibernate对比" class="headerlink" title="二、与Hibernate对比"></a>二、与Hibernate对比</h3><ul>
-<li>MyBatis与Hibernate都属于<code>ORM框架</code>，为数据层提供持久化操作的支持。</li>
-<li>由于MyBatis等<code>接近于JDBC的开发</code>，所以相对于Hibernate更加的简单易学。</li>
-<li>Hibernate开发者<code>不要关注SQL的生成和结果的映射</code>，而Mybatis需要手动配置关系和SQL。</li>
-<li>Hibernate与具体的数据库关联配置对应的XML即可，所执行的HQL语句与数据库无关，<code>移植性强</code>。而Mybatis直接使用的是SQL语句，相对没那么灵活，但是<code>执行效率</code>略高于Hibernate。</li>
+<li>MyBatis与Hibernate都属于<code>ORM框架</code>，为数据层提供持久化操作的支持</li>
+<li>由于MyBatis等<code>接近于JDBC的开发</code>，所以相对于Hibernate更加的简单易学</li>
+<li>Hibernate开发者<code>不要关注SQL的生成和结果的映射</code>，而Mybatis需要手动配置关系和SQL</li>
+<li>Hibernate与具体的数据库关联配置对应的XML即可，所执行的HQL语句与数据库无关，<code>移植性强</code>。而Mybatis直接使用的是SQL语句，相对没那么灵活，但是<code>执行效率</code>略高于Hibernate</li>
 </ul>
 <h3 id="三、Mybatis的优缺点"><a href="#三、Mybatis的优缺点" class="headerlink" title="三、Mybatis的优缺点"></a>三、Mybatis的优缺点</h3><ul>
 <li>优点：<ul>
-<li>SQL写在XML里，从程序代码中彻底分离，<code>降低耦合度</code>，便于统一管理和优化，并可重用，<code>适合多表的复杂查询</code>。</li>
-<li>提供XML标签，<code>支持编写动态SQL语句</code>。</li>
-<li>提供映射标签，<code>支持对象与数据库的ORM字段关系映射</code>。</li>
+<li>SQL写在XML里，从程序代码中彻底分离，<code>降低耦合度</code>，便于统一管理和优化，并可重用，<code>适合多表的复杂查询</code></li>
+<li>提供XML标签，<code>支持编写动态SQL语句</code></li>
+<li>提供映射标签，<code>支持对象与数据库的ORM字段关系映射</code></li>
 </ul>
 </li>
 <li>缺点<ul>
-<li>SQL语句的编写工<code>作量较大</code>，尤其是字段多、关联表多时，更是如此，对开发人员编写SQL语句的功底有一定要求。</li>
-<li>SQL语句依赖于数据库，导致数据库<code>移植性差</code>，不可随意更换数据库。</li>
+<li>SQL语句的编写工<code>作量较大</code>，尤其是字段多、关联表多时，更是如此，对开发人员编写SQL语句的功底有一定要求</li>
+<li>SQL语句依赖于数据库，导致数据库<code>移植性差</code>，不可随意更换数据库</li>
 </ul>
 </li>
 </ul>
@@ -495,8 +495,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/06/article/活在你的时区/" rel="prev" title="活在你的时区">
-                活在你的时区 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/06/hexo/hexo-order/" rel="prev" title="Hexo常用指令">
+                Hexo常用指令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -602,7 +602,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -707,7 +707,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">7.9k</span>
+    <span title="Site words total count">8.2k</span>
   
 </div>
 <!-- 
@@ -731,13 +731,13 @@ var jiathis_config={
 <!-- 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.9k字</span>
+  <span class="post-count">博客全站共8.2k字</span>
 </div>
 -->
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
 

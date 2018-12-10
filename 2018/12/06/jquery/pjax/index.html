@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Ronaldo">
 <meta property="og:description" content="Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-10T07:30:57.977Z">
+<meta property="og:updated_time" content="2018-12-10T08:42:26.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pjax">
 <meta name="twitter:description" content="Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。">
@@ -397,19 +397,19 @@
       
 
       
-        <p>Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。<br><a id="more"></a></p>
-<h3 id="一、我眼中的Pjax"><a href="#一、我眼中的Pjax" class="headerlink" title="一、我眼中的Pjax"></a>一、我眼中的Pjax</h3><p>Pjax === PushState(修改地址栏的Url) + Ajax(异步无刷新技术)。简单的来说pjax是这两个技术的结合，执行原理ajax负责去后端请求部分html片段或者json数据，通过渲染到指定的div容器中，再由pushstate刷新当前的url地址，但是并不会造成页面的闪动，因此提升用户网页浏览体验。</p>
-<h3 id="二、Pjax的工作原理"><a href="#二、Pjax的工作原理" class="headerlink" title="二、Pjax的工作原理"></a>二、Pjax的工作原理</h3><p>pjax的工作原理是通过ajax从服务器端获取HTML，在页面中用获取到的HTML替换指定容器元素中的内容。然后使用pushState技术更新浏览器地址栏中的当前地址。</p>
+        <p>Pjax是一个jQuery插件，它通过<code>ajax和pushState</code>技术提供了极速的<code>（无刷新ajax加载）</code>浏览体验，并且保持了<code>真实的地址</code>、<code>网页标题</code>，<code>浏览器的后退（前进）按钮</code>也可以正常使用。<br><a id="more"></a></p>
+<h3 id="一、我眼中的Pjax"><a href="#一、我眼中的Pjax" class="headerlink" title="一、我眼中的Pjax"></a>一、我眼中的Pjax</h3><p>Pjax === PushState(修改地址栏的Url) + Ajax(异步无刷新技术)。简单的来说pjax是这两个技术的结合，执行原理ajax负责去后端请求部分<code>html片段或者json数据</code>，通过<code>渲染到指定的div容器中</code>，再由<code>pushstate刷新当前的url地址</code>，但是并不会造成页面的闪动，因此提升用户网页浏览体验。</p>
+<h3 id="二、Pjax的工作原理"><a href="#二、Pjax的工作原理" class="headerlink" title="二、Pjax的工作原理"></a>二、Pjax的工作原理</h3><p>pjax的工作原理是通过ajax从<code>服务器端获取HTML</code>，在页面中用获取到的HTML<code>替换指定容器</code>元素中的内容。然后使用pushState技术更新浏览器地址栏中的当前地址。</p>
 <h3 id="三、Pjax的优缺点"><a href="#三、Pjax的优缺点" class="headerlink" title="三、Pjax的优缺点"></a>三、Pjax的优缺点</h3><ul>
 <li>优点：<ul>
-<li>不存在页面资源（js/css）的重复加载和应用。</li>
-<li>如果服务器端配置了pjax，它可以只渲染页面局部内容，从而避免服务器渲染完整布局的额外开销。</li>
+<li>不存在<code>页面资源（js/css）的重复加载和应用</code></li>
+<li>如果服务器端配置了pjax，它可以只渲染页面局部内容，从而<code>避免服务器渲染完整布局</code>的额外开销</li>
 </ul>
 </li>
 <li>缺点<ul>
-<li>不支持一些低版本的浏览器(如IE系列)，因为pushState是html5中history的新特性，在某些旧版浏览器中可能不支持。</li>
-<li>使服务端处理变得复杂。</li>
-<li>pjax依赖于jQuery 1.8或者更高版本。</li>
+<li>不支持一些<code>低版本的浏览器</code>(如IE系列)，因为pushState是html5中history的新特性，在某些旧版浏览器中可能不支持</li>
+<li>使服务端处理变得<code>复杂</code></li>
+<li>pjax依赖于<code>jQuery 1.8或者更高版本</code></li>
 </ul>
 </li>
 </ul>
@@ -421,9 +421,9 @@
 <li><p>$.fn.pjax 概述</p>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>(document).pjax(selector, [container], <span class="keyword">options</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>1.selector：string类型，用于click 事件委托 的选择器。</li>
-<li>2.container：string类型，用于标识唯一pjax容器的选择器。</li>
-<li>3.options object类型，包含下列选项。</li>
+<li>1.selector：<code>string类型，用于click 事件委托的选择器</code></li>
+<li>2.container：<code>string类型，用于标识唯一pjax容器的选择器</code></li>
+<li>3.options <code>object类型</code>，包含下列选项</li>
 </ul>
 </li>
 </ul>
@@ -484,13 +484,13 @@
 <li><p>最简单常见的pjax使用方法如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).pjax(<span class="string">'a'</span>, <span class="string">'#pjax-container'</span>)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>pjax()方法能若干个参数，上文涉及到的’a’和’#pjax-container’。’a’代表所有的a标签链接，而’#pjax-container’代表需要替换内容的容器。通过这种方式可以让页面中所有的链接都实现pjax加载，并指定ID为pjax-container的作为容器元素。</li>
+<li>pjax()方法能若干个参数，上文涉及到的<code>‘a’和’#pjax-container’</code>。<code>‘a’代表所有的a标签链接</code>，而<code>‘#pjax-container’代表需要替换内容的容器</code>。通过这种方式可以让页面中所有的链接都实现pjax加载，并指定ID为pjax-container的作为容器元素。</li>
 </ul>
 </li>
 <li><p>如果我们想指定a标签作为pjax链接使用方法如下：</p>
 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$<span class="comment">(document)</span>.pjax<span class="comment">('[data-pjax] a, a[data-pjax]', '#pjax-container')</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>那么我们可以用data-pjax来注明这是一个pjax链接，然后使用a[data-pjax]来代替全局选择器a。</li>
+<li>那么我们可以用<code>data-pjax来注明这是一个pjax链接</code>，然后使用<code>a[data-pjax]</code>来代替全局选择器a。</li>
 </ul>
 </li>
 </ul>
@@ -569,8 +569,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/06/hexo/hexo-order/" rel="next" title="Hexo常用指令">
-                <i class="fa fa-chevron-left"></i> Hexo常用指令
+              <a href="/2018/12/06/article/活在你的时区/" rel="next" title="活在你的时区">
+                <i class="fa fa-chevron-left"></i> 活在你的时区
               </a>
             
           </div>
@@ -686,7 +686,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -791,7 +791,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">7.9k</span>
+    <span title="Site words total count">8.2k</span>
   
 </div>
 <!-- 
@@ -815,13 +815,13 @@ var jiathis_config={
 <!-- 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.9k字</span>
+  <span class="post-count">博客全站共8.2k字</span>
 </div>
 -->
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
 

@@ -77,7 +77,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="原创,后端,mybatis,">
 
 
 
@@ -88,19 +88,18 @@
 
 
 
-<meta name="description" content="一、起步集合类都位于java.util包下，Java 集合框架主要包括两种类型的容器，一种是集合（Collection）,存储一个元素集合;另一种是图（Map）,存储键/值对映射。支持序列化">
+<meta name="description" content="一、Mybatis面向接口编程Mybatis面向接口编程是mybatis的独有的特性。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义结构清晰，方便维护和扩展。如果用mybatis处理Dao层的话，就可以直接省略实现类，直接在mapper.xml配置文件中编写，这样就可以通过接口访问映射文件。">
+<meta name="keywords" content="原创,后端,mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java 集合框架简述">
-<meta property="og:url" content="http://yoursite.com/2018/12/09/java/集合框架/index.html">
+<meta property="og:title" content="Mybatis学习笔记(四)">
+<meta property="og:url" content="http://yoursite.com/2018/12/10/mybatis/mybatis4/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="一、起步集合类都位于java.util包下，Java 集合框架主要包括两种类型的容器，一种是集合（Collection）,存储一个元素集合;另一种是图（Map）,存储键/值对映射。支持序列化">
+<meta property="og:description" content="一、Mybatis面向接口编程Mybatis面向接口编程是mybatis的独有的特性。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义结构清晰，方便维护和扩展。如果用mybatis处理Dao层的话，就可以直接省略实现类，直接在mapper.xml配置文件中编写，这样就可以通过接口访问映射文件。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2018/12/09/5c0cd52296277.png">
-<meta property="og:updated_time" content="2018-12-10T07:30:47.534Z">
+<meta property="og:updated_time" content="2018-12-10T11:14:04.024Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java 集合框架简述">
-<meta name="twitter:description" content="一、起步集合类都位于java.util包下，Java 集合框架主要包括两种类型的容器，一种是集合（Collection）,存储一个元素集合;另一种是图（Map）,存储键/值对映射。支持序列化">
-<meta name="twitter:image" content="https://i.loli.net/2018/12/09/5c0cd52296277.png">
+<meta name="twitter:title" content="Mybatis学习笔记(四)">
+<meta name="twitter:description" content="一、Mybatis面向接口编程Mybatis面向接口编程是mybatis的独有的特性。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义结构清晰，方便维护和扩展。如果用mybatis处理Dao层的话，就可以直接省略实现类，直接在mapper.xml配置文件中编写，这样就可以通过接口访问映射文件。">
 
 
 
@@ -130,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/09/java/集合框架/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/10/mybatis/mybatis4/">
 
 
 
 
 
-  <title>Java 集合框架简述 | Ronaldo</title>
+  <title>Mybatis学习笔记(四) | Ronaldo</title>
   
 
 
@@ -295,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/java/集合框架/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/10/mybatis/mybatis4/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FANYANGEN">
@@ -312,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java 集合框架简述</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis学习笔记(四)</h1>
         
 
         <div class="post-meta">
@@ -324,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T15:54:28+08:00">
-                2018-12-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T18:46:29+08:00">
+                2018-12-10
               </time>
             
 
@@ -361,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k
+                  290
                 </span>
               
 
@@ -377,7 +376,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  1
                 </span>
               
             </div>
@@ -398,128 +397,23 @@
       
 
       
-        <h3 id="一、起步"><a href="#一、起步" class="headerlink" title="一、起步"></a>一、起步</h3><p>集合类都位于java.util包下，Java 集合框架主要包括两种类型的容器，一种是<code>集合（Collection）,存储一个元素集合</code>;另一种是<code>图（Map）,存储键/值对映射。支持序列化</code></p>
+        <h3 id="一、Mybatis面向接口编程"><a href="#一、Mybatis面向接口编程" class="headerlink" title="一、Mybatis面向接口编程"></a>一、Mybatis面向接口编程</h3><p>Mybatis面向接口编程是<code>mybatis的独有的特性</code>。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义<code>结构清晰，方便维护和扩展</code>。如果用mybatis处理Dao层的话，就可以<code>直接省略实现类</code>，直接在<code>mapper.xml配置文件</code>中编写，这样就可以通过接口访问映射文件。</p>
 <a id="more"></a>
-<h3 id="二、Collection接口"><a href="#二、Collection接口" class="headerlink" title="二、Collection接口"></a>二、Collection接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>Collection&lt;E&gt; extends Iterable&lt;E&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看源码发现Collection是一个接口类，其继承了java迭代接口Iterable</li>
-<li>有三个主要的子接口<code>List、Set 和 Queue</code>，记住<code>Map不是Collection的子接口</code>!!</li>
-<li><code>存储特点允许重复的对象</code></li>
-<li>常用的方法<br><img src="https://i.loli.net/2018/12/09/5c0cd52296277.png" alt="O_W)D_YG3X2QP_~HZGU~4B5.png"></li>
-</ul>
-<h3 id="三、List接口"><a href="#三、List接口" class="headerlink" title="三、List接口"></a>三、List接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>List&lt;E&gt; extends Collection&lt;E&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看源码发现List是一个接口类，其继承了<code>Collection接口</code>，它可以定义一个<code>允许重复的有序集合</code></li>
-<li>List集合代表一个<code>有序集合</code>，集合中每个元素都有其对应的<code>顺序索引</code></li>
-<li>List集合<code>允许使用重复元素</code>，可以通过<code>索引</code>来访问指定位置的集合元素</li>
-<li>实现List接口的集合主要有：</li>
-<li><p>(1) <font color="#0099ff" size="4">ArrayList</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ArrayList&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractList&lt;E&gt;</span> <span class="title">implements</span> <span class="title">List&lt;E&gt;</span>, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>ArrayList继承于<code>AbstractList</code>，实现了<code>List</code>、<code>RandomAccess</code>、<code>Cloneable</code>、<code>Serializable</code>接口</li>
-<li>ArrayList是一个<code>动态数组</code>，也是我们最常用的集合</li>
-<li><code>它允许任何符合规则的元素插入甚至包括null</code></li>
-<li>每一个ArrayList都有一个初始容量（10），该容量代表了数组的大小，但是<code>数组大小是动态的</code></li>
-<li>总的特点:<code>基于数组实现，非线程安全，便于索引，查询效率高，但不便于插入和删除</code></li>
-</ul>
+<h3 id="二、代码实例"><a href="#二、代码实例" class="headerlink" title="二、代码实例"></a>二、代码实例</h3><ul>
+<li><p>Dao层接口</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBillDao</span> &#123;</span><br><span class="line">    <span class="comment">/*根据名称模糊查询所有的订单*/</span></span><br><span class="line">    <span class="function">List&lt;BillEntity&gt; <span class="title">queryBillByName</span>(<span class="params">String productName</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>(2) <font color="#0099ff" size="4">LinkedList</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LinkedList&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractSequentialList&lt;E&gt;</span> <span class="title">implements</span> <span class="title">List&lt;E&gt;</span>, <span class="title">Deque&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>LinkedList继承于<code>AbstractSequentialList</code>，实现了<code>List</code>，<code>Deque</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
-<li>LinkedList是一个<code>双向链表</code>，那么它的<code>顺序访问会非常高效</code>，而<code>随机访问效率比较低</code></li>
-<li>它除了有ArrayList的基本操作方法外还额外提供了<code>get</code>，<code>remove</code>，<code>insert</code>方法在LinkedList的首部或尾部进行操作</li>
-<li>有个重要的<code>内部类Entry</code>是双向链表节点所对应的数据结构，它包括的属性有：当前节点所包含的值，上一个节点，下一个节点。</li>
-<li>总的特点:<code>基于链表实现，链表内存是散乱的，每一个元素本身内存地址的同时还存储下一个的地址，链表增删快，查找慢</code></li>
-</ul>
+<li><p>Mapper.xml映射文件</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;mapper <span class="keyword">namespace</span>=<span class="string">"com.fan.dao.IBillDao"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">select</span> id=<span class="string">"queryBillByName"</span> parameterType=<span class="string">"String"</span> resultType=<span class="string">"BillEntity"</span>&gt;</span><br><span class="line">        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> smbms_bill <span class="keyword">WHERE</span> productName <span class="keyword">LIKE</span> concat(<span class="comment">'%',#&#123;productName&#125;,'%')</span></span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>(3) <font color="#0099ff" size="4">Vector</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Vector&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractList&lt;E&gt;</span> <span class="title">implements</span> <span class="title">List&lt;E&gt;</span>, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Vector继承于<code>AbstractList</code>，实现了<code>List</code>，<code>RandomAccess</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
-<li>与ArrayList相似，但是<code>Vector是同步的</code></li>
-<li>Vector是<code>线程安全的动态数组</code></li>
-<li>总的特点:<code>基于数组实现，线程安全的，效率低</code></li>
-</ul>
+<li><p>Main方法调用</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	SqlSession session = MybatisUtil.getSession()<span class="comment">;</span></span><br><span class="line">	IBillDao <span class="keyword">billDao </span>= session.getMapper(IBillDao.class)<span class="comment">;</span></span><br><span class="line">	List&lt;<span class="keyword">BillEntity&gt; </span>list = <span class="keyword">billDao.queryBillByName("饮料");</span></span><br><span class="line"><span class="keyword">	</span>for (<span class="keyword">BillEntity </span><span class="keyword">bill </span>: list) &#123;</span><br><span class="line">		System.out.println(<span class="keyword">bill.getBillCode() </span>+ <span class="string">"--"</span> + <span class="keyword">bill.getProductName());</span></span><br><span class="line"><span class="keyword">	</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h3 id="四、Map接口"><a href="#四、Map接口" class="headerlink" title="四、Map接口"></a>四、Map接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>Map&lt;K,V&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+<li><p>PS</p>
 <ul>
-<li>查看源码发现Map是一个接口类，但是它<code>不继承或者实现任何类或接口</code></li>
-<li>Map与List、Set接口不同，它是由一系列<code>键值对组成的集合</code></li>
-<li>提供了<code>key到Value的映射</code> Map中它保证了<code>key与value之间的一一对应关系</code></li>
-<li><code>它不能存在相同的key值，而value值可以相同</code></li>
-<li>实现Map接口的集合主要有：</li>
-<li><p>(1) <font color="#0099ff" size="4">HashMap</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HashMap&lt;K</span>,<span class="title">V&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractMap&lt;K</span>,<span class="title">V&gt;</span> <span class="title">implements</span> <span class="title">Map&lt;K</span>,<span class="title">V&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>HashMap继承于<code>AbstractMap</code>，实现了<code>Map</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
-<li>HashMap 是一个<code>散列表</code>，它存储的内容是<code>键值对(key-value)映射</code></li>
-<li>HashMap 的实现<code>不是同步的</code>，这意味着它<code>不是线程安全的</code></li>
-<li>HashMap中的<code>映射不是有序的</code></li>
-<li>总的特点:<code>基于hash表的Map接口实现，非线程安全的，效率高，key、value都可以为null</code></li>
-</ul>
-</li>
-<li><p>(2) <font color="#0099ff" size="4">HashTable</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Hashtable&lt;K</span>,<span class="title">V&gt;</span> <span class="keyword">extends</span> <span class="title">Dictionary&lt;K</span>,<span class="title">V&gt;</span> <span class="title">implements</span> <span class="title">Map&lt;K</span>,<span class="title">V&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>HashTable继承于<code>Dictionary</code>，实现了<code>Map</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
-<li>HashTable 是一个<code>散列表</code>，它存储的内容是<code>键值对(key-value)映射</code></li>
-<li>HashTable的实现<code>是同步的</code>，这意味着它<code>是线程安全的</code></li>
-<li>HashTable中的<code>映射不是有序的</code></li>
-<li>总的特点:<code>基于hash表的Map接口实现，线程安全的，效率低，key、value都不可以为null</code></li>
-</ul>
-</li>
-<li><p>(3) <font color="#0099ff" size="4">LinkedHashMap</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashMap&lt;K</span>,<span class="title">V&gt;</span> <span class="keyword">extends</span> <span class="title">HashMap&lt;K</span>,<span class="title">V&gt;</span> <span class="title">implements</span> <span class="title">Map&lt;K</span>,<span class="title">V&gt;</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>LinkedHashMap继承于<code>HashMap</code>，实现了 <code>Map</code>接口</li>
-<li>LinkedHashMap是一个<code>HashMap的子类</code>，它<code>保留插入的顺序</code></li>
-<li>如果需要<code>输出的顺序和输入时的相同</code>，那么就选用<code>LinkedHashMap</code></li>
-<li>LinkedHashMap是<code>Map接口哈希表和链接列的实现</code>，具有可预知的<code>迭代顺序</code></li>
-<li>总的特点:<code>基于HashMap，保存了记录的插入顺序，非线程安全的，key、value都可以为null</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="五、Set接口"><a href="#五、Set接口" class="headerlink" title="五、Set接口"></a>五、Set接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>Set&lt;E&gt; extends Collection&lt;E&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看源码发现Set是一个接口类，其继承了<code>Collection接口</code></li>
-<li>Set中的元素实现了<code>不重复，有点象集合的概念</code></li>
-<li>由于Set接口的特殊性，所有传入Set集合中的<code>元素都必须不同</code></li>
-<li><code>最多允许有一个null元素对象</code></li>
-<li><code>无序，不允许有重复的元素</code></li>
-<li>虽然Set中元素<code>没有顺序</code>，但是元素在set中的位置是有由该元素的<code>HashCode决定的</code>，其具体位置其实<code>是固定的</code></li>
-<li>实现Set接口的集合主要有：</li>
-<li><p>(1) <font color="#0099ff" size="4">HashSet</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HashSet&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractSet&lt;E&gt;</span> <span class="title">implements</span> <span class="title">Set&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>HashSet继承于AbstractSet，实现了<code>Set</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
-<li>HashSet是一个<code>没有重复元素</code>的集合，它是由<code>HashMap实现的，不保证元素的顺序</code></li>
-<li>HashSet<code>允许使用null元素</code>，但是<code>非同步的</code></li>
-<li>HashSet按<code>Hash算法来存储集合的元素</code>，因此具有很好的<code>存取和查找性能</code></li>
-<li>HashSet的实现方式大致如下，通过一个<code>HashMap存储元素</code>，元素是存放在<code>HashMap的Key中</code>，而<code>Value统一使用一个Object对象</code></li>
-<li>总的特点:<code>基于HashMap，不允许集合中有重复的值，使用该方式时需要重写equals()和hashCode()方法</code></li>
-</ul>
-</li>
-<li><p>(2) <font color="#0099ff" size="4">LinkedHashSet</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashSet&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">HashSet&lt;E&gt;</span> <span class="title">implements</span> <span class="title">Set&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>LinkedHashSet继承于HashSet，实现了<code>Set</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
-<li>LinkedHashSet底层是<code>基于LinkedHashMap来实现的，有序非同步</code></li>
-<li>LinkedHashSet集合是根据元素的<code>hashCode值</code>来决定元素的存储位置，但是它同时使用<code>链表维护元素的次序</code></li>
-<li>LinkedHashSet将会以元素的<code>添加顺序访问集合的元素</code></li>
-<li>总的特点:<code>基于HashMap，不允许集合中有重复的值，保存了记录的插入顺序</code></li>
-</ul>
-</li>
-<li><p>(2) <font color="#0099ff" size="4">TreeSet</font></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TreeSet&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractSet&lt;E&gt;</span> <span class="title">implements</span> <span class="title">NavigableSet&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>TreeSet继承于AbstractSet，实现了<code>NavigableSet</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
-<li>TreeSet是一个<code>有序集合</code></li>
-<li>TreeSet可以确保集合元素处于<code>排序状态</code></li>
-<li>TreeSet支持两种排序方式，<code>自然排序和定制排序</code></li>
-<li>TreeSet通过<code>compare或者comparaeTo函数</code>来判断元素是否相等</li>
-<li>总的特点:<code>基于TreeMap，非线程安全，非同步的</code></li>
+<li>Mapper.xml映射文件中<code>namespace</code>必须是<code> ‘包名.接口名’</code>，如<code>com.fan.dao.IBillDao</code></li>
+<li>Mapper.xml映射文件中<code>Id</code>必须与<code> 接口的方法名一致</code></li>
+<li>调用时通过<code>session.getMapper(接口.class)</code>，获得接口实例</li>
 </ul>
 </li>
 </ul>
@@ -550,6 +444,16 @@
 	
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+            <a href="/tags/后端/" rel="tag"># 后端</a>
+          
+            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+          
+        </div>
+      
 
       
       
@@ -559,8 +463,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/09/hexo/hexo绑定域名/" rel="next" title="使用Hexo-Github域名绑定(阿里云)">
-                <i class="fa fa-chevron-left"></i> 使用Hexo-Github域名绑定(阿里云)
+              <a href="/2018/12/10/mybatis/mybatis3/" rel="next" title="Mybatis学习笔记(三)">
+                <i class="fa fa-chevron-left"></i> Mybatis学习笔记(三)
               </a>
             
           </div>
@@ -568,10 +472,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/10/mybatis/mybatis3/" rel="prev" title="Mybatis学习笔记(三)">
-                Mybatis学习笔记(三) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -740,7 +640,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、起步"><span class="nav-number">1.</span> <span class="nav-text">一、起步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Collection接口"><span class="nav-number">2.</span> <span class="nav-text">二、Collection接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、List接口"><span class="nav-number">3.</span> <span class="nav-text">三、List接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Map接口"><span class="nav-number">4.</span> <span class="nav-text">四、Map接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Set接口"><span class="nav-number">5.</span> <span class="nav-text">五、Set接口</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Mybatis面向接口编程"><span class="nav-number">1.</span> <span class="nav-text">一、Mybatis面向接口编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、代码实例"><span class="nav-number">2.</span> <span class="nav-text">二、代码实例</span></a></li></ol></div>
             
 
           </div>
