@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
+<meta name="description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 <meta name="keywords" content="原创,后端,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis学习笔记(一)">
 <meta property="og:url" content="http://yoursite.com/2018/12/05/mybatis/mybatis1/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
+<meta property="og:description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-08T08:03:57.012Z">
+<meta property="og:updated_time" content="2018-12-10T07:31:06.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis学习笔记(一)">
-<meta name="twitter:description" content="MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
+<meta name="twitter:description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 
 
 
@@ -397,54 +397,52 @@
       
 
       
-        <p>MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。</p>
+        <p>MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。</p>
 <a id="more"></a>
 <h3 id="一、了解Mybatis"><a href="#一、了解Mybatis" class="headerlink" title="一、了解Mybatis"></a>一、了解Mybatis</h3><ul>
-<li>MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。</li>
-<li>MyBatis 避免了几乎所有的 JDBC 代码和手工设置参数以及抽取结果集。</li>
-<li>MyBatis 使用简单的 XML 或注解来配置和映射基本体，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</li>
+<li>MyBatis 是<code>支持定制化SQL</code>、<code>存储过程</code>以及<code>高级映射</code>的优秀的持久层框架。</li>
+<li>MyBatis 避免了几乎所有的 <code>JDBC 代码</code>和<code>手工设置参数</code>以及<code>抽取结果集</code>。</li>
+<li>MyBatis 使用简单的<code> XML </code>或<code>注解来配置和映射基本体</code>，将<code>接口</code>和 <code>Java 的 POJOs</code>(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</li>
 </ul>
 <h3 id="二、与Hibernate对比"><a href="#二、与Hibernate对比" class="headerlink" title="二、与Hibernate对比"></a>二、与Hibernate对比</h3><ul>
-<li>MyBatis与Hibernate都属于ORM框架，为数据层提供持久化操作的支持。</li>
-<li>由于MyBatis等接近于JDBC的开发，所以相对于Hibernate更加的简单易学。</li>
-<li>Hibernate开发者不要关注SQL的生成和结果的映射，而Mybatis需要手动配置关系和SQL。</li>
-<li>Hibernate与具体的数据库关联配置对应的XML即可，所执行的HQL语句与数据库无关，移植性强。而Mybatis直接使用的是SQL语句，相对没那么灵活。</li>
-<li>Mybatis的灵活性、执行效率略高于Hibernate。</li>
+<li>MyBatis与Hibernate都属于<code>ORM框架</code>，为数据层提供持久化操作的支持。</li>
+<li>由于MyBatis等<code>接近于JDBC的开发</code>，所以相对于Hibernate更加的简单易学。</li>
+<li>Hibernate开发者<code>不要关注SQL的生成和结果的映射</code>，而Mybatis需要手动配置关系和SQL。</li>
+<li>Hibernate与具体的数据库关联配置对应的XML即可，所执行的HQL语句与数据库无关，<code>移植性强</code>。而Mybatis直接使用的是SQL语句，相对没那么灵活，但是<code>执行效率</code>略高于Hibernate。</li>
 </ul>
 <h3 id="三、Mybatis的优缺点"><a href="#三、Mybatis的优缺点" class="headerlink" title="三、Mybatis的优缺点"></a>三、Mybatis的优缺点</h3><ul>
 <li>优点：<ul>
-<li>SQL写在XML里，从程序代码中彻底分离，降低耦合度，便于统一管理和优化，并可重用，适合多表的复杂查询。</li>
-<li>提供XML标签，支持编写动态SQL语句。</li>
-<li>提供映射标签，支持对象与数据库的ORM字段关系映射。</li>
+<li>SQL写在XML里，从程序代码中彻底分离，<code>降低耦合度</code>，便于统一管理和优化，并可重用，<code>适合多表的复杂查询</code>。</li>
+<li>提供XML标签，<code>支持编写动态SQL语句</code>。</li>
+<li>提供映射标签，<code>支持对象与数据库的ORM字段关系映射</code>。</li>
 </ul>
 </li>
 <li>缺点<ul>
-<li>SQL语句的编写工作量较大，尤其是字段多、关联表多时，更是如此，对开发人员编写SQL语句的功底有一定要求。</li>
-<li>SQL语句依赖于数据库，导致数据库移植性差，不可随意更换数据库。</li>
+<li>SQL语句的编写工<code>作量较大</code>，尤其是字段多、关联表多时，更是如此，对开发人员编写SQL语句的功底有一定要求。</li>
+<li>SQL语句依赖于数据库，导致数据库<code>移植性差</code>，不可随意更换数据库。</li>
 </ul>
 </li>
 </ul>
 <h3 id="四、代码案例"><a href="#四、代码案例" class="headerlink" title="四、代码案例"></a>四、代码案例</h3><p>1、编写Mybatis核心配置文件【 mybatis-core.xml 】<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">"com.fan.entity.StudentEntity"</span> <span class="attr">alias</span>=<span class="string">"StudentEntity"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://127.0.0.1:3306/public"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"xxxMapper.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>释意: </p>
 <ul>
-<li>typeAlias用于存放实体类别名的集合 — typeAlias中的type代表实体类 — alias我们自定义的别名</li>
-<li>environments环境 default里面的值可以是生产环境、测试环境、开发环境…</li>
-<li>transactionManager事务管理 type默认为JDBC</li>
+<li><code>typeAlias</code>用于存放实体类别名的集合 — typeAlias中的<code>type代表实体类</code> — <code>alias代表别名</code></li>
+<li>environments环境default里面的值可以是生产环境、测试环境、开发环境…</li>
+<li>transactionManager事务管理<code>type默认为JDBC</code></li>
 <li>dataSource是数据库连接的基本信息</li>
-<li>mapper中的resource代表应用实体类的Mapper的路径，里面的参数可以是resource=”xxxMapper.xml”或者url=”file:///C:/xxxMapper.xml”</li>
+<li>mapper中的resource代表应用实体类的<code>Mapper的路径</code>，里面的参数可以是resource=”xxxMapper.xml”或者url=”file:///C:/xxxMapper.xml”</li>
 </ul>
 <p>2、编写实体类映射文件【 xxxMapper.xml 】<br><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"StuMapper"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selCount"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span></span><br><span class="line"><span class="xml">      select count(*) from student</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"StudentEntity"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        SELECT * FROM student WHERE student.stuId = #</span><span class="template-variable">&#123;id&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addOne"</span> <span class="attr">parameterType</span>=<span class="string">"StudentEntity"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        INSERT INTO student VALUES(NULL,#</span><span class="template-variable">&#123;stuName&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;gender&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;age&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;address&#125;</span><span class="xml">,NULL)</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delOne"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        DELETE FROM student WHERE student.stuId = #</span><span class="template-variable">&#123;id&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"modifyOne"</span> <span class="attr">parameterType</span>=<span class="string">"StudentEntity"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        UPDATE student SET stuName = #</span><span class="template-variable">&#123;stuName&#125;</span><span class="xml"> WHERE stuId = #</span><span class="template-variable">&#123;stuId&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>释意: </p>
 <ul>
-<li>mapper中的namespace是独立唯一的</li>
-<li>映射文件中支持写原生的SQL语句</li>
-<li>id可以形象的理解为方法名，但是同时也是独立唯一的</li>
-<li>parameterType代表调用时传过来的参数类型</li>
-<li>resultType代表返回值类型</li>
-<li>#{xxx} 可以理解为占位符</li>
+<li>mapper中的<code>namespace是独立唯一的</code></li>
+<li>映射文件中支持写<code>原生的SQL语句</code></li>
+<li>id可以形象的理解为方法名，但是同时也是<code>独立唯一</code>的</li>
+<li><code>parameterType</code>代表调用时<code>传过来的参数类型</code></li>
+<li><code>resultType</code>代表<code>返回值类型</code></li>
+<li>#{xxx} 可以理解为<code>占位符</code></li>
 </ul>
 <p>3、简单的使用<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">		Reader reader = <span class="literal">null</span>;</span><br><span class="line">		SqlSessionFactoryBuilder builder = <span class="literal">null</span>;</span><br><span class="line">		SqlSessionFactory factory = <span class="literal">null</span>;</span><br><span class="line">		SqlSession session = <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1.加载配置文件</span></span><br><span class="line">			reader = Resources.getResourceAsReader(<span class="string">"mybatis-core.xml"</span>);</span><br><span class="line">			<span class="comment">//2.得到工厂的创建对象</span></span><br><span class="line">			builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">			<span class="comment">//3.得到工厂对象</span></span><br><span class="line">			factory = builder.build(reader);</span><br><span class="line">			<span class="comment">//4.得到session</span></span><br><span class="line">			session = factory.openSession();</span><br><span class="line">			<span class="comment">//5.执行语句</span></span><br><span class="line">			StudentEntity student = session.selectOne(<span class="string">"StuMapper.selById"</span>, <span class="number">100</span>);</span><br><span class="line">			<span class="comment">//StuMapper--&gt; StudentMapper.xml中的namespace。 selById--&gt; 为其中的id 。 100--&gt; 实参</span></span><br><span class="line">			System.<span class="keyword">out</span>.println(<span class="string">"学生名为--&gt;"</span> + student.getStuName());</span><br><span class="line">			session.commit();</span><br><span class="line">			<span class="comment">//修改、新增语句记得提交事务</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			session.rollback();</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (session != <span class="literal">null</span>) &#123;</span><br><span class="line">				session.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>END🙈</p>
 
       
     </div>
@@ -452,12 +450,24 @@
     
     
 
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center">END🙈</div>
+    
+</div>
+	  
+	</div>
+	
+	
     
 
     
 
     
-
+	
     <footer class="post-footer">
       
         <div class="post-tags">
@@ -485,8 +495,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/06/hexo/hexo-order/" rel="prev" title="Hexo常用指令">
-                Hexo常用指令 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/06/article/活在你的时区/" rel="prev" title="活在你的时区">
+                活在你的时区 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,7 +602,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -697,7 +707,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.9k</span>
+    <span title="Site words total count">7.9k</span>
   
 </div>
 <!-- 
@@ -721,7 +731,7 @@ var jiathis_config={
 <!-- 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.9k字</span>
+  <span class="post-count">博客全站共7.9k字</span>
 </div>
 -->
 

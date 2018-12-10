@@ -77,7 +77,7 @@
 
 
 
-  <meta name="keywords" content="转载,文章推荐,">
+  <meta name="keywords" content="原创,后端,mybatis,">
 
 
 
@@ -88,15 +88,18 @@
 
 
 
-<meta name="keywords" content="转载,文章推荐">
+<meta name="description" content="一、Mybatis动态SQL本篇所讲的使用mybatis动态SQL，通过 if, choose, when, otherwise, trim, where, set, foreach等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大提高了开发人员的效率。">
+<meta name="keywords" content="原创,后端,mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="上帝偏爱奔跑者">
-<meta property="og:url" content="http://yoursite.com/2018/12/08/article/上帝偏爱奔跑者/index.html">
+<meta property="og:title" content="Mybatis学习笔记(三)">
+<meta property="og:url" content="http://yoursite.com/2018/12/10/mybatis/mybatis3/index.html">
 <meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、Mybatis动态SQL本篇所讲的使用mybatis动态SQL，通过 if, choose, when, otherwise, trim, where, set, foreach等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大提高了开发人员的效率。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-10T07:30:08.950Z">
+<meta property="og:updated_time" content="2018-12-10T08:25:11.407Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="上帝偏爱奔跑者">
+<meta name="twitter:title" content="Mybatis学习笔记(三)">
+<meta name="twitter:description" content="一、Mybatis动态SQL本篇所讲的使用mybatis动态SQL，通过 if, choose, when, otherwise, trim, where, set, foreach等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大提高了开发人员的效率。">
 
 
 
@@ -126,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/08/article/上帝偏爱奔跑者/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/10/mybatis/mybatis3/">
 
 
 
 
 
-  <title>上帝偏爱奔跑者 | Ronaldo</title>
+  <title>Mybatis学习笔记(三) | Ronaldo</title>
   
 
 
@@ -291,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/article/上帝偏爱奔跑者/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/10/mybatis/mybatis3/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FANYANGEN">
@@ -308,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">上帝偏爱奔跑者</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis学习笔记(三)</h1>
         
 
         <div class="post-meta">
@@ -320,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-08T14:52:29+08:00">
-                2018-12-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T14:25:29+08:00">
+                2018-12-10
               </time>
             
 
@@ -357,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  1k
                 </span>
               
 
@@ -394,8 +397,86 @@
       
 
       
-        <br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;2013年，英超豪门阿森纳足球俱乐部的官方网站发布了一部短片，纪念一位越南的“Running Man”（奔跑者）。片头是：每一个故事里都有一个英雄，在这一次的旅途中，英雄出现了——The Running Man。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;短片一经发布，这位越南球迷即刻风靡全球。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;发布前一天，阿森纳队刚刚抵达越南。作为一支英超球队，此番访问越南尚属首次。因此，他们一到，立即引起了轰动。一群狂热的球迷一路奔跑，追赶着偶像乘坐的大巴车。可是，路途很长，车速也不慢。许多人在追赶一段后便放弃了。可是，有一个小伙子却一直坚持着。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;小伙子20岁上下，肤色黝黑，笑容爽朗。尽管大巴车一直以较快的速度前行，可是，他奔跑的速度也不慢，总能适时跟上。小伙子不断地朝车内的群星微笑，向他们挥手，向他们竖起大拇指。车内，球星们也不断回应，露出善意的笑容。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;大步奔跑，不断挥手示意，始终不渝地微笑着。这样的奔跑画面感染了每一位阿森纳球员。他们不断地朝他挥手、微笑、呐喊。车有多快，奔跑便有多快。那是一条长长的道路，途经闹市、街道、人群……一边望向车内，一边急速奔跑，他免不了摔跤。是的，他因一根灯柱而摔倒过，他因一棵大树而撞着了头……每一次，当他摔倒的时候，球星们便发出遗憾之叹。可是随即，他们又欢呼起来：这位了不起的小伙子迅速从地上爬起，仍然保持着那爽朗的笑容，向他们挥手，跟着他们继续前行。他不曾停歇。他只知道，他要一直追赶他们。就如夸父一样，这是一个奔向太阳的史诗般的“英雄”。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;目睹这位充满激情的小伙子奔跑、跌倒、爬起、微笑、再奔跑的过程，球星们对他肃然起敬。所有的球员都跑向车厢那一侧，对他唱了起来：“Sign him up（签下他）！Sign him up……”当然，这是玩笑话，但是，这位球迷身上的热情与激情深深打动了他们。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;他跑了足足5公里。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;他终于乏了。不过，他没有停下，而是换乘一辆摩托车，继续他的“追梦”之路。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;看着他如此不懈地追逐，带队教练终于发话，停下车，为他开启了一扇通向梦想的大门——他有了与阿森纳球员零距离接触的机会。见自己的奔跑没有白费，他振臂欢呼。与他一齐欢呼的，还有车上所有的队员和教练。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;车内，所有的球星一一起立，迎接这位他们刚刚“签下”的新成员。小伙子与他们握手、拥抱、合影，求取签名。他与阿尔特塔并肩而坐，一只手友好地搭在这位著名球星的肩上，另一只手则振臂高呼。这样的一张照片成了阿森纳与球迷合影的经典之照。前锋吉鲁把这一过程完整地拍了下来。当他把视频放上Facebook时，全世界的人都惊叹了。有网友评论：“惊人的耐力、体力和忠诚度！难道他就是温格传说中的7000万引援？签了他！”<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;这是幽默而善意的评论，还有很多人为他喝彩。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;可是，更令人意外的是，2013年7月17日，当阿森纳队与越南队一同出现在绿茵球场时，这位“奔跑者”居然获得了与阿森纳球星一同出场的机会，成为阿森纳“名副其实”的“首发”球员。站在球场上，他与波多尔斯基谈笑风生。他参加双方球员例行的握手仪式。赛后，他还获得了温格赠送的机票、球票和酒店住宿待遇。于是，在将来的某一天，这位幸运的“奔跑者”将前往伦敦，去观看足球比赛。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;对于一位追梦的人来说，这也是他获得的最高礼遇。这位红透全世界的越南小伙子，在忘我的奔跑中追寻到了他的梦想。这不仅仅是一个球迷对于球星的向往和追求，更是关于青春、关于“梦”的追求。就在那样疯狂的奔跑中，他实现了原本遥不可及的梦想。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;所有的球迷在为他高兴的同时，也在艳羡他的境遇。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;然而，并不是所有人都那么“幸运”。因为，世界上分为两种人：一种是奔跑者，一种是观望者。<br>&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;&#8194;而上帝，往往偏爱那些拼尽全力的疯狂的奔跑者。<p></p>
-<h3 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h3><p>链接：<a href="http://www.ledu365.com/a/lizhi/49888.html" target="_blank" rel="noopener">http://www.ledu365.com/a/lizhi/49888.html</a><br>来源：乐读网</p>
+        <h3 id="一、Mybatis动态SQL"><a href="#一、Mybatis动态SQL" class="headerlink" title="一、Mybatis动态SQL"></a>一、Mybatis动态SQL</h3><p>本篇所讲的使用mybatis动态SQL，通过 <code>if, choose, when, otherwise, trim, where, set, foreach</code>等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大<code>提高了开发人员的效率</code>。</p>
+<a id="more"></a>
+<h3 id="二、基本标签"><a href="#二、基本标签" class="headerlink" title="二、基本标签"></a>二、基本标签</h3><ul>
+<li><p>If标签</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByCondition"</span> parameterType=<span class="string">"com.fan.entity.ConditionEntity"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">1</span></span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"studentName != null"</span>&gt;</span><br><span class="line">            <span class="keyword">and</span> stuName <span class="keyword">like</span> concat(<span class="comment">'%',#&#123;studentName&#125;,'%')</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"minAge != null"</span>&gt;</span><br><span class="line">            <span class="keyword">and</span> age &gt;= <span class="meta">#&#123;minAge&#125;</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>parameterType类型我们用到了一个<code>自定义参数的实体类</code>，当然可以使用<code>map集合替代</code></li>
+<li><p>如果studentName和minAge<code>全部满足条件</code></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">1</span> <span class="keyword">AND</span> studentName <span class="keyword">like</span> ? <span class="keyword">AND</span> minAge= ?</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果<code>全不满足条件</code></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Where标签 + If标签</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByWhere"</span> parameterType=<span class="string">"com.fan.entity.ConditionEntity"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student</span><br><span class="line">        &lt;<span class="keyword">where</span>&gt;</span><br><span class="line">            &lt;<span class="keyword">if</span> test=<span class="string">"studentName != null"</span>&gt;</span><br><span class="line">                <span class="keyword">and</span> stuName <span class="keyword">like</span> concat(<span class="comment">'%',#&#123;studentName&#125;,'%')</span></span><br><span class="line">            &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">            &lt;<span class="keyword">if</span> test=<span class="string">"minAge != null"</span>&gt;</span><br><span class="line">                <span class="keyword">and</span> age &gt;= <span class="meta">#&#123;minAge&#125;</span></span><br><span class="line">            &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;/<span class="keyword">where</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>where元素的作用是在<code>写入where元素</code>的地方输出一个where</li>
+<li>MyBatis会<code>智能处理输出条件</code>，如果所有条件都不满足，那么MyBatis会<code>查出所有的记录</code></li>
+<li>如果输出后是以and开头的，MyBatis<code>会把第一个and忽略</code></li>
+<li>因此<code>不用写1=1</code>这样的条件</li>
+</ul>
+</li>
+<li><p>Set标签 + Where标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;update id=<span class="string">"modifyOne"</span> parameterType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">        UPDATE student</span><br><span class="line">        &lt;<span class="built_in">set</span>&gt;</span><br><span class="line">            &lt;<span class="keyword">if</span> <span class="built_in">test</span>=<span class="string">"stuName != null"</span>&gt;</span><br><span class="line">                stuName = <span class="comment">#&#123;stuName&#125;,</span></span><br><span class="line">            &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">            &lt;<span class="keyword">if</span> <span class="built_in">test</span>=<span class="string">"gender != null"</span>&gt;</span><br><span class="line">                gender = <span class="comment">#&#123;gender&#125;,</span></span><br><span class="line">            &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;/<span class="built_in">set</span>&gt;</span><br><span class="line">        WHERE stuId = <span class="comment">#&#123;stuId&#125;</span></span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意的是，if语句里面的需要<code>以 ‘,’ 逗号结尾</code>，如果只有一条语句合适的话，mybatis会<code>自动处理最后的逗号</code></li>
+<li><p>如果studentName和minAge<code>全部满足条件</code></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> stuName = ? <span class="keyword">AND</span> gender = ?  <span class="keyword">WHERE</span> stuId = ?</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果<code>全不满足条件</code>，就不会做出任何修改</p>
+</li>
+</ul>
+</li>
+<li><p>Choose(when,Otherwise)标签</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByCondition"</span> parameterType=<span class="string">"com.fan.entity.ConditionEntity"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">1</span></span><br><span class="line">        &lt;choose&gt;</span><br><span class="line">            &lt;<span class="keyword">when</span> test=<span class="string">"studentName != null"</span>&gt;</span><br><span class="line">                <span class="keyword">and</span> stuName <span class="keyword">like</span> concat(<span class="comment">'%',#&#123;studentName&#125;,'%')</span></span><br><span class="line">            &lt;/<span class="keyword">when</span>&gt;</span><br><span class="line">            &lt;<span class="keyword">when</span> test=<span class="string">"minAge != null"</span>&gt;</span><br><span class="line">                <span class="keyword">and</span> age &gt;= <span class="meta">#&#123;minAge&#125;</span></span><br><span class="line">            &lt;/<span class="keyword">when</span>&gt;</span><br><span class="line">            &lt;otherwise&gt;</span><br><span class="line">                <span class="keyword">and</span> state = <span class="number">1</span></span><br><span class="line">            &lt;/otherwise&gt;</span><br><span class="line">        &lt;/choose&gt;</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不论在什么情况下<code>都会执行otherwise标签</code>，例如<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student WHERE <span class="number">1</span> = <span class="number">1</span> and <span class="keyword">state</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Trim标签</p>
+<ul>
+<li>trim标记是一个<code>格式化的标记</code>，可以完成<code>Set或者是Where标记</code>的功能</li>
+<li><p>例如分别修改<code>查询</code>和<code>更新</code>语句</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByTrim"</span> parameterType=<span class="string">"com.fan.entity.ConditionEntity"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * FROM student</span><br><span class="line">    &lt;trim prefix=<span class="string">"WHERE"</span> prefixOverrides=<span class="string">"and|or"</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"studentName != null"</span>&gt;</span><br><span class="line">            <span class="literal">and</span> stuName like concat(<span class="string">'%'</span>,<span class="meta">#&#123;studentName&#125;,<span class="string">'%'</span>)</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"minAge != null"</span>&gt;</span><br><span class="line">            <span class="literal">and</span> age &gt;= <span class="meta">#&#123;minAge&#125;</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">    &lt;/trim&gt;</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>prefix</code>代表前缀</li>
+<li><code>prefixoverride</code>代表去掉<code>第一个and或者是or</code></li>
+</ul>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"modifyOneByTrim"</span> <span class="attr">parameterType</span>=<span class="string">"StudentEntity"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    UPDATE student</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"SET"</span> <span class="attr">suffix</span>=<span class="string">"WHERE stuId = #</span></span></span><span class="template-variable">&#123;stuId&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">suffixOverrides</span>=<span class="string">","</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"stuName != null"</span>&gt;</span></span></span><br><span class="line"><span class="xml">            stuName = #</span><span class="template-variable">&#123;stuName&#125;</span><span class="xml">,</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"gender != null"</span>&gt;</span></span></span><br><span class="line"><span class="xml">            gender = #</span><span class="template-variable">&#123;gender&#125;</span><span class="xml">,</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">trim</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>suffix</code>代表前缀，一般把最后的条件语句写在里面</li>
+<li><code>suffixOverrides</code>代表去掉<code>最后一个 ‘,’ 逗号</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Foreach标签"><a href="#三、Foreach标签" class="headerlink" title="三、Foreach标签"></a>三、Foreach标签</h3><ul>
+<li>foreach标签操作需求是对一个<code>集合进行遍历</code>，通常是在<code>构建IN条件语句</code>的时候，我们通常用作<code>批量删除、添加、和in查询字句</code>。</li>
+<li><p>实例</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">delete</span> id=<span class="string">"delBatch"</span>&gt;</span><br><span class="line">    DELETE <span class="built_in">from</span> student WHERE stuId <span class="keyword">in</span></span><br><span class="line">    &lt;foreach collection=<span class="string">"array"</span> <span class="keyword">item</span>=<span class="string">"id"</span> <span class="built_in">open</span>=<span class="string">"("</span> <span class="built_in">close</span>=<span class="string">")"</span> separator=<span class="string">","</span>&gt;</span><br><span class="line">        <span class="comment">#&#123;id&#125;</span></span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/<span class="built_in">delete</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用 先定义一个int类型的数组，然后作为参数后传入</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delBatch</span><span class="params">(SqlSession session)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] theArr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">123</span>, <span class="number">124</span>, <span class="number">125</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> res = session.<span class="keyword">delete</span>(<span class="string">"StuMapper.delBatch"</span>, theArr);</span><br><span class="line">    <span class="keyword">if</span> (res &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        System.out.println(<span class="string">"删除成功："</span> + res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>释意</p>
+<ul>
+<li>collection代表传入的参数类型，常用的有<code>array、list、map</code>三种，分别对应的参数类型为<code>数组、List、Map集合</code></li>
+<li><code>item</code>代表迭代过程中的每一个<code>元素的别名</code></li>
+<li><code>index</code>代表每次迭代的<code>下标</code></li>
+<li>open代表<code>前缀</code></li>
+<li>cloase代表<code>后缀</code></li>
+<li>separator分隔符，表示<code>迭代时每个元素之间以什么分隔</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="四、Bind、多数据库支持-了解应用后带来…"><a href="#四、Bind、多数据库支持-了解应用后带来…" class="headerlink" title="四、Bind、多数据库支持 了解应用后带来…"></a>四、Bind、多数据库支持 了解应用后带来…</h3>
       
     </div>
     
@@ -424,9 +505,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/转载/" rel="tag"># 转载</a>
+            <a href="/tags/原创/" rel="tag"># 原创</a>
           
-            <a href="/tags/文章推荐/" rel="tag"># 文章推荐</a>
+            <a href="/tags/后端/" rel="tag"># 后端</a>
+          
+            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
           
         </div>
       
@@ -439,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/07/mybatis/mybatis2/" rel="next" title="Mybatis学习笔记(二)">
-                <i class="fa fa-chevron-left"></i> Mybatis学习笔记(二)
+              <a href="/2018/12/09/java/集合框架/" rel="next" title="Java 集合框架简述">
+                <i class="fa fa-chevron-left"></i> Java 集合框架简述
               </a>
             
           </div>
@@ -448,10 +531,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/09/hexo/hexo绑定域名/" rel="prev" title="使用Hexo-Github域名绑定(阿里云)">
-                使用Hexo-Github域名绑定(阿里云) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -620,7 +699,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文章来源"><span class="nav-number">1.</span> <span class="nav-text">文章来源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Mybatis动态SQL"><span class="nav-number">1.</span> <span class="nav-text">一、Mybatis动态SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、基本标签"><span class="nav-number">2.</span> <span class="nav-text">二、基本标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Foreach标签"><span class="nav-number">3.</span> <span class="nav-text">三、Foreach标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Bind、多数据库支持-了解应用后带来…"><span class="nav-number">4.</span> <span class="nav-text">四、Bind、多数据库支持 了解应用后带来…</span></a></li></ol></div>
             
 
           </div>
