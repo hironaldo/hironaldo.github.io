@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="一、Mybatis关联映射在实际的项目开发中，我们不可能只对单表进行操作。从而有了一对一、一对多、多对一的多表关联，以下采用学生表(Student)和系表(Department)进行操作。">
+<meta name="description" content="一、Mybatis面向接口编程Mybatis面向接口编程是mybatis的独有的特性。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义结构清晰，方便维护和扩展。如果用mybatis处理Dao层的话，就可以直接省略实现类，直接在mapper.xml配置文件中编写，这样就可以通过接口访问映射文件。">
 <meta name="keywords" content="原创,后端,mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis学习笔记(五)">
-<meta property="og:url" content="http://yoursite.com/2018/12/12/mybatis/mybatis5/index.html">
+<meta property="og:title" content="Mybatis学习笔记(四)">
+<meta property="og:url" content="http://yoursite.com/2018/12/10/java/mybatis/mybatis4/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="一、Mybatis关联映射在实际的项目开发中，我们不可能只对单表进行操作。从而有了一对一、一对多、多对一的多表关联，以下采用学生表(Student)和系表(Department)进行操作。">
+<meta property="og:description" content="一、Mybatis面向接口编程Mybatis面向接口编程是mybatis的独有的特性。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义结构清晰，方便维护和扩展。如果用mybatis处理Dao层的话，就可以直接省略实现类，直接在mapper.xml配置文件中编写，这样就可以通过接口访问映射文件。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-12T07:43:27.861Z">
+<meta property="og:updated_time" content="2018-12-13T11:53:44.782Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis学习笔记(五)">
-<meta name="twitter:description" content="一、Mybatis关联映射在实际的项目开发中，我们不可能只对单表进行操作。从而有了一对一、一对多、多对一的多表关联，以下采用学生表(Student)和系表(Department)进行操作。">
+<meta name="twitter:title" content="Mybatis学习笔记(四)">
+<meta name="twitter:description" content="一、Mybatis面向接口编程Mybatis面向接口编程是mybatis的独有的特性。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义结构清晰，方便维护和扩展。如果用mybatis处理Dao层的话，就可以直接省略实现类，直接在mapper.xml配置文件中编写，这样就可以通过接口访问映射文件。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/12/mybatis/mybatis5/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/10/java/mybatis/mybatis4/">
 
 
 
 
 
-  <title>Mybatis学习笔记(五) | Ronaldo</title>
+  <title>Mybatis学习笔记(四) | Ronaldo</title>
   
 
 
@@ -229,16 +229,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-sentence">
-          <a href="/sentence" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-gratipay"></i> <br>
-            
-            句子集
-          </a>
-        </li>
-      
 
       
         <li class="menu-item menu-item-search">
@@ -304,12 +294,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/12/mybatis/mybatis5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/10/java/mybatis/mybatis4/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FANYANGEN">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/35914643?s=460&v=4">
+      <meta itemprop="image" content="/images/headpic.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -321,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis学习笔记(五)</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis学习笔记(四)</h1>
         
 
         <div class="post-meta">
@@ -333,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T09:46:29+08:00">
-                2018-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T18:46:29+08:00">
+                2018-12-10
               </time>
             
 
@@ -370,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  766
+                  290
                 </span>
               
 
@@ -386,7 +376,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  1
                 </span>
               
             </div>
@@ -407,65 +397,23 @@
       
 
       
-        <h3 id="一、Mybatis关联映射"><a href="#一、Mybatis关联映射" class="headerlink" title="一、Mybatis关联映射"></a>一、Mybatis关联映射</h3><p>在实际的项目开发中，我们不可能只对单表进行操作。从而有了<code>一对一、一对多、多对一的多表关联</code>，以下采用学生表(Student)和系表(Department)进行操作。<br><a id="more"></a></p>
-<h3 id="二、多对一"><a href="#二、多对一" class="headerlink" title="二、多对一"></a>二、多对一</h3><ul>
-<li>如<code>学生表(Student)</code>对应<code>系表(Department)</code>构成多对一关系</li>
-<li><p>学生实体</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentEntity</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Serializable</span></span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer stuId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> stuName;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> sex; <span class="comment">//此字段与数据库列名不一致</span></span><br><span class="line">    <span class="comment">/* 多对一关联系表的属性 */</span></span><br><span class="line">    <span class="keyword">private</span> DepartmentEntity dept;</span><br><span class="line">    省略<span class="keyword">get</span>、<span class="keyword">set</span>方法...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>DepartmentMapper.xml 系映射文件</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap <span class="built_in">id</span>=<span class="string">"deptMap"</span> type=<span class="string">"DepartmentEntity"</span> autoMapping=<span class="string">"true"</span>&gt;</span><br><span class="line">    &lt;<span class="built_in">id</span> <span class="keyword">property</span>=<span class="string">"deptId"</span> column=<span class="string">"deptId"</span>/&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>StudentMapper.xml 学生映射文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"stuJoinDept"</span> <span class="attr">type</span>=<span class="string">"StudentEntity"</span> <span class="attr">autoMapping</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"stuId"</span> <span class="attr">column</span>=<span class="string">"stuId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"sex"</span> <span class="attr">column</span>=<span class="string">"gender"</span>/&gt;</span> <span class="comment">&lt;!-- 因为属性名和列名不同所以要单独做映射 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"dept"</span> <span class="attr">javaType</span>=<span class="string">"DepartmentEntity"</span> <span class="attr">resultMap</span>=<span class="string">"com.fan.dao.IDepartmentDao.deptMap"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>PS</p>
-<ul>
-<li>如果映射文件使用了<code>autoMapping=”true”</code>时，表示<code>自动映射列名和属性名相同的属性</code>，不相同的就要<code>单独做映射</code></li>
-<li><code>ID列是必须带有的</code></li>
-<li><code>association</code>标签是<code>多对一</code>的关键字，<code>property</code>属性填写当前实体<code>关联的实体</code>，<code>javaType</code>属性填写当前<code>关联实体的类型</code>，<code>resultMap</code>属性填写<code>关联实体resultMap的ID</code></li>
-</ul>
-</li>
-<li>SQL配置<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryStuOne"</span> parameterType=<span class="string">"int"</span> resultMap=<span class="string">"stuJoinDept"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">as</span> s INNER <span class="keyword">JOIN</span> department <span class="keyword">as</span> d <span class="keyword">ON</span> s.deptIdd = d.deptId <span class="keyword">where</span> s.stuId = <span class="meta">#&#123;stuId&#125;</span></span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="三、一对多"><a href="#三、一对多" class="headerlink" title="三、一对多"></a>三、一对多</h3><ul>
-<li>如<code>系表(Department)</code>对应<code>学生表(Student)</code>构成一对多关系</li>
-<li><p>系实体</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepartmentEntity</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Serializable</span></span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer deptId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">String</span> departName;</span><br><span class="line">    <span class="comment">/* 一对多关联学生表的属性 */</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;StudentEntity&gt; stuList = <span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();</span><br><span class="line">    省略<span class="keyword">get</span>、<span class="keyword">set</span>方法...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>StudentMapper.xml 系映射文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"stuMap"</span> <span class="attr">type</span>=<span class="string">"StudentEntity"</span> <span class="attr">autoMapping</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"stuId"</span> <span class="attr">column</span>=<span class="string">"stuId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"sex"</span> <span class="attr">column</span>=<span class="string">"gender"</span>/&gt;</span> <span class="comment">&lt;!-- 因为属性名和列名不同所以要单独做映射 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>DepartmentMapper.xml 系映射文件</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap <span class="built_in">id</span>=<span class="string">"deptJoinStu"</span> type=<span class="string">"DepartmentEntity"</span> autoMapping=<span class="string">"true"</span>&gt;</span><br><span class="line">    &lt;<span class="built_in">id</span> <span class="keyword">property</span>=<span class="string">"deptId"</span> column=<span class="string">"deptId"</span>/&gt;</span><br><span class="line">    &lt;collection <span class="keyword">property</span>=<span class="string">"stuList"</span> javaType=<span class="string">"arrayList"</span> ofType=<span class="string">"StudentEntity"</span> resultMap=<span class="string">"com.fan.dao.IStudentDao.stuMap"</span>/&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>PS</p>
-<ul>
-<li><code>collection </code>标签是<code>一对多</code>的关键字，<code>property</code>属性填写当前实体<code>关联的实体</code>，<code>javaType</code>属性填写当前<code>关联实体的类型</code>，<code>resultMap</code>属性填写<code>关联实体resultMap的ID</code></li>
-</ul>
-</li>
-<li>SQL配置<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryDeptToStuList"</span> resultMap=<span class="string">"deptJoinStu"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">as</span> s INNER <span class="keyword">JOIN</span> department <span class="keyword">as</span> d <span class="keyword">ON</span> s.deptIdd = d.deptId</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="四、利用HashMap的“万能关联”"><a href="#四、利用HashMap的“万能关联”" class="headerlink" title="四、利用HashMap的“万能关联”"></a>四、利用HashMap的“万能关联”</h3><p>由于Mybatis的关联是很灵活的，不管几对几，我们都可以不用任何关联配置。</p>
-<ul>
+        <h3 id="一、Mybatis面向接口编程"><a href="#一、Mybatis面向接口编程" class="headerlink" title="一、Mybatis面向接口编程"></a>一、Mybatis面向接口编程</h3><p>Mybatis面向接口编程是<code>mybatis的独有的特性</code>。对比之前的Hiberbate我们通常是定义好一个Dao层接口，然后在定义一个DaoImpl的实现进行编程，这样定义<code>结构清晰，方便维护和扩展</code>。如果用mybatis处理Dao层的话，就可以<code>直接省略实现类</code>，直接在<code>mapper.xml配置文件</code>中编写，这样就可以通过接口访问映射文件。</p>
+<a id="more"></a>
+<h3 id="二、代码实例"><a href="#二、代码实例" class="headerlink" title="二、代码实例"></a>二、代码实例</h3><ul>
 <li><p>Dao层接口</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IStudentDao</span> &#123;</span><br><span class="line">    <span class="function">List&lt;HashMap&gt; <span class="title">queryStuListByMap</span>(<span class="params"></span>)</span>; <span class="comment">//查询全部学的详情</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>List集合中的类型必须是<code>HashMap</code></li>
-</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBillDao</span> &#123;</span><br><span class="line">    <span class="comment">/*根据名称模糊查询所有的订单*/</span></span><br><span class="line">    <span class="function">List&lt;BillEntity&gt; <span class="title">queryBillByName</span>(<span class="params">String productName</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>SQL配置</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryStuListByMap"</span> parameterType=<span class="string">"map"</span> resultType=<span class="string">"map"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">as</span> s INNER <span class="keyword">JOIN</span> department <span class="keyword">as</span> d <span class="keyword">ON</span> s.deptIdd = d.deptId</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>返回值的类型必须是<code>HashMap</code></li>
-</ul>
+<li><p>Mapper.xml映射文件</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;mapper <span class="keyword">namespace</span>=<span class="string">"com.fan.dao.IBillDao"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">select</span> id=<span class="string">"queryBillByName"</span> parameterType=<span class="string">"String"</span> resultType=<span class="string">"BillEntity"</span>&gt;</span><br><span class="line">        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> smbms_bill <span class="keyword">WHERE</span> productName <span class="keyword">LIKE</span> concat(<span class="comment">'%',#&#123;productName&#125;,'%')</span></span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>调用</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">    SqlSession session = MybatisUtil.getSession();</span><br><span class="line">    IStudentDao studentDao = session.getMapper(IStudentDao.class);</span><br><span class="line">    List&lt;<span class="keyword">HashMap</span>&gt; list = studentDao.queryStuListByMap();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">HashMap</span> stu : list) &#123;</span><br><span class="line">        System.out.<span class="built_in">println</span>(stu.<span class="built_in">get</span>(<span class="string">"stuName"</span>) + <span class="string">"--"</span> + stu.<span class="built_in">get</span>(<span class="string">"gender"</span>) + <span class="string">"--"</span> + stu.<span class="built_in">get</span>(<span class="string">"departName"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>Main方法调用</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	SqlSession session = MybatisUtil.getSession()<span class="comment">;</span></span><br><span class="line">	IBillDao <span class="keyword">billDao </span>= session.getMapper(IBillDao.class)<span class="comment">;</span></span><br><span class="line">	List&lt;<span class="keyword">BillEntity&gt; </span>list = <span class="keyword">billDao.queryBillByName("饮料");</span></span><br><span class="line"><span class="keyword">	</span>for (<span class="keyword">BillEntity </span><span class="keyword">bill </span>: list) &#123;</span><br><span class="line">		System.out.println(<span class="keyword">bill.getBillCode() </span>+ <span class="string">"--"</span> + <span class="keyword">bill.getProductName());</span></span><br><span class="line"><span class="keyword">	</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PS</p>
 <ul>
-<li>通过获取HashMap中的<code>Key得到Value</code></li>
+<li>Mapper.xml映射文件中<code>namespace</code>必须是<code> ‘包名.接口名’</code>，如<code>com.fan.dao.IBillDao</code></li>
+<li>Mapper.xml映射文件中<code>Id</code>必须与<code> 接口的方法名一致</code></li>
+<li>调用时通过<code>session.getMapper(接口.class)</code>，获得接口实例</li>
 </ul>
 </li>
 </ul>
@@ -515,8 +463,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/11/server/上传Java Web项目/" rel="next" title="使用宝塔面板上传Java Web项目">
-                <i class="fa fa-chevron-left"></i> 使用宝塔面板上传Java Web项目
+              <a href="/2018/12/10/java/mybatis/mybatis3/" rel="next" title="Mybatis学习笔记(三)">
+                <i class="fa fa-chevron-left"></i> Mybatis学习笔记(三)
               </a>
             
           </div>
@@ -524,6 +472,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/11/server/上传Java Web项目/" rel="prev" title="使用宝塔面板上传Java Web项目">
+                使用宝塔面板上传Java Web项目 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -615,7 +567,7 @@ var jiathis_config={
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="https://avatars3.githubusercontent.com/u/35914643?s=460&v=4" alt="FANYANGEN">
+              <img class="site-author-image" itemprop="image" src="/images/headpic.jpg" alt="FANYANGEN">
             
               <p class="site-author-name" itemprop="name">FANYANGEN</p>
               <p class="site-description motion-element" itemprop="description">行你所行 无问西东</p>
@@ -628,7 +580,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -696,7 +648,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Mybatis关联映射"><span class="nav-number">1.</span> <span class="nav-text">一、Mybatis关联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、多对一"><span class="nav-number">2.</span> <span class="nav-text">二、多对一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、一对多"><span class="nav-number">3.</span> <span class="nav-text">三、一对多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、利用HashMap的“万能关联”"><span class="nav-number">4.</span> <span class="nav-text">四、利用HashMap的“万能关联”</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Mybatis面向接口编程"><span class="nav-number">1.</span> <span class="nav-text">一、Mybatis面向接口编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、代码实例"><span class="nav-number">2.</span> <span class="nav-text">二、代码实例</span></a></li></ol></div>
             
 
           </div>
@@ -737,7 +689,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9.2k</span>
+    <span title="Site words total count">11k</span>
   
 </div>
 <!-- 
@@ -761,7 +713,7 @@ var jiathis_config={
 <!-- 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共9.2k字</span>
+  <span class="post-count">博客全站共11k字</span>
 </div>
 -->
 
