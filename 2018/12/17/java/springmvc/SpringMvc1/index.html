@@ -77,7 +77,7 @@
 
 
 
-  <meta name="keywords" content="原创,后端,mybatis,">
+  <meta name="keywords" content="转载,后端,SpringMvc,">
 
 
 
@@ -88,20 +88,20 @@
 
 
 
-<meta name="description" content="一、MybatisUtil工具类MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！">
-<meta name="keywords" content="原创,后端,mybatis">
+<meta name="description" content="Spring MVC框架是一个MVC框架，通过实现Model-View-Controller模式来很好地将数据、业务与展示进行分离，Spring MVC和Struts2非常类似。Spring MVC的设计是围绕DispatcherServlet展开的，DispatcherServlet负责将请求派发到特定的handler。">
+<meta name="keywords" content="转载,后端,SpringMvc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis (二)">
-<meta property="og:url" content="http://yoursite.com/2018/12/07/java/mybatis/mybatis2/index.html">
+<meta property="og:title" content="SpringMvc (一)">
+<meta property="og:url" content="http://yoursite.com/2018/12/17/java/springmvc/SpringMvc1/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="一、MybatisUtil工具类MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！">
+<meta property="og:description" content="Spring MVC框架是一个MVC框架，通过实现Model-View-Controller模式来很好地将数据、业务与展示进行分离，Spring MVC和Struts2非常类似。Spring MVC的设计是围绕DispatcherServlet展开的，DispatcherServlet负责将请求派发到特定的handler。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s1.ax1x.com/2018/12/08/F37rZ9.png">
-<meta property="og:updated_time" content="2018-12-17T10:39:09.216Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/17/F05MO1.md.png">
+<meta property="og:updated_time" content="2018-12-18T03:14:44.289Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis (二)">
-<meta name="twitter:description" content="一、MybatisUtil工具类MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/12/08/F37rZ9.png">
+<meta name="twitter:title" content="SpringMvc (一)">
+<meta name="twitter:description" content="Spring MVC框架是一个MVC框架，通过实现Model-View-Controller模式来很好地将数据、业务与展示进行分离，Spring MVC和Struts2非常类似。Spring MVC的设计是围绕DispatcherServlet展开的，DispatcherServlet负责将请求派发到特定的handler。">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/12/17/F05MO1.md.png">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/07/java/mybatis/mybatis2/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/17/java/springmvc/SpringMvc1/">
 
 
 
 
 
-  <title>Mybatis (二) | Ronaldo</title>
+  <title>SpringMvc (一) | Ronaldo</title>
   
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/07/java/mybatis/mybatis2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/java/springmvc/SpringMvc1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FANYANGEN">
@@ -313,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis (二)</h1>
+          <h1 class="post-title" itemprop="name headline">SpringMvc (一)</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T14:40:29+08:00">
-                2018-12-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-17T18:27:29+08:00">
+                2018-12-17
               </time>
             
 
@@ -362,7 +362,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  846
+                  1.1k
                 </span>
               
 
@@ -399,112 +399,99 @@
       
 
       
-        <h3 id="一、MybatisUtil工具类"><a href="#一、MybatisUtil工具类" class="headerlink" title="一、MybatisUtil工具类"></a>一、MybatisUtil工具类</h3><p>MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！<br><a id="more"></a></p>
+        <p>Spring MVC框架是一个<code>MVC框架</code>，通过实现<code>Model-View-Controller模式</code>来很好地将数据、业务与展示进行分离，<code>Spring MVC和Struts2非常类似</code>。Spring MVC的设计是围绕<code>DispatcherServlet</code>展开的，DispatcherServlet负责将<code>请求派发到特定的handler。</code></p>
+<a id="more"></a>
+<h3 id="一、了解SpringMvc"><a href="#一、了解SpringMvc" class="headerlink" title="一、了解SpringMvc"></a>一、了解SpringMvc</h3><ul>
+<li>Spring MVC 是一个<code>模型 - 视图 - 控制器（MVC）</code>的Web框架建立在中央前端控制器<code>servlet（DispatcherServlet）</code>，它负责发送每个<code>请求</code>到合适的处理程序，使用<code>视图</code>来最终返回响应结果的概念。</li>
+<li>Spring MVC 是 Spring 产品组合的一部分，它享有<code>Spring IoC容器紧密结合</code><code>Spring松耦合</code>等特点，因此它有<code>Spring的所有优点</code>。</li>
+</ul>
+<h3 id="二、与Struts2细节对比"><a href="#二、与Struts2细节对比" class="headerlink" title="二、与Struts2细节对比"></a>二、与Struts2细节对比</h3><ul>
+<li>框架机制<ul>
+<li>Struts2采用<code>Filter（StrutsPrepareAndExecuteFilter）</code>实现，SpringMVC采用<code>Servlet（DispatcherServlet）</code>实现</li>
+<li>Filter在<code>容器启动后即初始化,服务停止以后销毁,晚于Servlet调用</code>。Servlet在<code>调用时初始化,先于Filter调用,服务停止后销毁</code></li>
+</ul>
+</li>
+<li>性能方面<ul>
+<li><code>SpringMVC开发效率和性能高于Struts2</code>。因为SpringMVC实现了零配置，由于SpringMVC基于方法的拦截，有加载一次单例模式bean注入。而Struts2是类级别的拦截，每次请求对应实例一个新的Action，需要加载所有的属性值注入</li>
+</ul>
+</li>
+<li>拦截机制<ul>
+<li>Struts2有自己的<code>拦截Interceptor机制</code>，SpringMVC这是用的是<code>独立的Aop方式</code></li>
+</ul>
+</li>
+<li>设计思想<ul>
+<li>Struts2更加符合<code>OOP的编程思想</code>， SpringMVC只<code>在servlet上扩展</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="三、与Struts2总体对比"><a href="#三、与Struts2总体对比" class="headerlink" title="三、与Struts2总体对比"></a>三、与Struts2总体对比</h3><ul>
+<li>Struts2<ul>
+<li>Struts2框架是<code>类级别的拦截</code>，每次请求就会<code>创建一个Action</code>，和Spring整合时Struts2的ActionBean注入作用域是<code>原型模式prototype</code>然后通过setter，getter把<code>request数据注入到属性</code></li>
+<li>Struts2中，一个Action<code>对应一个request、response</code>，在接收参数时，可以<code>通过属性接收</code>，这说明属性参数是让<code>多个方法共享的</code></li>
+<li>Struts2中Action的一个方法可以<code>对应一个url</code>，而其类属性却被所有方法共享，这也就<code>无法用注解</code>或其他方式标识其所属方法了</li>
+</ul>
+</li>
+<li>SpringMVC<ul>
+<li>SpringMVC是<code>方法级别的拦截</code>，一个方法对应<code>一个Request上下文</code>，所以方法<code>基本上是独立的</code>，独享<code>request、response数据</code></li>
+<li>每个方法同时又可与<code>一个url对应</code>，参数的传递是<code>直接注入到方法中</code>的，是<code>方法所独有的</code>，处理结果通过<code>ModeMap返回给框架</code></li>
+<li>在Spring整合时，SpringMVC的Controller Bean默认<code>单例模式Singleton</code>，所以默认对所有的请求，只会创建一个<code>Controller</code>，因为没有共享的属性，所以是<code>线程安全的</code>，如果要改变默认的作用域，需要<code>添加@Scope注解修改</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="四、SpringMVC核心流程图及解析"><a href="#四、SpringMVC核心流程图及解析" class="headerlink" title="四、SpringMVC核心流程图及解析"></a>四、SpringMVC核心流程图及解析</h3><p><a href="https://imgchr.com/i/F05MO1" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/12/17/F05MO1.md.png" alt="F05MO1.md.png"></a></p>
 <ul>
-<li><p>完整版</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MybatisUtil</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> final String CONFIGFILE = <span class="string">"mybatis-core.xml"</span>;</span><br><span class="line">  <span class="comment">//当前线程存在session中</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> final ThreadLocal&lt;SqlSession&gt; THREAD_LOCAL = <span class="keyword">new</span> InheritableThreadLocal&lt;&gt;();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Reader reader = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactoryBuilder builder = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory factory = <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">//用静态代码块进行初始化</span></span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">//加载配置文件</span></span><br><span class="line">      reader = Resources.getResourceAsReader(CONFIGFILE);</span><br><span class="line">      <span class="comment">//得到工厂创建对象</span></span><br><span class="line">      builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">      <span class="comment">//得到工厂对象</span></span><br><span class="line">      factory = builder.build(reader);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//获得工厂对象</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactory <span class="title">getFactory</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (factory == <span class="literal">null</span>) &#123;</span><br><span class="line">      factory = builder.build(reader);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> factory;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//得到session</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSession <span class="title">getSession</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    SqlSession session = THREAD_LOCAL.<span class="keyword">get</span>();</span><br><span class="line">    <span class="keyword">if</span> (session == <span class="literal">null</span>) &#123;</span><br><span class="line">      SqlSessionFactory factory = getFactory();</span><br><span class="line">      session = factory.openSession();</span><br><span class="line">      THREAD_LOCAL.<span class="keyword">set</span>(session);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> session;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//关闭session</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">colseSession</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    SqlSession session = THREAD_LOCAL.<span class="keyword">get</span>();</span><br><span class="line">    <span class="keyword">if</span> (session != <span class="literal">null</span>) &#123;</span><br><span class="line">      session.close();</span><br><span class="line">    &#125;</span><br><span class="line">    THREAD_LOCAL.<span class="keyword">set</span>(<span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>简化版</p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisUtil</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory factory;</span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(<span class="string">"mybatis-core.xml"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">SqlSession <span class="title">getSession</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">return</span> factory.<span class="title">openSession</span><span class="params">(<span class="keyword">false</span>)</span></span>;</span><br><span class="line">    <span class="comment">//true 为自动提交事务</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">closeSession</span><span class="params">(SqlSession sqlSession)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != sqlSession) &#123;</span><br><span class="line">      sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="二、自增、模糊查询、分页查询及Map传参"><a href="#二、自增、模糊查询、分页查询及Map传参" class="headerlink" title="二、自增、模糊查询、分页查询及Map传参"></a>二、自增、模糊查询、分页查询及Map传参</h3><ul>
-<li><p>设置主键自动增长</p>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"saveOne"</span> <span class="attr">parameterType</span>=<span class="string">"StudentEntity"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"stuId"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    INSERT INTO student VALUES(NULL,#</span><span class="template-variable">&#123;stuName&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;gender&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;age&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;address&#125;</span><span class="xml">,NULL)</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li><code>useGeneratedKeys</code>表示是否使用JDBC的<code>getGenereatedKeys方法获取主键</code>，并赋值到<code>keyProperty</code>设置的属性中</li>
-<li>keyProperty需要自动增长的<code>主键名称</code></li>
+<li>DispatcherServlet(前端控制器)<ul>
+<li>应用了“ Front Controller”模式 – 是所有 Spring MVC 请求的中枢</li>
+<li>继承了HttpServlet，是一个Servlet，由WebApplicationContext 加载</li>
+<li>如果不作其它配置，会加载默认组件</li>
 </ul>
 </li>
-<li><p>模糊查询</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByVague"</span> parameterType=<span class="string">"String"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> student.stuName <span class="keyword">like</span> concat(<span class="comment">'%',#&#123;stuName&#125;,'%')</span></span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>   释意:</p>
-<ul>
-<li>MySQL中<code>concat函数</code>，返回结果为拼接参数产生的字符串。如有任何一个参数为NULL ，则返回值为 NULL<br><img src="https://s1.ax1x.com/2018/12/08/F37rZ9.png" alt="Image text"></li>
+<li>HandlerMapping(映射处理器)<ul>
+<li>将web请求映射到正确的处理器（handler）上 , 通常是一个 Controller</li>
+<li>不需用自定义处理器映射–已经内置了很多处理器映射策略</li>
+<li>在处理器映射中通过配置拦截器（包括处理器执行前、执行后、或者执行前后运行拦截器）将使其功能更强大</li>
 </ul>
 </li>
-<li><p>使用Map集合传参</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByFactor"</span> parameterType=<span class="string">"map"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> student.gender = <span class="meta">#&#123;gender&#125; AND student.age &gt; #&#123;minAge&#125;</span></span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li><p>调用时注意<code>map集合里面的键一定要与传参命名一致</code></p>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Map</span> parame = <span class="literal">new</span> HashMap();</span><br><span class="line">parame.put(<span class="string">"gender"</span>, <span class="string">"男"</span>);</span><br><span class="line">parame.put(<span class="string">"minAge"</span>, <span class="number">30</span>);</span><br><span class="line"><span class="built_in">List</span>&lt;StudentEntity&gt; <span class="built_in">list</span> = session.selectList(<span class="string">"StuMapper.selMap"</span>, parame);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>别名与Java类型映射表(常用类型)</p>
-</li>
+<li>Controller (后端控制器)<ul>
+<li>负责处理请求</li>
+<li>内部参数继承 HttpServlethandleRequest(HttpServletRequest, HttpServletResponse)</li>
+<li>返回一个 ModelAndView对象</li>
+<li>所有实现都是线程安全的</li>
+<li>基本不用自己实现接口 – 已经提供了很多实用的实现类</li>
 </ul>
 </li>
+<li>ModelAndView 对象<ul>
+<li>封装了用来渲染页面的 model和view</li>
+<li>Model 用 java.util.Map实现的</li>
+<li>添加对象，可以不需用名字</li>
+<li>addObject(String, Object) – 用显式名字添加</li>
+<li>addObject(Object) – 用默认名添加 (惯例优先)</li>
+<li>View 用 String 或 View 对象表示</li>
+<li>类似 Struts的 Action</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">别名</th>
-<th style="text-align:center">映射的类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">boolean</td>
-<td style="text-align:center">Boolean</td>
-</tr>
-<tr>
-<td style="text-align:center">string</td>
-<td style="text-align:center">String</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">Double</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">Intrger</td>
-</tr>
-<tr>
-<td style="text-align:center">intrger</td>
-<td style="text-align:center">Intrger</td>
-</tr>
-<tr>
-<td style="text-align:center">list</td>
-<td style="text-align:center">List</td>
-</tr>
-<tr>
-<td style="text-align:center">arraylist</td>
-<td style="text-align:center">ArrayList</td>
-</tr>
-<tr>
-<td style="text-align:center">map</td>
-<td style="text-align:center">Map</td>
-</tr>
-<tr>
-<td style="text-align:center">hashMap</td>
-<td style="text-align:center">HashMap</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>分页查询</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByPage"</span> parameterType=<span class="string">"map"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> gender = #&#123;gender&#125; <span class="keyword">ORDER</span> <span class="keyword">BY</span> stuId <span class="keyword">DESC</span> <span class="keyword">LIMIT</span> #&#123;<span class="keyword">start</span>&#125;,#&#123;<span class="keyword">end</span>&#125;</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li>调用时仍然采用map集合传参，注意下分页的页码<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map parame = new HashMap&lt;&gt;()<span class="comment">;</span></span><br><span class="line">parame.put(<span class="string">"gender"</span>, <span class="string">"男"</span>)<span class="comment">;</span></span><br><span class="line">parame.put(<span class="string">"start"</span>, (pageNo - <span class="number">1</span>) * pageSize)<span class="comment">;</span></span><br><span class="line">parame.put(<span class="string">"end"</span>, pageSize)<span class="comment">;</span></span><br><span class="line">List&lt;StudentEntity&gt; list = session.selectList(<span class="string">"StuMapper.queryByPage"</span>, parame)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 </li>
+<li>Interceptors(拦截器)<ul>
+<li>在请求前后添加其它功能</li>
+<li>包括拦截器方法 – preHandle and postHandle</li>
+<li>包括回调方法 – afterCompletetion</li>
+<li>可以通过 HandlerMapping 和一系列Controller关联上</li>
+</ul>
+</li>
+<li>ViewResolver(视图解析器)<ul>
+<li>从一个逻辑视图名映射到一个视图对象</li>
+</ul>
+</li>
+<li>View(视图)<ul>
+<li>InternalResourceView (JSP)</li>
+<li>JstlView (JSP + JSTL)</li>
+<li>VelocityView (Velocity)</li>
+<li>FreeMarkerView (FreeMarker)</li>
+<li>TilesView (Tiles)</li>
+<li>TilesJstlView (Tiles + JSTL)</li>
 </ul>
 </li>
 </ul>
-<h3 id="三、当实体类的属性和数据库中表的列名不一致"><a href="#三、当实体类的属性和数据库中表的列名不一致" class="headerlink" title="三、当实体类的属性和数据库中表的列名不一致"></a>三、当实体类的属性和数据库中表的列名不一致</h3><ul>
-<li><p>需要在映射文件中<code>重新绑定属性与列名</code></p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap <span class="built_in">id</span>=<span class="string">"diyMapping"</span> type=<span class="string">"StudentEntity"</span> autoMapping=<span class="string">"true"</span>&gt;</span><br><span class="line">    &lt;<span class="literal">result</span> <span class="keyword">property</span>=<span class="string">"sex"</span> column=<span class="string">"gender"</span>/&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li>id代表这个<code>resultMap的唯一标识</code></li>
-<li><code>type</code>代表需要重新映射的实体类也可以是之前设置的别名</li>
-<li><code>autoMapping=”true”</code>表示自动映射列名和属性名相同的属性，不相同的就要单独做映射</li>
-<li>下面语句中的<code>resultMap填写上面的ID</code>即可<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryCount"</span> resultMap=<span class="string">"diyMapping"</span>&gt;</span><br><span class="line">    <span class="keyword">select</span> <span class="built_in">count</span>(*) <span class="keyword">from</span> student</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
+<h3 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h3><p>作者：易白教程 / 水草滩 / 冯如<br>链接：<br><a href="https://www.yiibai.com/spring_mvc/" target="_blank" rel="noopener">https://www.yiibai.com/spring_mvc/</a><br><a href="https://blog.csdn.net/jishuizhipan/article/details/79385190" target="_blank" rel="noopener">https://blog.csdn.net/jishuizhipan/article/details/79385190</a><br><a href="https://www.cnblogs.com/fengru/p/5730174.html" target="_blank" rel="noopener">https://www.cnblogs.com/fengru/p/5730174.html</a><br>来源：易白教程 / CSDN / 博客园</p>
 
       
     </div>
@@ -534,11 +521,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/原创/" rel="tag"># 原创</a>
+            <a href="/tags/转载/" rel="tag"># 转载</a>
           
             <a href="/tags/后端/" rel="tag"># 后端</a>
           
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+            <a href="/tags/SpringMvc/" rel="tag"># SpringMvc</a>
           
         </div>
       
@@ -551,8 +538,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/06/jquery/pjax/" rel="next" title="Pjax">
-                <i class="fa fa-chevron-left"></i> Pjax
+              <a href="/2018/12/13/java/mybatis/mybatis7/" rel="next" title="Mybatis (七)">
+                <i class="fa fa-chevron-left"></i> Mybatis (七)
               </a>
             
           </div>
@@ -561,8 +548,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/08/article/上帝偏爱奔跑者/" rel="prev" title="上帝偏爱奔跑者">
-                上帝偏爱奔跑者 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/18/java/springmvc/SpringMvc2 /" rel="prev" title="SpringMvc (二)">
+                SpringMvc (二) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -736,7 +723,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、MybatisUtil工具类"><span class="nav-number">1.</span> <span class="nav-text">一、MybatisUtil工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、自增、模糊查询、分页查询及Map传参"><span class="nav-number">2.</span> <span class="nav-text">二、自增、模糊查询、分页查询及Map传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、当实体类的属性和数据库中表的列名不一致"><span class="nav-number">3.</span> <span class="nav-text">三、当实体类的属性和数据库中表的列名不一致</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、了解SpringMvc"><span class="nav-number">1.</span> <span class="nav-text">一、了解SpringMvc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、与Struts2细节对比"><span class="nav-number">2.</span> <span class="nav-text">二、与Struts2细节对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、与Struts2总体对比"><span class="nav-number">3.</span> <span class="nav-text">三、与Struts2总体对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、SpringMVC核心流程图及解析"><span class="nav-number">4.</span> <span class="nav-text">四、SpringMVC核心流程图及解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原文地址"><span class="nav-number">5.</span> <span class="nav-text">原文地址</span></a></li></ol></div>
             
 
           </div>

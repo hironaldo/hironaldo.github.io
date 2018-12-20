@@ -77,7 +77,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="原创,后端,SpringMvc,">
 
 
 
@@ -88,17 +88,23 @@
 
 
 
-<meta name="description" content="一、什么是Java JVM(java虚拟机)？ Java虚拟机是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。">
+<meta name="description" content="一、MultiActionController后端控制器MultiActionController类用于在单个控制器中分别映射多个URL到对应的方法，这样能减少很多类，系统的性能也会得到一定的提升。">
+<meta name="keywords" content="原创,后端,SpringMvc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java面试题整理-基础篇(一)">
-<meta property="og:url" content="http://yoursite.com/2018/12/13/java/Java面试题整理1/index.html">
+<meta property="og:title" content="SpringMvc (三)">
+<meta property="og:url" content="http://yoursite.com/2018/12/20/java/springmvc/SpringMvc3/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="一、什么是Java JVM(java虚拟机)？ Java虚拟机是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。">
+<meta property="og:description" content="一、MultiActionController后端控制器MultiActionController类用于在单个控制器中分别映射多个URL到对应的方法，这样能减少很多类，系统的性能也会得到一定的提升。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-13T11:53:44.744Z">
+<meta property="og:image" content="https://i.loli.net/2018/12/20/5c1aed37cc693.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/20/5c1aef4fb9dc5.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/20/5c1af9823c34a.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/20/5c1afaa1845bc.png">
+<meta property="og:updated_time" content="2018-12-20T02:18:02.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java面试题整理-基础篇(一)">
-<meta name="twitter:description" content="一、什么是Java JVM(java虚拟机)？ Java虚拟机是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。">
+<meta name="twitter:title" content="SpringMvc (三)">
+<meta name="twitter:description" content="一、MultiActionController后端控制器MultiActionController类用于在单个控制器中分别映射多个URL到对应的方法，这样能减少很多类，系统的性能也会得到一定的提升。">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/20/5c1aed37cc693.png">
 
 
 
@@ -128,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/13/java/Java面试题整理1/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/20/java/springmvc/SpringMvc3/">
 
 
 
 
 
-  <title>Java面试题整理-基础篇(一) | Ronaldo</title>
+  <title>SpringMvc (三) | Ronaldo</title>
   
 
 
@@ -293,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/java/Java面试题整理1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/java/springmvc/SpringMvc3/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FANYANGEN">
@@ -310,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java面试题整理-基础篇(一)</h1>
+          <h1 class="post-title" itemprop="name headline">SpringMvc (三)</h1>
         
 
         <div class="post-meta">
@@ -322,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T11:22:26+08:00">
-                2018-12-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-20T08:20:29+08:00">
+                2018-12-20
               </time>
             
 
@@ -359,7 +365,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  292
+                  936
                 </span>
               
 
@@ -375,7 +381,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -396,15 +402,41 @@
       
 
       
-        <h3 id="一、什么是Java-JVM-java虚拟机-？"><a href="#一、什么是Java-JVM-java虚拟机-？" class="headerlink" title="一、什么是Java JVM(java虚拟机)？"></a>一、什么是Java JVM(java虚拟机)？</h3><ul>
-<li>Java虚拟机是一个可以执行<code>Java字节码</code>的虚拟机进程，<code>Java源文件</code>被编译成能被Java虚拟机执行的<code>字节码文件</code>。 </li>
-</ul>
+        <h3 id="一、MultiActionController后端控制器"><a href="#一、MultiActionController后端控制器" class="headerlink" title="一、MultiActionController后端控制器"></a>一、MultiActionController后端控制器</h3><p><code>MultiActionController</code>类用于在<code>单个控制器</code>中分别<code>映射多个URL</code>到对应的方法，这样能减少很多类，<code>系统的性能</code>也会得到一定的提升。</p>
 <a id="more"></a>
-<h3 id="二、JDK、JRE、JVM关系是什么？"><a href="#二、JDK、JRE、JVM关系是什么？" class="headerlink" title="二、JDK、JRE、JVM关系是什么？"></a>二、JDK、JRE、JVM关系是什么？</h3><ul>
-<li>JDK（Java Development Kit）即为Java开发工具包，包含编写Java程序所必须的编译、运行等开发工具以及JRE。开发工具如：用于编译java程序的javac命令、用于启动JVM运行java程序的java命令、用于生成文档的javadoc命令以及用于打包的jar命令等等。 </li>
-<li>JRE（Java Runtime Environment）即为Java运行环境，提供了运行Java应用程序所必须的软件环境，包含有Java虚拟机（JVM）和丰富的系统类库。系统类库即为java提前封装好的功能类，只需拿来直接使用即可，可以大大的提高开发效率。 </li>
-<li>JVM（Java Virtual Machines）即为Java虚拟机，提供了字节码文件（.class）的运行环境支持。 <h3 id="三、Tomcat的优化经验"><a href="#三、Tomcat的优化经验" class="headerlink" title="三、Tomcat的优化经验"></a>三、Tomcat的优化经验</h3></li>
-<li>去掉对web.xml的监视，把JSP提前编辑成Servlet；有富余物理内存的情况下，加大Tomcat使用的JVM内存。</li>
+<p>1、编写多方法控制类<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword"><span class="keyword">extends</span> <span class="type">MultiActionController</span></span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> ModelAndView login(HttpServletRequest request, HttpServletResponse response) &#123;</span><br><span class="line">		<span class="keyword">String</span> u = request.getParameter(<span class="string">"username"</span>);</span><br><span class="line">		<span class="keyword">String</span> p = request.getParameter(<span class="string">"password"</span>);</span><br><span class="line">		IUserDao userDao = <span class="keyword">new</span> <span class="type">UserDaoImpl</span>();</span><br><span class="line">		ModelAndView mav = <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (userDao.userLogin(u, p)) &#123;</span><br><span class="line">			mav = <span class="keyword">new</span> <span class="type">ModelAndView</span>(<span class="string">"message"</span>);</span><br><span class="line">			mav.addObject(<span class="string">"message"</span>, u + <span class="string">" say hello SpringMVC !!!"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			mav = <span class="keyword">new</span> <span class="type">ModelAndView</span>(<span class="string">"redirect:login.jsp"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> mav;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> ModelAndView register(HttpServletRequest request, HttpServletResponse response, UsertEntity user) &#123;</span><br><span class="line">		IUserDao userDao = <span class="keyword">new</span> <span class="type">UserDaoImpl</span>();</span><br><span class="line">		ModelAndView mav = <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (userDao.userRegister(user)) &#123;</span><br><span class="line">			mav = <span class="keyword">new</span> <span class="type">ModelAndView</span>(<span class="string">"redirect:login.jsp"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			mav = <span class="keyword">new</span> <span class="type">ModelAndView</span>(<span class="string">"redirect:register.jsp"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> mav;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>该类必须继承<code>MultiActionController</code></li>
+</ul>
+<p>2、编写SpringMvc配置文件如【 SpringMvc-core.xml 】<br>以下两种配置达成的效果一致，但是不能共存，请结合应用场景使用</p>
+<ul>
+<li><p>BeanNameUrlHandlerMapping</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 映射处理器BeanNameUrlHandlerMapping --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"/login.php"</span> <span class="attr">class</span>=<span class="string">"com.fan.controllers.UserController"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"/register.php"</span> <span class="attr">class</span>=<span class="string">"com.fan.controllers.UserController"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SimpleUrlHandlerMapping</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"simpleUrlHandlerMapping"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/login.php"</span>&gt;</span>userController<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/register.php"</span>&gt;</span>userController<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"springMethodNameResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/login.php"</span>&gt;</span>login<span class="tag">&lt;/<span class="name">prop</span>&gt;</span>       <span class="comment">&lt;!-- 对用控制器中的login方法 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/register.php"</span>&gt;</span>register<span class="tag">&lt;/<span class="name">prop</span>&gt;</span> <span class="comment">&lt;!-- 对用控制器中的register方法 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 引用上方id名为springMethodNameResolver的解析器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userController"</span> <span class="attr">class</span>=<span class="string">"com.fan.controllers.UserController"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"methodNameResolver"</span> <span class="attr">ref</span>=<span class="string">"springMethodNameResolver"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>3、发送请求<br>登陆 成功跳转至<code>message.jsp页面</code></p>
+<ul>
+<li><a href="http://localhost:81/login.php?username=ronaldo&amp;password=123" target="_blank" rel="noopener">http://localhost:81/login.php?username=ronaldo&amp;password=123</a></li>
+</ul>
+<p><img src="https://i.loli.net/2018/12/20/5c1aed37cc693.png" alt="NEC]N_4PULSOJR8PG(6AJPG.png"></p>
+<p>注册 成功跳转至<code>login.jsp页面</code></p>
+<ul>
+<li><a href="http://localhost:81/register.php?username=ronaldo&amp;password=123&amp;repassword=123" target="_blank" rel="noopener">http://localhost:81/register.php?username=ronaldo&amp;password=123&amp;repassword=123</a></li>
+</ul>
+<p><img src="https://i.loli.net/2018/12/20/5c1aef4fb9dc5.png" alt="1.png"></p>
+<h3 id="二、Spring-Interceptor拦截器"><a href="#二、Spring-Interceptor拦截器" class="headerlink" title="二、Spring Interceptor拦截器"></a>二、Spring Interceptor拦截器</h3><p>Spring MVC中的<code>拦截器（Interceptor）</code>类似于<code>Servlet中的过滤器（Filter）</code>,它主要用于拦截用户请求并作相应的处理。<br>1、案例：只在8:00~18:00开放登陆<br>2、编写拦截器如【LoginTimeInterceptor】<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginTimeInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> startTime;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> endTime;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setStartTime</span><span class="params">(<span class="keyword">int</span> startTime)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.startTime = startTime;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setEndTime</span><span class="params">(<span class="keyword">int</span> endTime)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.endTime = endTime;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//在控制器执行前调用</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function">Boolean <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object <span class="keyword">handler</span>)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"&lt;======执行preHandle方法======&gt;"</span>);</span><br><span class="line">		Calendar cal = Calendar.getInstance();</span><br><span class="line">		<span class="keyword">int</span> hour = cal.get(Calendar.HOUR_OF_DAY);</span><br><span class="line">		<span class="comment">//获取当前时间对应的小时数</span></span><br><span class="line">		<span class="keyword">if</span> (hour &lt;= startTime &amp;&amp; hour &lt; endTime) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			request.setAttribute(<span class="string">"msg"</span>,<span class="string">"非登陆时段"</span>);</span><br><span class="line">			request.getRequestDispatcher(<span class="string">"login.jsp"</span>).forward(request,response);</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//在后端控制器执行后调用</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object <span class="keyword">handler</span>, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"&lt;======执行postHandle方法======&gt;"</span>);</span><br><span class="line">		<span class="keyword">super</span>.postHandle(request, response, <span class="keyword">handler</span>, modelAndView);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//该方法在整个请求后执行完成后调用</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object <span class="keyword">handler</span>, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"&lt;======执行afterCompletion方法======&gt;"</span>);</span><br><span class="line">		<span class="keyword">super</span>.afterCompletion(request, response, <span class="keyword">handler</span>, ex);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>可实现<code>HandlerInterceptor</code>接口，或继承HandlerInterceptor接口的实现类<code>（如HandlerInterceptorAdapter）</code>来定义</li>
+<li>可实现<code>WebRequestInterceptor</code>接口，或继承<code>WebRequestInterceptor</code>接口的实现类来定义</li>
+</ul>
+<p>3、编写SpringMvc配置文件如【 SpringMvc-core.xml 】<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"simpleUrlHandlerMapping"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"</span> &gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 引用拦截器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptors"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"workTimeInterceptor"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mappings"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"/login.php"</span>&gt;</span>loginController<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"loginController"</span> <span class="attr">class</span>=<span class="string">"com.fan.controllers.LoginController"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 注入时间段 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"workTimeInterceptor"</span> <span class="attr">class</span>=<span class="string">"com.fan.interceptors.LoginTimeInterceptor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"startTime"</span> <span class="attr">value</span>=<span class="string">"8"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"endTime"</span> <span class="attr">value</span>=<span class="string">"20"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>4、登陆</p>
+<ul>
+<li>如果当前系统时间为10:01:30，在该时段登陆能正常会自动跳转至消息页<br><img src="https://i.loli.net/2018/12/20/5c1af9823c34a.png" alt="B.png"></li>
+<li>如果当前时间为21:07:30，在该时段登陆会禁止登陆<br><img src="https://i.loli.net/2018/12/20/5c1afaa1845bc.png" alt="N.png"></li>
 </ul>
 
       
@@ -433,6 +465,16 @@
 	
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+            <a href="/tags/后端/" rel="tag"># 后端</a>
+          
+            <a href="/tags/SpringMvc/" rel="tag"># SpringMvc</a>
+          
+        </div>
+      
 
       
       
@@ -442,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/12/java/mybatis/mybatis5/" rel="next" title="Mybatis学习笔记(五)">
-                <i class="fa fa-chevron-left"></i> Mybatis学习笔记(五)
+              <a href="/2018/12/18/java/springmvc/SpringMvc2 /" rel="next" title="SpringMvc (二)">
+                <i class="fa fa-chevron-left"></i> SpringMvc (二)
               </a>
             
           </div>
@@ -451,10 +493,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/13/java/mybatis/mybatis6/" rel="prev" title="Mybatis学习笔记(六)">
-                Mybatis学习笔记(六) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +597,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -572,7 +610,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -627,7 +665,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是Java-JVM-java虚拟机-？"><span class="nav-number">1.</span> <span class="nav-text">一、什么是Java JVM(java虚拟机)？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、JDK、JRE、JVM关系是什么？"><span class="nav-number">2.</span> <span class="nav-text">二、JDK、JRE、JVM关系是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Tomcat的优化经验"><span class="nav-number">3.</span> <span class="nav-text">三、Tomcat的优化经验</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、MultiActionController后端控制器"><span class="nav-number">1.</span> <span class="nav-text">一、MultiActionController后端控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Spring-Interceptor拦截器"><span class="nav-number">2.</span> <span class="nav-text">二、Spring Interceptor拦截器</span></a></li></ol></div>
             
 
           </div>
@@ -668,7 +706,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">11k</span>
+    <span title="Site words total count">13.9k</span>
   
 </div>
 <!-- 
@@ -692,7 +730,7 @@ var jiathis_config={
 <!-- 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共11k字</span>
+  <span class="post-count">博客全站共13.9k字</span>
 </div>
 -->
 

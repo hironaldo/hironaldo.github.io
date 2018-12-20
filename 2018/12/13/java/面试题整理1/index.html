@@ -77,7 +77,7 @@
 
 
 
-  <meta name="keywords" content="原创,后端,mybatis,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -88,20 +88,17 @@
 
 
 
-<meta name="description" content="一、MybatisUtil工具类MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！">
-<meta name="keywords" content="原创,后端,mybatis">
+<meta name="description" content="一、什么是Java JVM(java虚拟机)？ Java虚拟机是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis (二)">
-<meta property="og:url" content="http://yoursite.com/2018/12/07/java/mybatis/mybatis2/index.html">
+<meta property="og:title" content="Java面试题整理-基础篇(一)">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/java/面试题整理1/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="一、MybatisUtil工具类MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！">
+<meta property="og:description" content="一、什么是Java JVM(java虚拟机)？ Java虚拟机是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s1.ax1x.com/2018/12/08/F37rZ9.png">
-<meta property="og:updated_time" content="2018-12-17T10:39:09.216Z">
+<meta property="og:updated_time" content="2018-12-13T11:53:44.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis (二)">
-<meta name="twitter:description" content="一、MybatisUtil工具类MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/12/08/F37rZ9.png">
+<meta name="twitter:title" content="Java面试题整理-基础篇(一)">
+<meta name="twitter:description" content="一、什么是Java JVM(java虚拟机)？ Java虚拟机是一个可以执行Java字节码的虚拟机进程，Java源文件被编译成能被Java虚拟机执行的字节码文件。">
 
 
 
@@ -131,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/07/java/mybatis/mybatis2/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/13/java/面试题整理1/">
 
 
 
 
 
-  <title>Mybatis (二) | Ronaldo</title>
+  <title>Java面试题整理-基础篇(一) | Ronaldo</title>
   
 
 
@@ -296,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/07/java/mybatis/mybatis2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/java/面试题整理1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FANYANGEN">
@@ -313,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis (二)</h1>
+          <h1 class="post-title" itemprop="name headline">Java面试题整理-基础篇(一)</h1>
         
 
         <div class="post-meta">
@@ -325,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T14:40:29+08:00">
-                2018-12-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T11:22:26+08:00">
+                2018-12-13
               </time>
             
 
@@ -362,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  846
+                  292
                 </span>
               
 
@@ -378,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  1
                 </span>
               
             </div>
@@ -399,111 +396,15 @@
       
 
       
-        <h3 id="一、MybatisUtil工具类"><a href="#一、MybatisUtil工具类" class="headerlink" title="一、MybatisUtil工具类"></a>一、MybatisUtil工具类</h3><p>MybatisUtil工具类主要是为了简化开发、提升开发速率。在没整合Spring之前方便统一管理Session等好处。以下两个版本的代码所执行的结果一致，完整版考虑的周到代码健壮性更好，两版本没本质区别！<br><a id="more"></a></p>
-<ul>
-<li><p>完整版</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MybatisUtil</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> final String CONFIGFILE = <span class="string">"mybatis-core.xml"</span>;</span><br><span class="line">  <span class="comment">//当前线程存在session中</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> final ThreadLocal&lt;SqlSession&gt; THREAD_LOCAL = <span class="keyword">new</span> InheritableThreadLocal&lt;&gt;();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Reader reader = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactoryBuilder builder = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory factory = <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">//用静态代码块进行初始化</span></span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">//加载配置文件</span></span><br><span class="line">      reader = Resources.getResourceAsReader(CONFIGFILE);</span><br><span class="line">      <span class="comment">//得到工厂创建对象</span></span><br><span class="line">      builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">      <span class="comment">//得到工厂对象</span></span><br><span class="line">      factory = builder.build(reader);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//获得工厂对象</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactory <span class="title">getFactory</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (factory == <span class="literal">null</span>) &#123;</span><br><span class="line">      factory = builder.build(reader);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> factory;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//得到session</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSession <span class="title">getSession</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    SqlSession session = THREAD_LOCAL.<span class="keyword">get</span>();</span><br><span class="line">    <span class="keyword">if</span> (session == <span class="literal">null</span>) &#123;</span><br><span class="line">      SqlSessionFactory factory = getFactory();</span><br><span class="line">      session = factory.openSession();</span><br><span class="line">      THREAD_LOCAL.<span class="keyword">set</span>(session);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> session;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//关闭session</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">colseSession</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    SqlSession session = THREAD_LOCAL.<span class="keyword">get</span>();</span><br><span class="line">    <span class="keyword">if</span> (session != <span class="literal">null</span>) &#123;</span><br><span class="line">      session.close();</span><br><span class="line">    &#125;</span><br><span class="line">    THREAD_LOCAL.<span class="keyword">set</span>(<span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>简化版</p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisUtil</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory factory;</span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(<span class="string">"mybatis-core.xml"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">SqlSession <span class="title">getSession</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">return</span> factory.<span class="title">openSession</span><span class="params">(<span class="keyword">false</span>)</span></span>;</span><br><span class="line">    <span class="comment">//true 为自动提交事务</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">closeSession</span><span class="params">(SqlSession sqlSession)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != sqlSession) &#123;</span><br><span class="line">      sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+        <h3 id="一、什么是Java-JVM-java虚拟机-？"><a href="#一、什么是Java-JVM-java虚拟机-？" class="headerlink" title="一、什么是Java JVM(java虚拟机)？"></a>一、什么是Java JVM(java虚拟机)？</h3><ul>
+<li>Java虚拟机是一个可以执行<code>Java字节码</code>的虚拟机进程，<code>Java源文件</code>被编译成能被Java虚拟机执行的<code>字节码文件</code>。 </li>
 </ul>
-<h3 id="二、自增、模糊查询、分页查询及Map传参"><a href="#二、自增、模糊查询、分页查询及Map传参" class="headerlink" title="二、自增、模糊查询、分页查询及Map传参"></a>二、自增、模糊查询、分页查询及Map传参</h3><ul>
-<li><p>设置主键自动增长</p>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"saveOne"</span> <span class="attr">parameterType</span>=<span class="string">"StudentEntity"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"stuId"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    INSERT INTO student VALUES(NULL,#</span><span class="template-variable">&#123;stuName&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;gender&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;age&#125;</span><span class="xml">,#</span><span class="template-variable">&#123;address&#125;</span><span class="xml">,NULL)</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li><code>useGeneratedKeys</code>表示是否使用JDBC的<code>getGenereatedKeys方法获取主键</code>，并赋值到<code>keyProperty</code>设置的属性中</li>
-<li>keyProperty需要自动增长的<code>主键名称</code></li>
-</ul>
-</li>
-<li><p>模糊查询</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByVague"</span> parameterType=<span class="string">"String"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> student.stuName <span class="keyword">like</span> concat(<span class="comment">'%',#&#123;stuName&#125;,'%')</span></span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>   释意:</p>
-<ul>
-<li>MySQL中<code>concat函数</code>，返回结果为拼接参数产生的字符串。如有任何一个参数为NULL ，则返回值为 NULL<br><img src="https://s1.ax1x.com/2018/12/08/F37rZ9.png" alt="Image text"></li>
-</ul>
-</li>
-<li><p>使用Map集合传参</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByFactor"</span> parameterType=<span class="string">"map"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> student.gender = <span class="meta">#&#123;gender&#125; AND student.age &gt; #&#123;minAge&#125;</span></span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li><p>调用时注意<code>map集合里面的键一定要与传参命名一致</code></p>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Map</span> parame = <span class="literal">new</span> HashMap();</span><br><span class="line">parame.put(<span class="string">"gender"</span>, <span class="string">"男"</span>);</span><br><span class="line">parame.put(<span class="string">"minAge"</span>, <span class="number">30</span>);</span><br><span class="line"><span class="built_in">List</span>&lt;StudentEntity&gt; <span class="built_in">list</span> = session.selectList(<span class="string">"StuMapper.selMap"</span>, parame);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>别名与Java类型映射表(常用类型)</p>
-</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">别名</th>
-<th style="text-align:center">映射的类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">boolean</td>
-<td style="text-align:center">Boolean</td>
-</tr>
-<tr>
-<td style="text-align:center">string</td>
-<td style="text-align:center">String</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">Double</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">Intrger</td>
-</tr>
-<tr>
-<td style="text-align:center">intrger</td>
-<td style="text-align:center">Intrger</td>
-</tr>
-<tr>
-<td style="text-align:center">list</td>
-<td style="text-align:center">List</td>
-</tr>
-<tr>
-<td style="text-align:center">arraylist</td>
-<td style="text-align:center">ArrayList</td>
-</tr>
-<tr>
-<td style="text-align:center">map</td>
-<td style="text-align:center">Map</td>
-</tr>
-<tr>
-<td style="text-align:center">hashMap</td>
-<td style="text-align:center">HashMap</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>分页查询</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryByPage"</span> parameterType=<span class="string">"map"</span> resultType=<span class="string">"StudentEntity"</span>&gt;</span><br><span class="line">    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> gender = #&#123;gender&#125; <span class="keyword">ORDER</span> <span class="keyword">BY</span> stuId <span class="keyword">DESC</span> <span class="keyword">LIMIT</span> #&#123;<span class="keyword">start</span>&#125;,#&#123;<span class="keyword">end</span>&#125;</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li>调用时仍然采用map集合传参，注意下分页的页码<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map parame = new HashMap&lt;&gt;()<span class="comment">;</span></span><br><span class="line">parame.put(<span class="string">"gender"</span>, <span class="string">"男"</span>)<span class="comment">;</span></span><br><span class="line">parame.put(<span class="string">"start"</span>, (pageNo - <span class="number">1</span>) * pageSize)<span class="comment">;</span></span><br><span class="line">parame.put(<span class="string">"end"</span>, pageSize)<span class="comment">;</span></span><br><span class="line">List&lt;StudentEntity&gt; list = session.selectList(<span class="string">"StuMapper.queryByPage"</span>, parame)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、当实体类的属性和数据库中表的列名不一致"><a href="#三、当实体类的属性和数据库中表的列名不一致" class="headerlink" title="三、当实体类的属性和数据库中表的列名不一致"></a>三、当实体类的属性和数据库中表的列名不一致</h3><ul>
-<li><p>需要在映射文件中<code>重新绑定属性与列名</code></p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap <span class="built_in">id</span>=<span class="string">"diyMapping"</span> type=<span class="string">"StudentEntity"</span> autoMapping=<span class="string">"true"</span>&gt;</span><br><span class="line">    &lt;<span class="literal">result</span> <span class="keyword">property</span>=<span class="string">"sex"</span> column=<span class="string">"gender"</span>/&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
-<p>  释意:</p>
-<ul>
-<li>id代表这个<code>resultMap的唯一标识</code></li>
-<li><code>type</code>代表需要重新映射的实体类也可以是之前设置的别名</li>
-<li><code>autoMapping=”true”</code>表示自动映射列名和属性名相同的属性，不相同的就要单独做映射</li>
-<li>下面语句中的<code>resultMap填写上面的ID</code>即可<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"queryCount"</span> resultMap=<span class="string">"diyMapping"</span>&gt;</span><br><span class="line">    <span class="keyword">select</span> <span class="built_in">count</span>(*) <span class="keyword">from</span> student</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
+<a id="more"></a>
+<h3 id="二、JDK、JRE、JVM关系是什么？"><a href="#二、JDK、JRE、JVM关系是什么？" class="headerlink" title="二、JDK、JRE、JVM关系是什么？"></a>二、JDK、JRE、JVM关系是什么？</h3><ul>
+<li>JDK（Java Development Kit）即为Java开发工具包，包含编写Java程序所必须的编译、运行等开发工具以及JRE。开发工具如：用于编译java程序的javac命令、用于启动JVM运行java程序的java命令、用于生成文档的javadoc命令以及用于打包的jar命令等等。 </li>
+<li>JRE（Java Runtime Environment）即为Java运行环境，提供了运行Java应用程序所必须的软件环境，包含有Java虚拟机（JVM）和丰富的系统类库。系统类库即为java提前封装好的功能类，只需拿来直接使用即可，可以大大的提高开发效率。 </li>
+<li>JVM（Java Virtual Machines）即为Java虚拟机，提供了字节码文件（.class）的运行环境支持。 <h3 id="三、Tomcat的优化经验"><a href="#三、Tomcat的优化经验" class="headerlink" title="三、Tomcat的优化经验"></a>三、Tomcat的优化经验</h3></li>
+<li>去掉对web.xml的监视，把JSP提前编辑成Servlet；有富余物理内存的情况下，加大Tomcat使用的JVM内存。</li>
 </ul>
 
       
@@ -532,16 +433,6 @@
 	
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/原创/" rel="tag"># 原创</a>
-          
-            <a href="/tags/后端/" rel="tag"># 后端</a>
-          
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
-          
-        </div>
-      
 
       
       
@@ -551,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/06/jquery/pjax/" rel="next" title="Pjax">
-                <i class="fa fa-chevron-left"></i> Pjax
+              <a href="/2018/12/12/java/mybatis/mybatis5/" rel="next" title="Mybatis (五)">
+                <i class="fa fa-chevron-left"></i> Mybatis (五)
               </a>
             
           </div>
@@ -561,8 +452,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/08/article/上帝偏爱奔跑者/" rel="prev" title="上帝偏爱奔跑者">
-                上帝偏爱奔跑者 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/13/java/mybatis/mybatis6/" rel="prev" title="Mybatis (六)">
+                Mybatis (六) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -736,7 +627,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、MybatisUtil工具类"><span class="nav-number">1.</span> <span class="nav-text">一、MybatisUtil工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、自增、模糊查询、分页查询及Map传参"><span class="nav-number">2.</span> <span class="nav-text">二、自增、模糊查询、分页查询及Map传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、当实体类的属性和数据库中表的列名不一致"><span class="nav-number">3.</span> <span class="nav-text">三、当实体类的属性和数据库中表的列名不一致</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是Java-JVM-java虚拟机-？"><span class="nav-number">1.</span> <span class="nav-text">一、什么是Java JVM(java虚拟机)？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、JDK、JRE、JVM关系是什么？"><span class="nav-number">2.</span> <span class="nav-text">二、JDK、JRE、JVM关系是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Tomcat的优化经验"><span class="nav-number">3.</span> <span class="nav-text">三、Tomcat的优化经验</span></a></li></ol></div>
             
 
           </div>
