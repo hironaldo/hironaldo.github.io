@@ -88,18 +88,15 @@
 
 
 
-<meta name="description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 <meta name="keywords" content="原创,后端,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis (一)">
 <meta property="og:url" content="http://yoursite.com/2018/12/05/java/mybatis/mybatis1/index.html">
 <meta property="og:site_name" content="Ronaldo">
-<meta property="og:description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-17T10:39:09.197Z">
+<meta property="og:updated_time" content="2018-12-21T07:50:59.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis (一)">
-<meta name="twitter:description" content="MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。">
 
 
 
@@ -398,7 +395,6 @@
 
       
         <p>MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。是一个基于Java的持久层框架。</p>
-<a id="more"></a>
 <h3 id="一、了解Mybatis"><a href="#一、了解Mybatis" class="headerlink" title="一、了解Mybatis"></a>一、了解Mybatis</h3><ul>
 <li>MyBatis 是<code>支持定制化SQL</code>、<code>存储过程</code>以及<code>高级映射</code>的优秀的持久层框架</li>
 <li>MyBatis 避免了几乎所有的 <code>JDBC 代码</code>和<code>手工设置参数</code>以及<code>抽取结果集</code></li>
@@ -443,7 +439,6 @@
 <li>#{xxx} 可以理解为<code>占位符</code></li>
 </ul>
 <p>3、简单的使用<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span> &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span> &#123;</span><br><span class="line">		Reader reader = <span class="literal">null</span>;</span><br><span class="line">		SqlSessionFactoryBuilder builder = <span class="literal">null</span>;</span><br><span class="line">		SqlSessionFactory factory = <span class="literal">null</span>;</span><br><span class="line">		SqlSession session = <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1.加载配置文件</span></span><br><span class="line">			reader = Resources.getResourceAsReader(<span class="string">"mybatis-core.xml"</span>);</span><br><span class="line">			<span class="comment">//2.得到工厂的创建对象</span></span><br><span class="line">			builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">			<span class="comment">//3.得到工厂对象</span></span><br><span class="line">			factory = builder.build(reader);</span><br><span class="line">			<span class="comment">//4.得到session</span></span><br><span class="line">			session = factory.openSession();</span><br><span class="line">			<span class="comment">//5.执行语句</span></span><br><span class="line">			StudentEntity student = session.selectOne(<span class="string">"StuMapper.selById"</span>, <span class="number">100</span>);</span><br><span class="line">			<span class="comment">//StuMapper--&gt; StudentMapper.xml中的namespace。 selById--&gt; 为其中的id 。 100--&gt; 实参</span></span><br><span class="line">			System.<span class="keyword">out</span>.println(<span class="string">"学生名为--&gt;"</span> + student.getStuName());</span><br><span class="line">			session.commit();</span><br><span class="line">			<span class="comment">//修改、新增语句记得提交事务</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			session.rollback();</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (session != <span class="literal">null</span>) &#123;</span><br><span class="line">				session.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
       
     </div>
     
@@ -615,7 +610,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -711,7 +706,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.9k</span>
+    <span title="Site words total count">16.4k</span>
   
 </div>
 <!-- 
@@ -735,7 +730,7 @@ var jiathis_config={
 <!-- 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共13.9k字</span>
+  <span class="post-count">博客全站共16.4k字</span>
 </div>
 -->
 
