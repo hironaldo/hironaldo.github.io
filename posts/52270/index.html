@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="FANYANGEN"><title>Mybatis (六) · Ronaldo</title><meta name="description" content="一、Mybatis缓存机制
+mybatis提供了强大的缓存机制减轻数据库压力，提高数据库性能
+mybatis的缓存分为：一级缓存、二级缓存
+一级缓存是SqlSession级别的缓存，缓存的数据只在SqlSession内有效
+二级缓存是mapper级别的缓存，同一个namespace公用这一个缓存，所"><meta name="keywords" content="Java,HTML,CSS,Javascript,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Ronaldo</a></h3><div class="description"><p>爱你所爱 行你所行</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/archives">Archive</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/headpic.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Mybatis (六)</a></h3></div><div class="post-content"><h3 id="一、Mybatis缓存机制"><a href="#一、Mybatis缓存机制" class="headerlink" title="一、Mybatis缓存机制"></a>一、Mybatis缓存机制</h3><ul>
+<li>mybatis提供了强大的缓存机制<code>减轻数据库压力</code>，<code>提高数据库性能</code></li>
+<li>mybatis的缓存分为：<code>一级缓存</code>、<code>二级缓存</code></li>
+<li>一级缓存是<code>SqlSession级别的缓存</code>，缓存的数据<code>只在SqlSession内有效</code></li>
+<li>二级缓存是<code>mapper级别的缓存</code>，同一个<code>namespace公用这一个缓存</code>，所以对<code>SqlSession是共享的</code></li>
+<li>如果SqlSession执行了<code>DML操作（insert、update、delete）</code>，<code>并提交事务了</code>，那么mybatis就会清空当前SqlSession缓存中的<code>所有缓存数据</code>，这样可以保证缓存中的<code>数据永远和数据库中一致</code>，避免出现<code>脏读取</code><a id="more"></a>
+</li>
+</ul>
+<h3 id="二、一级缓存"><a href="#二、一级缓存" class="headerlink" title="二、一级缓存"></a>二、一级缓存</h3><ul>
+<li>MyBatis的一级缓存<code>默认开启的</code></li>
+<li>第一次执行查询完毕后，会将查到的数据写入<code>SqlSession内的HashMap中缓存</code>起来</li>
+<li>第二次如果执行相同的查询，会直接到从<code>缓存中返回数据</code>，从而提高了效率</li>
+<li><p>实例，执行两次相同的查询</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">	SqlSession session= MybatisUtil.getSession();</span><br><span class="line">	StudentEntity stu0 = session.selectOne(<span class="string">"StuMapper.queryOne"</span>, <span class="number">100</span>);</span><br><span class="line">	System.out.<span class="built_in">println</span>(stu0.getStuName() + <span class="string">"--"</span> + stu0.getGender());</span><br><span class="line">	MybatisUtil.colseSession();	<span class="comment">//执行第二次相同查询时，先关闭Session</span></span><br><span class="line">	SqlSession session= MybatisUtil.getSession(); <span class="comment">//然后再次开启</span></span><br><span class="line">	StudentEntity stu1 = session.selectOne(<span class="string">"StuMapper.queryOne"</span>, <span class="number">100</span>);</span><br><span class="line">	System.out.<span class="built_in">println</span>(stu1.getStuName() + <span class="string">"--"</span> + stu1.getGender());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行的结果，我们可以从中看出<code>两次查询</code>，系统默认只执行了<code>一次SQL查询</code><br><img src="https://i.loli.net/2018/12/13/5c1238e39f1db.png" alt="8D34NJLD]}}}_VNM8$VGMF6.png"></li>
+</ul>
+</li>
+</ul>
+<h3 id="三、二级缓存"><a href="#三、二级缓存" class="headerlink" title="三、二级缓存"></a>三、二级缓存</h3><ul>
+<li>MyBatis的二级缓存<code>不是默认开启的</code></li>
+<li>二级缓存是<code>mapper级别的缓存</code>，也就是同一个namespace的xxxMapper.xml，当多个SqlSession使用同一个Mapper操作数据库的时候，得到的数据会缓存在<code>同一个二级缓存区域</code></li>
+<li><p>实例</p>
+<ul>
+<li><p>在Mybatis核心配置文件【 mybatis-core.xml 】中开启缓存</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在须要开启二级缓存的【 xxxMapper.xml 】中配置缓存</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;cache <span class="attribute">eviction</span>=<span class="string">"LRU"</span> <span class="attribute">flushInterval</span>=<span class="string">"60000"</span> <span class="attribute">size</span>=<span class="string">"2048"</span> <span class="attribute">readOnly</span>=<span class="string">"true"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p> 这里配置了一个LRU缓存，并每隔60秒刷新，最大存储512个对象，而却返回的对象是只读的</p>
+<ul>
+<li>参数详情表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">eviction</td>
+<td>可用资源的回收策略，主要包含如下几种: <br>LRU：<code>较少使用的、移除最长时间不被使用的对象</code><br>FIFO：(先进先出)：<code>按对象进入缓存的顺序将其移除</code><br>SOFT(软引用)：<code>移除基于垃圾回收器状态和软引用规则的对象</code><br>WEAK(弱引用)：<code>积极地移除基于垃圾收集器状态和弱引用规则的对象</code></td>
+</tr>
+<tr>
+<td style="text-align:center">flushInterval</td>
+<td><code>刷新间隔，可以被设置为任意的正整数</code>，它们代表一个合理的毫秒形式的时间段。<br><code>默认情况下不设置</code>，即没有刷新间隔，缓存仅在调用语句时刷新</td>
+</tr>
+<tr>
+<td style="text-align:center">size</td>
+<td><code>引用数目，可以被设置为任意正整数</code>，要牢记缓存的对象数目和运行环境的可用内存资源数目<br><code>默认值为1024</code></td>
+</tr>
+<tr>
+<td style="text-align:center">readOnly</td>
+<td>只读属性可以被设置为<code>true或false</code>只读的缓存设置会给所有调用者<code>返回缓存对象的相同实例</code><br>因此这些对象不能被修改。此处提供了很重要的性能优势<br>可读写的缓存会返回缓存对象的拷贝（通过序列化<br>这样<code>较为缓慢，但比较安全</code>，因此默认为false</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>执行结果如下<br><img src="https://i.loli.net/2018/12/13/5c1238e39f1db.png" alt="8D34NJLD]}}}_VNM8$VGMF6.png"></li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-12-13</span><i class="fa fa-tag"></i><a class="tag" href="/tags/原创/" title="原创">原创 </a><a class="tag" href="/tags/后端/" title="后端">后端 </a><a class="tag" href="/tags/mybatis/" title="mybatis">mybatis </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/posts/52270/,Ronaldo,Mybatis (六),;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/posts/52271/" title="Mybatis (七)">Previous Article</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/posts/27661/" title="Mybatis (五)">Next Article</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

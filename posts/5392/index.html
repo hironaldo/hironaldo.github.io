@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="FANYANGEN"><title>Java 面试题整理 (集合框架篇一) · Ronaldo</title><meta name="description" content="一、起步集合类都位于java.util包下，Java 集合框架主要包括两种类型的容器，一种是集合（Collection）,存储一个元素集合;另一种是图（Map）,存储键/值对映射。支持序列化
+二、Collection接口1public interface Collection&amp;lt;E&amp;gt; ex"><meta name="keywords" content="Java,HTML,CSS,Javascript,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Ronaldo</a></h3><div class="description"><p>爱你所爱 行你所行</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/archives">Archive</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/headpic.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Java 面试题整理 (集合框架篇一)</a></h3></div><div class="post-content"><h3 id="一、起步"><a href="#一、起步" class="headerlink" title="一、起步"></a>一、起步</h3><p>集合类都位于java.util包下，Java 集合框架主要包括两种类型的容器，一种是<code>集合（Collection）,存储一个元素集合</code>;另一种是<code>图（Map）,存储键/值对映射。支持序列化</code></p>
+<h3 id="二、Collection接口"><a href="#二、Collection接口" class="headerlink" title="二、Collection接口"></a>二、Collection接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>Collection&lt;E&gt; extends Iterable&lt;E&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看源码发现Collection是一个接口类，其继承了java迭代接口Iterable</li>
+<li>有三个主要的子接口<code>List、Set 和 Queue</code>，记住<code>Map不是Collection的子接口</code>!!</li>
+<li><code>存储特点允许重复的对象</code></li>
+<li>常用的方法<br><img src="https://i.loli.net/2018/12/09/5c0cd52296277.png" alt="O_W)D_YG3X2QP_~HZGU~4B5.png"></li>
+</ul>
+<h3 id="三、List接口"><a href="#三、List接口" class="headerlink" title="三、List接口"></a>三、List接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>List&lt;E&gt; extends Collection&lt;E&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看源码发现List是一个接口类，其继承了<code>Collection接口</code>，它可以定义一个<code>允许重复的有序集合</code></li>
+<li>List集合代表一个<code>有序集合</code>，集合中每个元素都有其对应的<code>顺序索引</code></li>
+<li>List集合<code>允许使用重复元素</code>，可以通过<code>索引</code>来访问指定位置的集合元素</li>
+<li>实现List接口的集合主要有：</li>
+<li><p>(1) <font color="#0099ff" size="4">ArrayList</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ArrayList&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractList&lt;E&gt;</span> <span class="title">implements</span> <span class="title">List&lt;E&gt;</span>, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ArrayList继承于<code>AbstractList</code>，实现了<code>List</code>、<code>RandomAccess</code>、<code>Cloneable</code>、<code>Serializable</code>接口</li>
+<li>ArrayList是一个<code>动态数组</code>，也是我们最常用的集合</li>
+<li><code>它允许任何符合规则的元素插入甚至包括null</code></li>
+<li>每一个ArrayList都有一个初始容量（10），该容量代表了数组的大小，但是<code>数组大小是动态的</code></li>
+<li>总的特点:<code>基于数组实现，非线程安全，便于索引，查询效率高，但不便于插入和删除</code></li>
+</ul>
+</li>
+<li><p>(2) <font color="#0099ff" size="4">LinkedList</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LinkedList&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractSequentialList&lt;E&gt;</span> <span class="title">implements</span> <span class="title">List&lt;E&gt;</span>, <span class="title">Deque&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>LinkedList继承于<code>AbstractSequentialList</code>，实现了<code>List</code>，<code>Deque</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
+<li>LinkedList是一个<code>双向链表</code>，那么它的<code>顺序访问会非常高效</code>，而<code>随机访问效率比较低</code></li>
+<li>它除了有ArrayList的基本操作方法外还额外提供了<code>get</code>，<code>remove</code>，<code>insert</code>方法在LinkedList的首部或尾部进行操作</li>
+<li>有个重要的<code>内部类Entry</code>是双向链表节点所对应的数据结构，它包括的属性有：当前节点所包含的值，上一个节点，下一个节点。</li>
+<li>总的特点:<code>基于链表实现，链表内存是散乱的，每一个元素本身内存地址的同时还存储下一个的地址，链表增删快，查找慢</code></li>
+</ul>
+</li>
+<li><p>(3) <font color="#0099ff" size="4">Vector</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Vector&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractList&lt;E&gt;</span> <span class="title">implements</span> <span class="title">List&lt;E&gt;</span>, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Vector继承于<code>AbstractList</code>，实现了<code>List</code>，<code>RandomAccess</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
+<li>与ArrayList相似，但是<code>Vector是同步的</code></li>
+<li>Vector是<code>线程安全的动态数组</code></li>
+<li>总的特点:<code>基于数组实现，线程安全的，效率低</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="四、Map接口"><a href="#四、Map接口" class="headerlink" title="四、Map接口"></a>四、Map接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>Map&lt;K,V&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看源码发现Map是一个接口类，但是它<code>不继承或者实现任何类或接口</code></li>
+<li>Map与List、Set接口不同，它是由一系列<code>键值对组成的集合</code></li>
+<li>提供了<code>key到Value的映射</code> Map中它保证了<code>key与value之间的一一对应关系</code></li>
+<li><code>它不能存在相同的key值，而value值可以相同</code></li>
+<li>实现Map接口的集合主要有：</li>
+<li><p>(1) <font color="#0099ff" size="4">HashMap</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HashMap&lt;K</span>,<span class="title">V&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractMap&lt;K</span>,<span class="title">V&gt;</span> <span class="title">implements</span> <span class="title">Map&lt;K</span>,<span class="title">V&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HashMap继承于<code>AbstractMap</code>，实现了<code>Map</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
+<li>HashMap 是一个<code>散列表</code>，它存储的内容是<code>键值对(key-value)映射</code></li>
+<li>HashMap 的实现<code>不是同步的</code>，这意味着它<code>不是线程安全的</code></li>
+<li>HashMap中的<code>映射不是有序的</code></li>
+<li>总的特点:<code>基于hash表的Map接口实现，非线程安全的，效率高，key、value都可以为null</code></li>
+</ul>
+</li>
+<li><p>(2) <font color="#0099ff" size="4">HashTable</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Hashtable&lt;K</span>,<span class="title">V&gt;</span> <span class="keyword">extends</span> <span class="title">Dictionary&lt;K</span>,<span class="title">V&gt;</span> <span class="title">implements</span> <span class="title">Map&lt;K</span>,<span class="title">V&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HashTable继承于<code>Dictionary</code>，实现了<code>Map</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
+<li>HashTable 是一个<code>散列表</code>，它存储的内容是<code>键值对(key-value)映射</code></li>
+<li>HashTable的实现<code>是同步的</code>，这意味着它<code>是线程安全的</code></li>
+<li>HashTable中的<code>映射不是有序的</code></li>
+<li>总的特点:<code>基于hash表的Map接口实现，线程安全的，效率低，key、value都不可以为null</code></li>
+</ul>
+</li>
+<li><p>(3) <font color="#0099ff" size="4">LinkedHashMap</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashMap&lt;K</span>,<span class="title">V&gt;</span> <span class="keyword">extends</span> <span class="title">HashMap&lt;K</span>,<span class="title">V&gt;</span> <span class="title">implements</span> <span class="title">Map&lt;K</span>,<span class="title">V&gt;</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>LinkedHashMap继承于<code>HashMap</code>，实现了 <code>Map</code>接口</li>
+<li>LinkedHashMap是一个<code>HashMap的子类</code>，它<code>保留插入的顺序</code></li>
+<li>如果需要<code>输出的顺序和输入时的相同</code>，那么就选用<code>LinkedHashMap</code></li>
+<li>LinkedHashMap是<code>Map接口哈希表和链接列的实现</code>，具有可预知的<code>迭代顺序</code></li>
+<li>总的特点:<code>基于HashMap，保存了记录的插入顺序，非线程安全的，key、value都可以为null</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="五、Set接口"><a href="#五、Set接口" class="headerlink" title="五、Set接口"></a>五、Set接口</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>Set&lt;E&gt; extends Collection&lt;E&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看源码发现Set是一个接口类，其继承了<code>Collection接口</code></li>
+<li>Set中的元素实现了<code>不重复，有点象集合的概念</code></li>
+<li>由于Set接口的特殊性，所有传入Set集合中的<code>元素都必须不同</code></li>
+<li><code>最多允许有一个null元素对象</code></li>
+<li><code>无序，不允许有重复的元素</code></li>
+<li>虽然Set中元素<code>没有顺序</code>，但是元素在set中的位置是有由该元素的<code>HashCode决定的</code>，其具体位置其实<code>是固定的</code></li>
+<li>实现Set接口的集合主要有：</li>
+<li><p>(1) <font color="#0099ff" size="4">HashSet</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HashSet&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractSet&lt;E&gt;</span> <span class="title">implements</span> <span class="title">Set&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HashSet继承于AbstractSet，实现了<code>Set</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
+<li>HashSet是一个<code>没有重复元素</code>的集合，它是由<code>HashMap实现的，不保证元素的顺序</code></li>
+<li>HashSet<code>允许使用null元素</code>，但是<code>非同步的</code></li>
+<li>HashSet按<code>Hash算法来存储集合的元素</code>，因此具有很好的<code>存取和查找性能</code></li>
+<li>HashSet的实现方式大致如下，通过一个<code>HashMap存储元素</code>，元素是存放在<code>HashMap的Key中</code>，而<code>Value统一使用一个Object对象</code></li>
+<li>总的特点:<code>基于HashMap，不允许集合中有重复的值，使用该方式时需要重写equals()和hashCode()方法</code></li>
+</ul>
+</li>
+<li><p>(2) <font color="#0099ff" size="4">LinkedHashSet</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashSet&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">HashSet&lt;E&gt;</span> <span class="title">implements</span> <span class="title">Set&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>LinkedHashSet继承于HashSet，实现了<code>Set</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
+<li>LinkedHashSet底层是<code>基于LinkedHashMap来实现的，有序非同步</code></li>
+<li>LinkedHashSet集合是根据元素的<code>hashCode值</code>来决定元素的存储位置，但是它同时使用<code>链表维护元素的次序</code></li>
+<li>LinkedHashSet将会以元素的<code>添加顺序访问集合的元素</code></li>
+<li>总的特点:<code>基于HashMap，不允许集合中有重复的值，保存了记录的插入顺序</code></li>
+</ul>
+</li>
+<li><p>(2) <font color="#0099ff" size="4">TreeSet</font></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TreeSet&lt;E&gt;</span> <span class="keyword">extends</span> <span class="title">AbstractSet&lt;E&gt;</span> <span class="title">implements</span> <span class="title">NavigableSet&lt;E&gt;</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>TreeSet继承于AbstractSet，实现了<code>NavigableSet</code>，<code>Cloneable</code>，<code>Serializable</code>接口</li>
+<li>TreeSet是一个<code>有序集合</code></li>
+<li>TreeSet可以确保集合元素处于<code>排序状态</code></li>
+<li>TreeSet支持两种排序方式，<code>自然排序和定制排序</code></li>
+<li>TreeSet通过<code>compare或者comparaeTo函数</code>来判断元素是否相等</li>
+<li>总的特点:<code>基于TreeMap，非线程安全，非同步的</code></li>
+</ul>
+</li>
+</ul></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-12-21</span><i class="fa fa-tag"></i><a class="tag" href="/tags/原创/" title="原创">原创 </a><a class="tag" href="/tags/面试/" title="面试">面试 </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/posts/5392/,Ronaldo,Java 面试题整理 (集合框架篇一),;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/posts/6292/" title="Java 面试题整理 (基础篇)">Previous Article</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/posts/4392/" title="SpringMvc (三)">Next Article</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="FANYANGEN"><title>Pjax · Ronaldo</title><meta name="description" content="Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。
+一、我眼中的PjaxPjax === PushState(修改地址栏的Url) + Ajax(异步无刷新技术)。"><meta name="keywords" content="Java,HTML,CSS,Javascript,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Ronaldo</a></h3><div class="description"><p>爱你所爱 行你所行</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/archives">Archive</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/headpic.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Pjax</a></h3></div><div class="post-content"><p>Pjax是一个jQuery插件，它通过<code>ajax和pushState</code>技术提供了极速的<code>（无刷新ajax加载）</code>浏览体验，并且保持了<code>真实的地址</code>、<code>网页标题</code>，<code>浏览器的后退（前进）按钮</code>也可以正常使用。<br><a id="more"></a></p>
+<h3 id="一、我眼中的Pjax"><a href="#一、我眼中的Pjax" class="headerlink" title="一、我眼中的Pjax"></a>一、我眼中的Pjax</h3><p>Pjax === PushState(修改地址栏的Url) + Ajax(异步无刷新技术)。简单的来说pjax是这两个技术的结合，执行原理ajax负责去后端请求部分<code>html片段或者json数据</code>，通过<code>渲染到指定的div容器中</code>，再由<code>pushstate刷新当前的url地址</code>，但是并不会造成页面的闪动，因此提升用户网页浏览体验。</p>
+<h3 id="二、Pjax的工作原理"><a href="#二、Pjax的工作原理" class="headerlink" title="二、Pjax的工作原理"></a>二、Pjax的工作原理</h3><p>pjax的工作原理是通过ajax从<code>服务器端获取HTML</code>，在页面中用获取到的HTML<code>替换指定容器</code>元素中的内容。然后使用pushState技术更新浏览器地址栏中的当前地址。</p>
+<h3 id="三、Pjax的优缺点"><a href="#三、Pjax的优缺点" class="headerlink" title="三、Pjax的优缺点"></a>三、Pjax的优缺点</h3><ul>
+<li>优点：<ul>
+<li>不存在<code>页面资源（js/css）的重复加载和应用</code></li>
+<li>如果服务器端配置了pjax，它可以只渲染页面局部内容，从而<code>避免服务器渲染完整布局</code>的额外开销</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>不支持一些<code>低版本的浏览器</code>(如IE系列)，因为pushState是html5中history的新特性，在某些旧版浏览器中可能不支持</li>
+<li>使服务端处理变得<code>复杂</code></li>
+<li>pjax依赖于<code>jQuery 1.8或者更高版本</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="四、Pjax起步"><a href="#四、Pjax起步" class="headerlink" title="四、Pjax起步"></a>四、Pjax起步</h3><ul>
+<li>通过npm安装 or 通过js引入(首先得引入jqeury)<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install jquery-pjax</span><br><span class="line">https:<span class="regexp">//</span>raw.github.com<span class="regexp">/defunkt/</span>jquery-pjax<span class="regexp">/master/</span>jquery.pjax.js</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="五、Pjax方法"><a href="#五、Pjax方法" class="headerlink" title="五、Pjax方法"></a>五、Pjax方法</h3><ul>
+<li><p>$.fn.pjax 概述</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>(document).pjax(selector, [container], <span class="keyword">options</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>1.selector：<code>string类型，用于click 事件委托的选择器</code></li>
+<li>2.container：<code>string类型，用于标识唯一pjax容器的选择器</code></li>
+<li>3.options <code>object类型</code>，包含下列选项</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">timeout</td>
+<td style="text-align:center">650</td>
+<td style="text-align:center">ajax超时时间（毫秒），超时后强制刷新整个页面</td>
+</tr>
+<tr>
+<td style="text-align:center">push</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">使用 pushState 在浏览器中添加历史记录</td>
+</tr>
+<tr>
+<td style="text-align:center">replace</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">替换URL地址但不添加浏览器历史记录</td>
+</tr>
+<tr>
+<td style="text-align:center">type</td>
+<td style="text-align:center">“GET”</td>
+<td style="text-align:center">请求类型</td>
+</tr>
+<tr>
+<td style="text-align:center">dataType</td>
+<td style="text-align:center">“html”</td>
+<td style="text-align:center">服务器端返回的数据类型</td>
+</tr>
+<tr>
+<td style="text-align:center">type</td>
+<td style="text-align:center">“GET”</td>
+<td style="text-align:center">请求类型</td>
+</tr>
+<tr>
+<td style="text-align:center">url</td>
+<td style="text-align:center">link.href</td>
+<td style="text-align:center">string或function，返回ajax请求响应的URL</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>全局使用$.pjax.defaults对象改变默认配置，如下</p>
+<blockquote>
+<p>$.pjax.defaults.timeout = 1200</p>
+</blockquote>
+</li>
+<li><p>$.fn.pjax 用法</p>
+<ul>
+<li><p>最简单常见的pjax使用方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).pjax(<span class="string">'a'</span>, <span class="string">'#pjax-container'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pjax()方法能若干个参数，上文涉及到的<code>‘a’和’#pjax-container’</code>。<code>‘a’代表所有的a标签链接</code>，而<code>‘#pjax-container’代表需要替换内容的容器</code>。通过这种方式可以让页面中所有的链接都实现pjax加载，并指定ID为pjax-container的作为容器元素。</li>
+</ul>
+</li>
+<li><p>如果我们想指定a标签作为pjax链接使用方法如下：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$<span class="comment">(document)</span>.pjax<span class="comment">('[data-pjax] a, a[data-pjax]', '#pjax-container')</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>那么我们可以用<code>data-pjax来注明这是一个pjax链接</code>，然后使用<code>a[data-pjax]</code>来代替全局选择器a。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、事件"><a href="#六、事件" class="headerlink" title="六、事件"></a>六、事件</h3><ul>
+<li><p>$.pjax.click 点击事件</p>
+<ul>
+<li>本示例使用当前的click上下文来设置一个祖先元素作为容器：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ($<span class="selector-class">.support</span><span class="selector-class">.pjax</span>) &#123;</span><br><span class="line">  $(document).on(<span class="string">'click'</span>, <span class="string">'a[data-pjax]'</span>, function(event) &#123;</span><br><span class="line">    <span class="selector-tag">var</span> container = $(this).closest(<span class="string">'[data-pjax-container]'</span>)</span><br><span class="line">    <span class="selector-tag">var</span> containerSelector = <span class="string">'#'</span> + container.id</span><br><span class="line">    $<span class="selector-class">.pjax</span><span class="selector-class">.click</span>(event, &#123;container: containerSelector&#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>$.pjax.submit 表单提交事件</p>
+<ul>
+<li>通过pjax提交表单<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'submit'</span>, <span class="string">'form[data-pjax]'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  $.pjax.submit(event, <span class="string">'#pjax-container'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>$.pjax.reload 重载事件</p>
+<ul>
+<li>使用pjax机制发起一个当前URL的请求到服务器，并且通过响应的内容替换容器元素中的内容，同时不添加浏览器历史记录。<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$<span class="selector-class">.pjax</span><span class="selector-class">.reload</span>(<span class="string">'#pjax-container'</span>, options)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>$.pjax 手动调用pjax事件</p>
+<ul>
+<li>主要用于非click事件发起pjax请求的情况。如果可以获得click事件，请使用$.pjax.click(event)来代替。<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">applyFilters</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="built_in">url</span> = urlForFilters()</span><br><span class="line">  $.pjax(&#123;<span class="attribute">url</span>: <span class="built_in">url</span>, <span class="attribute">container</span>: <span class="string">'#pjax-container'</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="七、文档"><a href="#七、文档" class="headerlink" title="七、文档"></a>七、文档</h3><p>链接：<a href="https://github.com/defunkt/jquery-pjax" target="_blank" rel="noopener">https://github.com/defunkt/jquery-pjax</a><br>来源：github<br>链接：<a href="http://bsify.admui.com/jquery-pjax/" target="_blank" rel="noopener">http://bsify.admui.com/jquery-pjax/</a><br>来源：bsify</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-12-06</span><i class="fa fa-tag"></i><a class="tag" href="/tags/转载/" title="转载">转载 </a><a class="tag" href="/tags/前端/" title="前端">前端 </a><a class="tag" href="/tags/jquery/" title="jquery">jquery </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/posts/44568/,Ronaldo,Pjax,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/posts/27655/" title="Mybatis (二)">Previous Article</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/posts/49663/" title="活在你的时区">Next Article</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

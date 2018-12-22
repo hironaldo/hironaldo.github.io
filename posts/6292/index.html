@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="FANYANGEN"><title>Java 面试题整理 (基础篇) · Ronaldo</title><meta name="description" content="一、面向对是什么？有哪些特征？
+https://www.cnblogs.com/wmyskxz/p/9016611.html
+
+
+面向对象是一种思想，世间万物都可以看做一个对象
+优点
+代码开发模块化，更易维护和修改
+代码复用性强
+增强代码的可靠性和灵活性
+增加代码的可读性
+
+
+特征
+封装
+概念：封装"><meta name="keywords" content="Java,HTML,CSS,Javascript,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Ronaldo</a></h3><div class="description"><p>爱你所爱 行你所行</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/archives">Archive</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/headpic.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Java 面试题整理 (基础篇)</a></h3></div><div class="post-content"><h3 id="一、面向对是什么？有哪些特征？"><a href="#一、面向对是什么？有哪些特征？" class="headerlink" title="一、面向对是什么？有哪些特征？"></a>一、面向对是什么？有哪些特征？</h3><blockquote>
+<p><a href="https://www.cnblogs.com/wmyskxz/p/9016611.html" target="_blank" rel="noopener">https://www.cnblogs.com/wmyskxz/p/9016611.html</a></p>
+</blockquote>
+<ul>
+<li>面向对象是一种思想，世间万物都可以看做一个对象</li>
+<li>优点<ul>
+<li>代码开发模块化，更易维护和修改</li>
+<li>代码复用性强</li>
+<li>增强代码的可靠性和灵活性</li>
+<li>增加代码的可读性</li>
+</ul>
+</li>
+<li>特征<ul>
+<li>封装<ul>
+<li>概念：封装是指将<code>对象的实现细节隐藏</code>起来，然后通过<code>公共的方法来向外暴露出该对象</code>的功能</li>
+<li>特点：使用操作更加的<code>安全和简化</code></li>
+</ul>
+</li>
+<li>继承<ul>
+<li>继承是面向对象<code>实现代码复用</code>的重要手段，当子类继承父类后，子类是一种特殊的父类，能直接或间接<code>获得父类里的成员</code></li>
+<li>优点：容易<code>实现和扩展</code></li>
+<li>缺点：1、继承是一种<code>强耦合关系</code>，父类变子类也必须变化 2、继承<code>破坏了封装</code>，对于父类而言，它的实现细节对子类来说都是透明的</li>
+</ul>
+</li>
+<li>多态<ul>
+<li>概念：多态就是<code>同一个行为具有多个不同表现形式或形态的能力</code></li>
+<li>条件：<code>1、继承 2、重写 3、向上转型</code></li>
+<li>特点：提高了代码的<code>维护性和扩展性</code></li>
+</ul>
+</li>
+<li>抽象<ul>
+<li>概念：抽象是指从特定的角度出发，从已经存在的一些事物中抽取我们所关注的<code>特性、行为</code>，从而形成一个新的事物的思维过程，是一种从<code>复杂到简洁的思维方式</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、什么是Java-JVM？"><a href="#二、什么是Java-JVM？" class="headerlink" title="二、什么是Java JVM？"></a>二、什么是Java JVM？</h3><ul>
+<li>Java虚拟机是一个可以执行<code>Java字节码</code>的虚拟机进程，<code>Java源文件</code>被编译成能被Java虚拟机执行的<code>字节码文件</code>。 </li>
+</ul>
+<h3 id="三、JDK、JRE、JVM关系是什么？"><a href="#三、JDK、JRE、JVM关系是什么？" class="headerlink" title="三、JDK、JRE、JVM关系是什么？"></a>三、JDK、JRE、JVM关系是什么？</h3><ul>
+<li>JDK（Java Development Kit）即为<code>Java开发工具包</code>，包含<code>编写Java程序所必须的编译、运行等开发工具以及JRE</code></li>
+<li>JRE（Java Runtime Environment）即为<code>Java运行环境</code>，提供了<code>运行Java应用程序所必须的软件环境</code>，包含有<code>Java虚拟机</code>和<code>丰富的系统类库</code>。系统类库即为<code>java提前封装好的功能类</code>，只需拿来直接使用即可，可以大大的提高开发效率</li>
+<li>JVM（Java Virtual Machines）即为<code>Java虚拟机</code>，提供了<code>字节码文件（.class）的运行环境支持</code></li>
+</ul>
+<h3 id="四、如何创建一个对象？"><a href="#四、如何创建一个对象？" class="headerlink" title="四、如何创建一个对象？"></a>四、如何创建一个对象？</h3><ul>
+<li>使用<code>new关键字</code>：会显示的调用构造函数</li>
+<li>使用<code>clone方法</code>：是在内存上对已有的对象的拷贝，不会调用构造函数</li>
+<li><code>反射机制</code>：会显示的调用构造函数</li>
+<li><code>反序列化</code>：是从文件中还原类的对象，不会调用构造函数</li>
+</ul>
+<h3 id="五、clone-与new的区别"><a href="#五、clone-与new的区别" class="headerlink" title="五、clone()与new的区别"></a>五、clone()与new的区别</h3><ul>
+<li><code>new和clone()都能创建对象</code></li>
+<li><code>clone()不会调用构造方法</code>；<code>new会调用构造方法</code></li>
+<li>clone()能快速的创建一个<code>已有的对象的副本</code>，即创建对象并且将已有对象中所有<code>属性值克隆</code></li>
+<li>new只能在<code>JVM中申请一个空的内存区域</code>，对象的属性值要通过<code>构造方法赋值</code><ul>
+<li>PS:<ul>
+<li>使用clone()类必须实现<code>java.lang.Cloneable接口</code>并重写<code>Object类的clone()方法</code>，如果没有实现Cloneable()接口将会抛出<code>CloneNotSupportedException异常</code></li>
+<li>默认的Object.clone()方法是<code>浅拷贝</code>，创建好对象的副本然后通过<code>“赋值”拷贝内容</code>，如果类包含<code>引用类型变量</code>，那么原始对象和克隆对象的引用<code>将指向相同的引用内容</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、什么是浅拷贝和深拷贝？"><a href="#六、什么是浅拷贝和深拷贝？" class="headerlink" title="六、什么是浅拷贝和深拷贝？"></a>六、什么是浅拷贝和深拷贝？</h3><ul>
+<li>“浅拷贝”：默认的<code>Object.clone()方法</code>,对于<code>引用类型</code>成员变量拷贝只是<code>拷贝“值”即地址</code>,<code>没有</code>在堆中开辟新的内存空间</li>
+<li>“深拷贝”：重写<code>clone()方法</code>，对于<code>引用类型</code>成员变量，<code>重新</code>在堆中开辟新的内存空间</li>
+</ul>
+<h3 id="七、方法重载和方法重写的关系"><a href="#七、方法重载和方法重写的关系" class="headerlink" title="七、方法重载和方法重写的关系"></a>七、方法重载和方法重写的关系</h3><ul>
+<li>重载(Overload)<ul>
+<li>是为了让类以<code>统一的方式处理不同类型数据</code>的一种手段</li>
+<li>一个类中有多个<code>同名函数</code>，但是具有不同的<code>参数个数和类型</code></li>
+<li>重载是<code>多态性的一种表现</code></li>
+<li>重载方法的规则<ul>
+<li>必须有<code>不同的参数列表</code></li>
+<li>可以有<code>不同的返回类型</code>，只要<code>参数列表不同</code>就可以了</li>
+<li>可以有<code>不同的访问修饰符</code></li>
+<li>可以抛出<code>不同类型的异常</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重写(Override)<ul>
+<li>父类与子类之间的<code>多态性</code>，对父类函数进行<code>重新定义</code></li>
+<li>与父类某个方法<code>完全相同</code>，只是<code>方法体不同</code></li>
+<li>如需要父类的<code>原有方法</code>，使用<code>super关键字</code></li>
+<li>子类函数的访问<code>修饰符权限不能小于</code>父类函数</li>
+<li>重写方法的规则<ul>
+<li>子类方法的<code>参数列表必须完全与被重写的方法的相同</code></li>
+<li>访问修饰符的限制一定要<code>大于被重写方法</code>的访问修饰符（public&gt;protected&gt;default&gt;private）</li>
+<li>重写方法一定不能抛出<code>新的检查异常</code>或者比被重写方法申明<code>更宽泛的检查型异常</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="八、Java构造方法能否被重写和重载？"><a href="#八、Java构造方法能否被重写和重载？" class="headerlink" title="八、Java构造方法能否被重写和重载？"></a>八、Java构造方法能否被重写和重载？</h3><ul>
+<li>构造函数<code>能被重载</code>，例如在同一个类中<code>存在多个不同参数的的构造函数</code></li>
+<li>构造函数<code>不能被重写</code>，例如在子类中<code>不可能存在与父类类名一致的函数</code></li>
+</ul>
+<h3 id="九、实现多线程的两种方法"><a href="#九、实现多线程的两种方法" class="headerlink" title="九、实现多线程的两种方法"></a>九、实现多线程的两种方法</h3><ul>
+<li>继承<code>Thread类</code>，重写它的run()方法</li>
+<li>实现<code>Runnable接口</code>，重写Runable接口中的run()方法</li>
+</ul>
+<h3 id="十、是否可以继承String类，为什么？"><a href="#十、是否可以继承String类，为什么？" class="headerlink" title="十、是否可以继承String类，为什么？"></a>十、是否可以继承String类，为什么？</h3><ul>
+<li>因为String类是<code>final类</code>，final修饰的类<code>不能被继承</code></li>
+</ul>
+<h3 id="十一、Java抽象类和接口的异同点"><a href="#十一、Java抽象类和接口的异同点" class="headerlink" title="十一、Java抽象类和接口的异同点"></a>十一、Java抽象类和接口的异同点</h3><ul>
+<li>相同点<ul>
+<li>不能被<code>实例化</code></li>
+<li>能将抽象类和接口作为<code>引用类型</code></li>
+<li>某个类继承了抽象类或实现了接口，就必须对其父类的抽象方法<code>全部实现</code>，除非该类也是<code>抽象类</code></li>
+</ul>
+</li>
+<li>差异点<ul>
+<li>抽象类中<code>能定义构造器</code>;而接口中<code>不能定义构造器</code></li>
+<li>抽象类中<code>可以有抽象方法和普通方法</code>;而接口中的方法<code>全都是抽象方法</code></li>
+<li>抽象类中的访问修饰符可以是<code>private、默认、protected、public</code>;而接口中的访问修饰符全都是<code>public</code></li>
+<li>抽象类中可以<code>定义成员变量</code>;而接口中的成员变量会自动加上<code>public final转变为常量</code></li>
+<li>抽象类中<code>可以有静态方法</code>;而接口中<code>不可以有静态方法</code></li>
+<li>抽象类中<code>不一定要有抽象方法</code>，而有抽象方法的类<code>一定是抽象类</code></li>
+<li>一个类只能继承<code>一个抽象类可以实现多个接口</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="十二、Java抽象类和接口的应用场景"><a href="#十二、Java抽象类和接口的应用场景" class="headerlink" title="十二、Java抽象类和接口的应用场景"></a>十二、Java抽象类和接口的应用场景</h3><blockquote>
+<p><a href="https://www.cnblogs.com/wmyskxz/p/9016611.html" target="_blank" rel="noopener">https://www.cnblogs.com/wmyskxz/p/9016611.html</a></p>
+</blockquote>
+<ul>
+<li>如果要创建<code>不带任何方法定义和成员变量的基类</code>，那么就应该选择<code>接口而不是抽象类</code></li>
+<li>如果知道某个类应该是<code>基类</code>，那么第一个选择的应该是让它成为一个<code>接口</code>，只有在必须要有<code>方法定义和成员变量</code>的时候，才应该选择<code>抽象类</code></li>
+</ul>
+<h3 id="十三、final和static的用法"><a href="#十三、final和static的用法" class="headerlink" title="十三、final和static的用法"></a>十三、final和static的用法</h3><blockquote>
+<p><a href="http://www.cnblogs.com/dolphin0520/p/3799052.html" target="_blank" rel="noopener">http://www.cnblogs.com/dolphin0520/p/3799052.html</a></p>
+</blockquote>
+<ul>
+<li>final<ul>
+<li>final修饰的类<code>不能被继承</code></li>
+<li>final修饰的方法<code>不能被重写</code></li>
+<li>final修饰的变量为常量它的值<code>不能被修改</code></li>
+</ul>
+</li>
+<li>static：方便在<code>没有创建对象</code>的情况下来进行调用（方法/变量）<ul>
+<li>static表示“全局”或者“静态”的意思，能修饰<code>成员变量和成员方法，也可以形成静态static代码块</code></li>
+<li>static变量<ul>
+<li>静态变量被<code>所有的对象所共享</code>，在内存中只有一个副本，它当且仅当在<code>类初次加载时会被初始化</code></li>
+<li>非静态变量是<code>对象所拥有的</code>，在<code>创建对象的时候被初始化</code>，存在多个副本，各个<code>对象拥有的副本互不影响</code></li>
+</ul>
+</li>
+<li>static方法<ul>
+<li>静态方法<code>不依赖于任何对象</code>就可以进行访问，因此对于静态方法来说，是<code>没有this的</code></li>
+<li>静态方法中不能访问类的<code>非静态成员变量和非静态成员方法</code>，因为非静态成员方法/变量都是必须<code>依赖具体的对象</code>才能够被调用</li>
+</ul>
+</li>
+<li>static代码块<ul>
+<li>static块可以置于类中的<code>任何地方</code>，类中可以有<code>多个static块</code>。在类初次被加载的时候，会按照static块的顺序来执行每个static块，并且<code>只会执行一次</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="十四、Java-中的值传递和引用传递"><a href="#十四、Java-中的值传递和引用传递" class="headerlink" title="十四、Java 中的值传递和引用传递"></a>十四、Java 中的值传递和引用传递</h3><ul>
+<li>值传递是指<code>对象被值传递</code>，意味着传递了<code>对象的一个副本</code>，即使副本被改变，也不会影响源对象</li>
+<li>引用传递是指<code>对象被引用传递</code>，意味着传递的并不是实际的对象，而是<code>对象的引用值会受到影响</code></li>
+</ul>
+<h3 id="十五、i-与-i-到底有什么不同？"><a href="#十五、i-与-i-到底有什么不同？" class="headerlink" title="十五、i++ 与 ++i 到底有什么不同？"></a>十五、i++ 与 ++i 到底有什么不同？</h3><blockquote>
+<p><a href="https://www.cnblogs.com/wmyskxz/p/9016611.html" target="_blank" rel="noopener">https://www.cnblogs.com/wmyskxz/p/9016611.html</a></p>
+</blockquote>
+<ul>
+<li>不管是前置 ++，还是后置 ++，都是<code>先将变量的值加1</code>，然后才继续计算的</li>
+<li>前置 ++ 是将变量的值加 1 后，使用<code>增值后的变量进行运算的</code></li>
+<li>后置 ++ 是首先将变量<code>赋值给一个临时变量</code>，接下来对变量的值加1，然后使用那个<code>临时变量进行运算</code></li>
+</ul>
+<h3 id="十六、类什么时候被初始化？"><a href="#十六、类什么时候被初始化？" class="headerlink" title="十六、类什么时候被初始化？"></a>十六、类什么时候被初始化？</h3><ul>
+<li>创建类的实例，也就是使用<code>new操作符</code></li>
+<li>访问<code>某个类或接口的静态变量</code>，或者对该<code>静态变量赋值</code></li>
+<li>访问类的<code>静态方法</code></li>
+<li>反射<code>Class.forName</code></li>
+<li>初始化类的子类<code>(会先初始化该类的父类)</code></li>
+<li>JVM启动时标明的<code>启动类</code>，即<code>文件名和类名相同</code>的那个类</li>
+</ul>
+<h3 id="十七、类的初始化步骤"><a href="#十七、类的初始化步骤" class="headerlink" title="十七、类的初始化步骤"></a>十七、类的初始化步骤</h3><ul>
+<li>如果该类还没有被加载和连接，那么<code>先进行加载和连接</code></li>
+<li>假如这个类存在直接的父类，并且该类还没被初始化，那就<code>先初始化直接的父类</code>[ 不适合接口 ]</li>
+<li>假如类中存在初始化语句[ 如static变量和static块 ]，那么就<code>依次执行这些初始化语句</code></li>
+</ul>
+<h3 id="十八、获得一个类有哪些方式？"><a href="#十八、获得一个类有哪些方式？" class="headerlink" title="十八、获得一个类有哪些方式？"></a>十八、获得一个类有哪些方式？</h3><ul>
+<li><code>类型.class</code></li>
+<li><code>对象.getclass</code></li>
+<li><code>Class.forName()</code></li>
+</ul>
+<h3 id="十九、父类与子类之间的调用顺序"><a href="#十九、父类与子类之间的调用顺序" class="headerlink" title="十九、父类与子类之间的调用顺序"></a>十九、父类与子类之间的调用顺序</h3><p>1、父类静态代码块<br>2、子类静态代码块<br>3、父类构造方法<br>4、子类构造方法<br>5、重写父类的方法</p>
+<h3 id="二十、Java中-和eqauls-的区别"><a href="#二十、Java中-和eqauls-的区别" class="headerlink" title="二十、Java中==和eqauls()的区别"></a>二十、Java中==和eqauls()的区别</h3><ul>
+<li>==和eqauls()的最大的区别就是<code>一个是运算符一个是方法</code></li>
+<li>==<ul>
+<li>如果比较的对象是<code>基本数据类型</code>，则比较的是<code>数值</code>是否相等</li>
+<li>如果比较的是<code>引用数据类型</code>，则比较的是对象的<code>地址值</code>是否相等</li>
+</ul>
+</li>
+<li>eqauls()<ul>
+<li>用来比较方法两个<code>对象的内容</code>是否相等；</li>
+<li>不能用于基本数据类型的变量，如果没有对eqauls方法进行重写，则比较的是<code>引用类型的变量所指向的对象的地址</code></li>
+</ul>
+</li>
+</ul></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-12-21</span><i class="fa fa-tag"></i><a class="tag" href="/tags/原创/" title="原创">原创 </a><a class="tag" href="/tags/面试/" title="面试">面试 </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/posts/6292/,Ronaldo,Java 面试题整理 (基础篇),;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/posts/6372/" title="Java 面试题整理 (集合框架篇二)">Previous Article</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/posts/5392/" title="Java 面试题整理 (集合框架篇一)">Next Article</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

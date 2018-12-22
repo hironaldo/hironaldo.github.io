@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="FANYANGEN"><title>SpringMvc (一) · Ronaldo</title><meta name="description" content="Spring MVC框架是一个MVC框架，通过实现Model-View-Controller模式来很好地将数据、业务与展示进行分离，Spring MVC和Struts2非常类似。Spring MVC的设计是围绕DispatcherServlet展开的，DispatcherServlet负责将请求派发"><meta name="keywords" content="Java,HTML,CSS,Javascript,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Ronaldo</a></h3><div class="description"><p>爱你所爱 行你所行</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">About</a></li><li><a href="/archives">Archive</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/images/headpic.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>SpringMvc (一)</a></h3></div><div class="post-content"><p>Spring MVC框架是一个<code>MVC框架</code>，通过实现<code>Model-View-Controller模式</code>来很好地将数据、业务与展示进行分离，<code>Spring MVC和Struts2非常类似</code>。Spring MVC的设计是围绕<code>DispatcherServlet</code>展开的，DispatcherServlet负责将<code>请求派发到特定的handler。</code></p>
+<h3 id="一、了解SpringMvc"><a href="#一、了解SpringMvc" class="headerlink" title="一、了解SpringMvc"></a>一、了解SpringMvc</h3><ul>
+<li>Spring MVC 是一个<code>模型 - 视图 - 控制器（MVC）</code>的Web框架建立在中央前端控制器<code>servlet（DispatcherServlet）</code>，它负责发送每个<code>请求</code>到合适的处理程序，使用<code>视图</code>来最终返回响应结果的概念。</li>
+<li>Spring MVC 是 Spring 产品组合的一部分，它享有<code>Spring IoC容器紧密结合</code><code>Spring松耦合</code>等特点，因此它有<code>Spring的所有优点</code>。</li>
+</ul>
+<h3 id="二、与Struts2细节对比"><a href="#二、与Struts2细节对比" class="headerlink" title="二、与Struts2细节对比"></a>二、与Struts2细节对比</h3><ul>
+<li>框架机制<ul>
+<li>Struts2采用<code>Filter（StrutsPrepareAndExecuteFilter）</code>实现，SpringMVC采用<code>Servlet（DispatcherServlet）</code>实现</li>
+<li>Filter在<code>容器启动后即初始化,服务停止以后销毁,晚于Servlet调用</code>。Servlet在<code>调用时初始化,先于Filter调用,服务停止后销毁</code></li>
+</ul>
+</li>
+<li>性能方面<ul>
+<li><code>SpringMVC开发效率和性能高于Struts2</code>。因为SpringMVC实现了零配置，由于SpringMVC基于方法的拦截，有加载一次单例模式bean注入。而Struts2是类级别的拦截，每次请求对应实例一个新的Action，需要加载所有的属性值注入</li>
+</ul>
+</li>
+<li>拦截机制<ul>
+<li>Struts2有自己的<code>拦截Interceptor机制</code>，SpringMVC这是用的是<code>独立的Aop方式</code></li>
+</ul>
+</li>
+<li>设计思想<ul>
+<li>Struts2更加符合<code>OOP的编程思想</code>， SpringMVC只<code>在servlet上扩展</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="三、与Struts2总体对比"><a href="#三、与Struts2总体对比" class="headerlink" title="三、与Struts2总体对比"></a>三、与Struts2总体对比</h3><ul>
+<li>Struts2<ul>
+<li>Struts2框架是<code>类级别的拦截</code>，每次请求就会<code>创建一个Action</code>，和Spring整合时Struts2的ActionBean注入作用域是<code>原型模式prototype</code>然后通过setter，getter把<code>request数据注入到属性</code></li>
+<li>Struts2中，一个Action<code>对应一个request、response</code>，在接收参数时，可以<code>通过属性接收</code>，这说明属性参数是让<code>多个方法共享的</code></li>
+<li>Struts2中Action的一个方法可以<code>对应一个url</code>，而其类属性却被所有方法共享，这也就<code>无法用注解</code>或其他方式标识其所属方法了</li>
+</ul>
+</li>
+<li>SpringMVC<ul>
+<li>SpringMVC是<code>方法级别的拦截</code>，一个方法对应<code>一个Request上下文</code>，所以方法<code>基本上是独立的</code>，独享<code>request、response数据</code></li>
+<li>每个方法同时又可与<code>一个url对应</code>，参数的传递是<code>直接注入到方法中</code>的，是<code>方法所独有的</code>，处理结果通过<code>ModeMap返回给框架</code></li>
+<li>在Spring整合时，SpringMVC的Controller Bean默认<code>单例模式Singleton</code>，所以默认对所有的请求，只会创建一个<code>Controller</code>，因为没有共享的属性，所以是<code>线程安全的</code>，如果要改变默认的作用域，需要<code>添加@Scope注解修改</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="四、SpringMVC核心流程图及解析"><a href="#四、SpringMVC核心流程图及解析" class="headerlink" title="四、SpringMVC核心流程图及解析"></a>四、SpringMVC核心流程图及解析</h3><p><a href="https://imgchr.com/i/F05MO1" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/12/17/F05MO1.md.png" alt="F05MO1.md.png"></a></p>
+<ul>
+<li>DispatcherServlet(前端控制器)<ul>
+<li>应用了“ Front Controller”模式 – 是所有 Spring MVC 请求的中枢</li>
+<li>继承了HttpServlet，是一个Servlet，由WebApplicationContext 加载</li>
+<li>如果不作其它配置，会加载默认组件</li>
+</ul>
+</li>
+<li>HandlerMapping(映射处理器)<ul>
+<li>将web请求映射到正确的处理器（handler）上 , 通常是一个 Controller</li>
+<li>不需用自定义处理器映射–已经内置了很多处理器映射策略</li>
+<li>在处理器映射中通过配置拦截器（包括处理器执行前、执行后、或者执行前后运行拦截器）将使其功能更强大</li>
+</ul>
+</li>
+<li>Controller (后端控制器)<ul>
+<li>负责处理请求</li>
+<li>内部参数继承 HttpServlethandleRequest(HttpServletRequest, HttpServletResponse)</li>
+<li>返回一个 ModelAndView对象</li>
+<li>所有实现都是线程安全的</li>
+<li>基本不用自己实现接口 – 已经提供了很多实用的实现类</li>
+</ul>
+</li>
+<li>ModelAndView 对象<ul>
+<li>封装了用来渲染页面的 model和view</li>
+<li>Model 用 java.util.Map实现的</li>
+<li>添加对象，可以不需用名字</li>
+<li>addObject(String, Object) – 用显式名字添加</li>
+<li>addObject(Object) – 用默认名添加 (惯例优先)</li>
+<li>View 用 String 或 View 对象表示</li>
+<li>类似 Struts的 Action</li>
+</ul>
+</li>
+<li>Interceptors(拦截器)<ul>
+<li>在请求前后添加其它功能</li>
+<li>包括拦截器方法 – preHandle and postHandle</li>
+<li>包括回调方法 – afterCompletetion</li>
+<li>可以通过 HandlerMapping 和一系列Controller关联上</li>
+</ul>
+</li>
+<li>ViewResolver(视图解析器)<ul>
+<li>从一个逻辑视图名映射到一个视图对象</li>
+</ul>
+</li>
+<li>View(视图)<ul>
+<li>InternalResourceView (JSP)</li>
+<li>JstlView (JSP + JSTL)</li>
+<li>VelocityView (Velocity)</li>
+<li>FreeMarkerView (FreeMarker)</li>
+<li>TilesView (Tiles)</li>
+<li>TilesJstlView (Tiles + JSTL)</li>
+</ul>
+</li>
+</ul>
+<h3 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h3><p>作者：易白教程 / 水草滩 / 冯如<br>链接：<br><a href="https://www.yiibai.com/spring_mvc/" target="_blank" rel="noopener">https://www.yiibai.com/spring_mvc/</a><br><a href="https://blog.csdn.net/jishuizhipan/article/details/79385190" target="_blank" rel="noopener">https://blog.csdn.net/jishuizhipan/article/details/79385190</a><br><a href="https://www.cnblogs.com/fengru/p/5730174.html" target="_blank" rel="noopener">https://www.cnblogs.com/fengru/p/5730174.html</a><br>来源：易白教程 / CSDN / 博客园</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-12-17</span><i class="fa fa-tag"></i><a class="tag" href="/tags/转载/" title="转载">转载 </a><a class="tag" href="/tags/后端/" title="后端">后端 </a><a class="tag" href="/tags/SpringMvc/" title="SpringMvc">SpringMvc </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://yoursite.com/posts/5896/,Ronaldo,SpringMvc (一),;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/posts/6399/" title="SpringMvc (二)">Previous Article</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/posts/52271/" title="Mybatis (七)">Next Article</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
