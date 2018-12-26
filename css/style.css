@@ -34,6 +34,12 @@ body::-webkit-scrollbar-track {
     background-color: rgb(216,216,216);
 }
 
+p>img,li>img{
+	box-sizing: border-box;
+    margin: auto;
+    padding: 3px;
+    border: 1px solid #ddd;
+}
 
 .title img{
 	border-radius: 50%;
@@ -41,10 +47,6 @@ body::-webkit-scrollbar-track {
 
 .avatar{
 	display:none
-}
-
-.post-content{
-
 }
 
 h3>a:hover{
@@ -57,6 +59,40 @@ h3>a:hover{
 
 .post-content{
 	line-height: 28px;
+}
+
+table{
+	margin: 20px 0;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    table-layout: fixed;
+    word-wrap: break-all;
+}
+
+table>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+td {
+    border-bottom-width: 1px;
+}
+th, td {
+    border-right: 1px solid #eee;
+}
+caption, th, td {
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: normal;
 }
 
 p {
