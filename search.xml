@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Mybatis-generator逆向工程生成mapper和pojo]]></title>
     <url>%2Fposts%2F1596%2F</url>
-    <content type="text"><![CDATA[一、Mybatis工具 http://www.mybatis.tk MyBatis-Spring-Boot https://github.com/abel533/MyBatis-Spring-Boot Mybatis 通用 Mapper3 https://github.com/abel533/Mapper Mybatis 分页插件 PageHelper https://github.com/pagehelper/Mybatis-PageHelper]]></content>
+    <content type="text"><![CDATA[一、Mybatis工具 http://www.mybatis.tk MyBatis-Spring-Boot https://github.com/abel533/MyBatis-Spring-Boot Mybatis 通用 Mapper3 https://github.com/abel533/Mapper Mybatis 分页插件 PageHelper https://github.com/pagehelper/Mybatis-PageHelper 二、集成MyBatis, 分页插件 PageHelper, 通用 Mapper, 数据源 druid]]></content>
       <tags>
         <tag>原创</tag>
         <tag>后端</tag>
