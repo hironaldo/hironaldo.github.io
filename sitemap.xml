@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/posts/7539/</loc>
+    
+    <lastmod>2019-01-13T09:46:40.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/posts/9175/</loc>
+    
+    <lastmod>2019-01-13T08:53:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/posts/43820/</loc>
+    
+    <lastmod>2019-01-13T07:48:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/posts/1596/</loc>
     
     <lastmod>2019-01-12T06:27:22.000Z</lastmod>
@@ -19,13 +40,6 @@
     <loc>http://yoursite.com/posts/44568/</loc>
     
     <lastmod>2019-01-11T08:04:38.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/posts/9175/</loc>
-    
-    <lastmod>2019-01-11T07:28:00.000Z</lastmod>
     
   </url>
   
@@ -201,13 +215,6 @@
     <loc>http://yoursite.com/posts/49663/</loc>
     
     <lastmod>2018-12-22T08:15:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/posts/43820/</loc>
-    
-    <lastmod>2018-12-22T08:15:32.000Z</lastmod>
     
   </url>
   
