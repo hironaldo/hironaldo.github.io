@@ -519,14 +519,12 @@ mark {
 }
 
 code,tt {
-	padding: 1px 3px;
-	font-family: Inconsolata,monospace,sans-serif;
-	font-size: .85em;
-	white-space: pre-wrap;
-	border: 1px solid #E3EDF3;
-	background: #f7f7f9;
-	color: #d14;
-	border-radius: 2px
+	margin: 0 2px;
+    color: #f00;
+    padding: 3px 5px;
+    font-size: .9em;
+    border-radius: 2px;
+    background-color: #f8f8f8;
 }
 
 .toc {
