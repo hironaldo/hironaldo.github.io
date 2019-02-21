@@ -385,7 +385,8 @@ pre .addition,pre .apache .cbracket,pre .apache .tag,pre .attr_selector,pre .bui
 }
 
 pre .apache .sqbracket,pre .comment,pre .doctype,pre .java .annotation,pre .pi,pre .python .decorator,pre .shebang,pre .template_comment,pre .tex .formula {
-	color: #b3b3b3!important
+  /* color: #b3b3b3!important */
+  color:  #f9532e!important
 }
 
 pre .deletion {
