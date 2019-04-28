@@ -29,16 +29,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Vue.js常用指令]]></title>
-    <url>%2Fposts%2F1976%2F</url>
-    <content type="text"><![CDATA[一、简单了解MVVM模式]]></content>
-      <tags>
-        <tag>原创</tag>
-        <tag>前端</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Hello Vue.js]]></title>
     <url>%2Fposts%2F7888%2F</url>
     <content type="text"><![CDATA[Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue也完全能够为复杂的单页应用提供驱动 – Vue中文官网 一、简单了解MVVM模式&ensp;&ensp;&ensp;&ensp;&ensp;MVVM是Model-View-ViewModel的简写。它本质上就是MVC的改进版。MVVM 就是将其中的View的状态和行为抽象化，让我们将视图和业务逻辑分开。当然这些事ViewModel已经帮我们做了，它可以取出Model的数据同时帮忙处理View中需要展示内容而涉及的业务逻辑。 上图清晰的描述了关于vue视图和模型之间交互的流程 我们从中也能看到ViewModel是Vue的核心，它是一个Vue的实例，这个实例是作用于DOM元素的 Data Bindings将model和view绑定起来，使的双方任何一方发生改变，另一方也会随之改变 DOM Listeners会帮vue监听页面DOM元素的变化，从而影响Model中的数据 DOM Listeners(文档监听)和Data Bindings(数据绑定)，它们是ViewModel的核心，是实现双向绑定的关键 二、Vue.js开发环境 IDE vscode git nvm (node包管理) github for nvm 1curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash node npm/cnpm 1$ npm install -g cnpm --registry=https://registry.npm.taobao.org vue-cli (vue脚手架) 1npm install -g vue-cli 三、Hello World123456789101112131415&lt;body&gt; &lt;!-- View --&gt; &lt;h1 align="center" id="app"&gt;Ronaldo Say &#123;&#123; msg &#125;&#125;&lt;/h1&gt;&lt;/body&gt;&lt;script&gt; // Model let my-data = &#123; msg: 'Hello Vue.js!!!' &#125; // 创建一个ViewModel(Vue 实例),用它来关联View和Model new Vue(&#123; el: '#app', data: my-data &#125;)&lt;/script&gt; Ps: 1）vue实例中，el: ‘#app’表示将该实例与view层id名为app的元素绑定；2）data: my-data表示与model层名为my-data的对象绑定。更详细的介绍请移至vue官网]]></content>
@@ -56,18 +46,6 @@
         <tag>后端</tag>
         <tag>SpringBoot</tag>
         <tag>原创</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[基于SpringBoot/JPA/Thymeleaf的CRUD、并添加Druid监控]]></title>
-    <url>%2Fposts%2F1994%2F</url>
-    <content type="text"><![CDATA[一、构建项目]]></content>
-      <tags>
-        <tag>后端</tag>
-        <tag>SpringBoot</tag>
-        <tag>原创</tag>
-        <tag>JPA</tag>
-        <tag>Druid</tag>
       </tags>
   </entry>
   <entry>
@@ -363,7 +341,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[初始 Pjax]]></title>
+    <title><![CDATA[Hello Pjax]]></title>
     <url>%2Fposts%2F44568%2F</url>
     <content type="text"><![CDATA[Pjax是一个jQuery插件，它通过ajax和pushState技术提供了极速的（无刷新ajax加载）浏览体验，并且保持了真实的地址、网页标题，浏览器的后退（前进）按钮也可以正常使用。 一、我眼中的PjaxPjax === PushState(修改地址栏的Url) + Ajax(异步无刷新技术)。简单的来说pjax是这两个技术的结合，执行原理ajax负责去后端请求部分html片段或者json数据，通过渲染到指定的div容器中，再由pushstate刷新当前的url地址，但是并不会造成页面的闪动，因此提升用户网页浏览体验。 二、Pjax的工作原理pjax的工作原理是通过ajax从服务器端获取HTML，在页面中用获取到的HTML替换指定容器元素中的内容。然后使用pushState技术更新浏览器地址栏中的当前地址。 三、Pjax的优缺点 优点： 不存在页面资源（js/css）的重复加载和应用 如果服务器端配置了pjax，它可以只渲染页面局部内容，从而避免服务器渲染完整布局的额外开销 缺点 不支持一些低版本的浏览器(如IE系列)，因为pushState是html5中history的新特性，在某些旧版浏览器中可能不支持 使服务端处理变得复杂 pjax依赖于jQuery 1.8或者更高版本 四、Pjax起步 通过npm安装 or 通过js引入(首先得引入jqeury)12$ npm install jquery-pjaxhttps://raw.github.com/defunkt/jquery-pjax/master/jquery.pjax.js 五、Pjax方法 $.fn.pjax 概述 1$(document).pjax(selector, [container], options) 1.selector：string类型，用于click 事件委托的选择器 2.container：string类型，用于标识唯一pjax容器的选择器 3.options object类型，包含下列选项 选项 默认值 说明 timeout 650 ajax超时时间（毫秒），超时后强制刷新整个页面 push true 使用 pushState 在浏览器中添加历史记录 replace false 替换URL地址但不添加浏览器历史记录 type “GET” 请求类型 dataType “html” 服务器端返回的数据类型 type “GET” 请求类型 url link.href string或function，返回ajax请求响应的URL 全局使用$.pjax.defaults对象改变默认配置，如下 $.pjax.defaults.timeout = 1200 $.fn.pjax 用法 最简单常见的pjax使用方法如下： 1$(document).pjax('a', '#pjax-container') pjax()方法能若干个参数，上文涉及到的‘a’和’#pjax-container’。‘a’代表所有的a标签链接，而‘#pjax-container’代表需要替换内容的容器。通过这种方式可以让页面中所有的链接都实现pjax加载，并指定ID为pjax-container的作为容器元素。 如果我们想指定a标签作为pjax链接使用方法如下： 1$(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container') 那么我们可以用data-pjax来注明这是一个pjax链接，然后使用a[data-pjax]来代替全局选择器a。 六、事件 $.pjax.click 点击事件 本示例使用当前的click上下文来设置一个祖先元素作为容器：1234567if ($.support.pjax) &#123; $(document).on('click', 'a[data-pjax]', function(event) &#123; var container = $(this).closest('[data-pjax-container]') var containerSelector = '#' + container.id $.pjax.click(event, &#123;container: containerSelector&#125;) &#125;)&#125; $.pjax.submit 表单提交事件 通过pjax提交表单123$(document).on('submit', 'form[data-pjax]', function(event) &#123; $.pjax.submit(event, '#pjax-container')&#125;) $.pjax.reload 重载事件 使用pjax机制发起一个当前URL的请求到服务器，并且通过响应的内容替换容器元素中的内容，同时不添加浏览器历史记录。1$.pjax.reload('#pjax-container', options) $.pjax 手动调用pjax事件 主要用于非click事件发起pjax请求的情况。如果可以获得click事件，请使用$.pjax.click(event)来代替。1234function applyFilters() &#123; var url = urlForFilters() $.pjax(&#123;url: url, container: '#pjax-container'&#125;)&#125; 七、文档链接：https://github.com/defunkt/jquery-pjax来源：github链接：http://bsify.admui.com/jquery-pjax/来源：bsify]]></content>
       <tags>
