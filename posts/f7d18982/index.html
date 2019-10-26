@@ -17,17 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>sentence | Ronaldo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="sentence">
-<meta property="og:url" content="/sentence/index.html">
+  <title>Hello | Ronaldo</title>
+  <meta name="description" content="一、Hello12345678910111213141516171819202122232425262728import UIKitpublic class AsyncButton: UIButton &amp;#123;        private var imageURL = [UInt:NSURL]()    private var placeholderImage = [UInt:UIImage">
+<meta name="keywords" content="原创,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello">
+<meta property="og:url" content="/posts/f7d18982/index.html">
 <meta property="og:site_name" content="RONALDO">
+<meta property="og:description" content="一、Hello12345678910111213141516171819202122232425262728import UIKitpublic class AsyncButton: UIButton &amp;#123;        private var imageURL = [UInt:NSURL]()    private var placeholderImage = [UInt:UIImage">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-10T13:29:10.000Z">
+<meta property="og:updated_time" content="2019-10-26T08:30:56.690Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sentence">
+<meta name="twitter:title" content="Hello">
+<meta name="twitter:description" content="一、Hello12345678910111213141516171819202122232425262728import UIKitpublic class AsyncButton: UIButton &amp;#123;        private var imageURL = [UInt:NSURL]()    private var placeholderImage = [UInt:UIImage">
   <!-- Canonical links -->
-  <link rel="canonical" href="/sentence/index.html">
+  <link rel="canonical" href="/posts/f7d18982/index.html">
   
     <link rel="alternate" href="/atom.xml" title="RONALDO" type="application/atom+xml">
   
@@ -242,14 +246,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <article id="post-DevOps/test" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      sentence
+      Hello
     </h1>
   
 
@@ -257,22 +261,27 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/sentence/index.html" class="article-date">
-	  <time datetime="2018-12-10T11:27:37.000Z" itemprop="datePublished">2018-12-10</time>
+	<a href="/posts/f7d18982/" class="article-date">
+	  <time datetime="2018-12-21T04:54:28.000Z" itemprop="datePublished">2018-12-21</time>
 	</a>
 </span>
         
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/原创/">原创</a>, <a class="article-tag-link" href="/tags/面试/">面试</a>
+  </span>
+
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/sentence/index.html#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/f7d18982/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        
+        <h3 id="一、Hello"><a href="#一、Hello" class="headerlink" title="一、Hello"></a>一、Hello</h3><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">public class AsyncButton: UIButton &#123;</span><br><span class="line">    </span><br><span class="line">    private var imageURL = [UInt:NSURL]()</span><br><span class="line">    private var placeholderImage = [UInt:UIImage]()</span><br><span class="line"></span><br><span class="line">    public func <span class="built_in">set</span>ImageURL(url: NSURL?, placeholderImage placeholder:UIImage?, <span class="keyword">for</span>State <span class="keyword">state</span>:UIControl.State) &#123;</span><br><span class="line">        </span><br><span class="line">        imageURL[<span class="keyword">state</span>.rawValue] = url</span><br><span class="line">        placeholderImage[<span class="keyword">state</span>.rawValue] = placeholder</span><br><span class="line">        </span><br><span class="line">        if let urlString = url?.absoluteString &#123;</span><br><span class="line">            ImageLoader.sharedLoader.imageForUrl(urlString: urlString) &#123; [weak <span class="literal">self</span>] image, url <span class="keyword">in</span></span><br><span class="line">                </span><br><span class="line">                if let strongSelf = <span class="literal">self</span> &#123;</span><br><span class="line">                    </span><br><span class="line">                    DispatchQueue.main.async(execute: &#123; () -&gt; Void <span class="keyword">in</span></span><br><span class="line">                        if strongSelf.imageURL[<span class="keyword">state</span>.rawValue]?.absoluteString == url &#123;</span><br><span class="line">                            strongSelf.<span class="built_in">set</span>Image(image, <span class="keyword">for</span>: <span class="keyword">state</span>)</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -281,7 +290,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="/sentence/index.html" title="sentence" target="_blank" rel="external">/sentence/index.html</a>
+      <a href="/posts/f7d18982/" title="Hello" target="_blank" rel="external">/posts/f7d18982/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -324,6 +333,16 @@
 
   <nav class="bar bar-footer clearfix" data-stick-bottom="">
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/f7d18982/" title="Hello"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    
+  </ul>
   
   
   
@@ -389,6 +408,10 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 })(jQuery);
 </script>
 
+
+
+
+   
 
 
 
