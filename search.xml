@@ -2,20 +2,18 @@
 <search>
   <entry>
     <title><![CDATA[Hello]]></title>
-    <url>%2Fposts%2Ff7d18982%2F</url>
+    <url>%2Fposts%2F7858%2F</url>
     <content type="text"><![CDATA[一、Hello12345678910111213141516171819import UIKitpublic class AutoTextView: UITextView &#123; public override var intrinsicContentSize: CGSize &#123; get &#123; var size = self.sizeThatFits(CGSize(width: self.frame.size.width, height: CGFloat.greatestFiniteMagnitude)) size.width = self.frame.size.width if text.length == 0 &#123; size.height = 0 &#125; contentInset = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4) layoutIfNeeded() return size &#125; &#125;&#125;]]></content>
       <tags>
         <tag>原创</tag>
-        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello]]></title>
-    <url>%2Fposts%2Ff7d18982%2F</url>
+    <title><![CDATA[World]]></title>
+    <url>%2Fposts%2F6642%2F</url>
     <content type="text"><![CDATA[一、Hello12345678910111213141516171819202122232425262728import UIKitpublic class AsyncButton: UIButton &#123; private var imageURL = [UInt:NSURL]() private var placeholderImage = [UInt:UIImage]() public func setImageURL(url: NSURL?, placeholderImage placeholder:UIImage?, forState state:UIControl.State) &#123; imageURL[state.rawValue] = url placeholderImage[state.rawValue] = placeholder if let urlString = url?.absoluteString &#123; ImageLoader.sharedLoader.imageForUrl(urlString: urlString) &#123; [weak self] image, url in if let strongSelf = self &#123; DispatchQueue.main.async(execute: &#123; () -&gt; Void in if strongSelf.imageURL[state.rawValue]?.absoluteString == url &#123; strongSelf.setImage(image, for: state) &#125; &#125;) &#125; &#125; &#125; &#125; &#125;]]></content>
       <tags>
         <tag>原创</tag>
-        <tag>面试</tag>
       </tags>
   </entry>
 </search>
