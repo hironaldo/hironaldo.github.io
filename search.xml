@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Hello]]></title>
     <url>%2Fposts%2F7858%2F</url>
-    <content type="text"><![CDATA[一、Hello12345678910111213141516171819import UIKitpublic class AutoTextView: UITextView &#123; public override var intrinsicContentSize: CGSize &#123; get &#123; var size = self.sizeThatFits(CGSize(width: self.frame.size.width, height: CGFloat.greatestFiniteMagnitude)) size.width = self.frame.size.width if text.length == 0 &#123; size.height = 0 &#125; contentInset = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4) layoutIfNeeded() return size &#125; &#125;&#125;]]></content>
+    <content type="text"><![CDATA[一、Hello123456789101112131415161718import UIKitpublic class AutoTextView: UITextView &#123; public override var intrinsicContentSize: CGSize &#123; get &#123; var size = self.sizeThatFits(CGSize(width: self.frame.size.width, height: CGFloat.greatestFiniteMagnitude)) size.width = self.frame.size.width if text.length == 0 &#123; size.height = 0 &#125; contentInset = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4) layoutIfNeeded() return size &#125; &#125;&#125;]]></content>
       <tags>
         <tag>原创</tag>
       </tags>
