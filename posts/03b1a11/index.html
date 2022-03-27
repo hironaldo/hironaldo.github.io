@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>浅谈API安全及版本控制 | Ronaldo</title>
+  <meta name="description" content="一、前言&amp;ensp; &amp;ensp; 数据安全是互联网永恒的话题，API直接基于公开的外网请求必将产生，数据被抓包窃取、数据被篡改、数据被大规模的恶意调用等问题。如系统形成完整的产品线，接口的调用方可能有PC端、APP端、第三方系统调用，这时我们必须做好API的版本控制，才能保证一套API能满足所有形式的调用。 二、API安全安全的数据传输应该建立在https这种安全的协议上。我认为一个安全的API">
+<meta name="keywords" content="解决方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈API安全及版本控制">
+<meta property="og:url" content="http://yoursite.com/child/posts/03b1a11/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、前言&amp;ensp; &amp;ensp; 数据安全是互联网永恒的话题，API直接基于公开的外网请求必将产生，数据被抓包窃取、数据被篡改、数据被大规模的恶意调用等问题。如系统形成完整的产品线，接口的调用方可能有PC端、APP端、第三方系统调用，这时我们必须做好API的版本控制，才能保证一套API能满足所有形式的调用。 二、API安全安全的数据传输应该建立在https这种安全的协议上。我认为一个安全的API">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/API安全.png">
+<meta property="og:updated_time" content="2022-03-27T08:17:10.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈API安全及版本控制">
+<meta name="twitter:description" content="一、前言&amp;ensp; &amp;ensp; 数据安全是互联网永恒的话题，API直接基于公开的外网请求必将产生，数据被抓包窃取、数据被篡改、数据被大规模的恶意调用等问题。如系统形成完整的产品线，接口的调用方可能有PC端、APP端、第三方系统调用，这时我们必须做好API的版本控制，才能保证一套API能满足所有形式的调用。 二、API安全安全的数据传输应该建立在https这种安全的协议上。我认为一个安全的API">
+<meta name="twitter:image" content="http://yoursite.com/assets/API安全.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/03b1a11/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/浅谈API安全及版本控制" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈API安全及版本控制
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/03b1a11/" class="article-date">
+	  <time datetime="2020-05-27T16:00:00.000Z" itemprop="datePublished">2020-05-28</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/解决方案/">解决方案</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/解决方案/">解决方案</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/03b1a11/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>&ensp; &ensp; 数据安全是互联网永恒的话题，API直接基于公开的外网请求必将产生，数据被抓包窃取、数据被篡改、数据被大规模的恶意调用等问题。如系统形成完整的产品线，接口的调用方可能有PC端、APP端、第三方系统调用，这时我们必须做好API的版本控制，才能保证一套API能满足所有形式的调用。</p>
+<h3 id="二、API安全"><a href="#二、API安全" class="headerlink" title="二、API安全"></a>二、API安全</h3><p>安全的数据传输应该建立在https这种安全的协议上。我认为一个安全的API系统，应该满足如下要求：</p>
+<ul>
+<li>使用令牌方式进行身份验证</li>
+<li>使用网关黑白名单控制恶意调用和限流</li>
+<li>使用接口幂等控制重复提交</li>
+<li>使用加签名防止篡改数据</li>
+<li>敏感数据全部基于SSL</li>
+<li>第三方系统调用必须遵循OAuth2<center><img src="/assets/API安全.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="三、API版本控制"><a href="#三、API版本控制" class="headerlink" title="三、API版本控制"></a>三、API版本控制</h3><p>&ensp; &ensp; 随着业务的快速迭代，设计API时应考虑向后兼容。一般的做法就是在原来的数据响应结构上添加，多次迭代后响应出去的数据将会越来越多，就会产生大量的冗余，调用方根本不知道那个版本该用哪些数据，避免不了跟提供方进行没必要的沟通，造成开发效率低下。</p>
+<ul>
+<li>针对该问题产生如下解决方法：<ul>
+<li>3.1 客户端<ul>
+<li>1）基于URL<ul>
+<li>URL中指定版本号<ul>
+<li>GET <a href="https://www.api.com/SERVER_NAME/v1/users" target="_blank" rel="noopener">https://www.api.com/SERVER_NAME/v1/users</a></li>
+<li>如果接口版本大部分都不统一，可以采用这种方式，接口版本统一也可使用，只是所有接口都需要加上版本号，服务端直接根据请求url跳转对对应的接口。</li>
+</ul>
+</li>
+<li>参数中指定版本号<ul>
+<li>GET <a href="https://www.api.com/SERVER_NAME/users?version=1" target="_blank" rel="noopener">https://www.api.com/SERVER_NAME/users?version=1</a></li>
+<li>该处理方法虽能直观的体现版本，但是不利于版本迭代，每次资源的变化就得变化url，并且也违背了RESTful API风格。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2）基于Request Headers<ul>
+<li>Header中自定义参数<ul>
+<li>Api-Version: 1</li>
+<li>该处理方法最大的优点是保证了url统一，调用方只要传指定数据请求不同版本的数据，如果未指定提供方可默认响应最新版本数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3）基于Token<ul>
+<li>数据库中保存客户端名、默认的版本号、特殊接口uri、特殊接口uri地址，废弃uri、废弃uri版本。</li>
+<li>前端不需要关注版本号，版本控制完全由后台控制，如A系统用户登录，服务器将系统的默认的版本号、特殊uri及版本号、废弃uri及版本号存放在token中，客户端发起请求时先对token进行校验，校验通过后先根据token和uri先判断调用uri和版本号是否废弃，废弃则提示废弃，提示uri应跳转的版本号；然后是否在特殊版本接口中，是跳转对应版本接口，否则跳转到默认版本的接口中；对于不需要token的接口则默认跳转到最新版本的接口中或者客户端在head中存放系统名，跳转到系统默认的版本接口中。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/03b1a11/" title="浅谈API安全及版本控制" target="_blank" rel="external">http://yoursite.com/child/posts/03b1a11/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/26f10a8/" title="记录使用Arrays.asList()时异常事故"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

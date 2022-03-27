@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>HttpMessageConverter转换器 | Ronaldo</title>
+  <meta name="description" content="一、数据序列化和反序列化&amp;ensp; &amp;ensp; 序列化（serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HttpMessageConverter转换器">
+<meta property="og:url" content="http://yoursite.com/child/posts/00e5cee/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、数据序列化和反序列化&amp;ensp; &amp;ensp; 序列化（serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/Spring中的数据转换流程.png">
+<meta property="og:image" content="http://yoursite.com/assets/httpMessageConverters.png">
+<meta property="og:updated_time" content="2022-03-27T08:16:44.630Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HttpMessageConverter转换器">
+<meta name="twitter:description" content="一、数据序列化和反序列化&amp;ensp; &amp;ensp; 序列化（serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程">
+<meta name="twitter:image" content="http://yoursite.com/assets/Spring中的数据转换流程.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/00e5cee/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JAVA/HttpMessageConverter转换器" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HttpMessageConverter转换器
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/00e5cee/" class="article-date">
+	  <time datetime="2020-06-26T16:00:00.000Z" itemprop="datePublished">2020-06-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Java/">Java</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/00e5cee/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、数据序列化和反序列化"><a href="#一、数据序列化和反序列化" class="headerlink" title="一、数据序列化和反序列化"></a>一、数据序列化和反序列化</h3><p>&ensp; &ensp; 序列化（serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程并不容易。面向对象中的对象序列化，并不概括之前原始对象所关系的函数。这种过程也称为对象编组（marshalling）。从一系列字节提取数据结构的反向操作，是反序列化（也称为解编组、deserialization、unmarshalling）。——维基百科</p>
+<p>&ensp; &ensp; 简单的来理解，序列化是将<font color="red">对象转换成可存储或传输的二进制数据</font>，反序列化将<font color="red">二进制数据还原成原始对象</font>。在Spring Web中常使用两个数据接收和响应的注解@RequestBody和@ResponseBody，在数据的处理时就可以理解为一组数据的序列化和反序列化过程。</p>
+<h3 id="二、Spring中的数据转换流程"><a href="#二、Spring中的数据转换流程" class="headerlink" title="二、Spring中的数据转换流程"></a>二、Spring中的数据转换流程</h3><p>&ensp; &ensp; Http请求和响应都是基于文本传输的，@RequestBody的作用是将这些文本映射为具体的对象，@ResponseBody的作用是将数据解析成JSON输出，整个过程就是利用HttpMessageConverter进行转换。<br>&ensp; &ensp; 在Spring Web应用中WebMvcConfigurationSupport这个类的addDefaultHttpMessageConverters方法会在程序启动时加载一些默认的数据转换器，之后我们的请求或者响应程序会根据JavaType和MediaType找到具体的消息转换器去执行。执行流程如下：</p>
+<center><img src="/assets/Spring中的数据转换流程.png" alt="image.png"></center>
+
+<h3 id="三、Spring中常见的消息转换器"><a href="#三、Spring中常见的消息转换器" class="headerlink" title="三、Spring中常见的消息转换器"></a>三、Spring中常见的消息转换器</h3><table>
+<thead>
+<tr>
+<th>转换器</th>
+<th>支持的JavaType</th>
+<th>支持的MediaType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StringHttpMessageConverter</td>
+<td>String</td>
+<td>text/plain, <em>/</em></td>
+</tr>
+<tr>
+<td>ResourceHttpMessageConverter</td>
+<td>Resource</td>
+<td><em>/</em></td>
+</tr>
+<tr>
+<td>MappingJackson2HttpMessageConverter</td>
+<td>Object</td>
+<td>application/json, application/*+json</td>
+</tr>
+<tr>
+<td>ByteArrayHttpMessageConverter</td>
+<td>byte[]</td>
+<td>application/octet-stream, <em>/</em></td>
+</tr>
+<tr>
+<td>AllEncompassingFormHttpMessageConverter</td>
+<td>Map</td>
+<td>application/x-www-form-urlencoded, multipart/form-data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="四、分析HttpMessageConverter"><a href="#四、分析HttpMessageConverter" class="headerlink" title="四、分析HttpMessageConverter"></a>四、分析HttpMessageConverter</h3><ul>
+<li><p>先通过源码分析这个接口具有的功能</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> HttpMessageConverter&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">boolean</span> canRead(<span class="keyword">Class</span>&lt;?&gt; clazz, @Nullable MediaType mediaType);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">boolean</span> canWrite(<span class="keyword">Class</span>&lt;?&gt; clazz, @Nullable MediaType mediaType);</span><br><span class="line"></span><br><span class="line">    List&lt;MediaType&gt; getSupportedMediaTypes();</span><br><span class="line"></span><br><span class="line">    T <span class="keyword">read</span>(<span class="keyword">Class</span>&lt;? <span class="keyword">extends</span> T&gt; clazz, HttpInputMessage inputMessage) <span class="keyword">throws</span> IOException, HttpMessageNotReadableException;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="keyword">write</span>(T t, @Nullable MediaType contentType, HttpOutputMessage outputMessage) <span class="keyword">throws</span> IOException, HttpMessageNotWritableException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>canRead和canWrite来控制对数据的读写权限</li>
+<li>getSupportMediaTypes来获取支持的媒体类型集合</li>
+<li>read和write来决定数据的转换，其中最重要的两个参数HttpInputMessage和HttpOutputMessage，都提供了getBody的方法用来获取数据的流信息，这样我们就能对请求和响应的数据进行处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、重写HttpMessageConverter"><a href="#五、重写HttpMessageConverter" class="headerlink" title="五、重写HttpMessageConverter"></a>五、重写HttpMessageConverter</h3><p>&ensp; &ensp; 虽然FastJson也定义了自己的消息转换器FastJsonHttpMessageConverter，但是从WebMvcConfigurationSupport类中得知Spring默认支持的JSON序列化工具为Jackson和Gson。那么我们也可以试着利用FastJson来实现该功能。</p>
+<ul>
+<li><p>方式一：添加FastJsonHttpMessageConverter序列化规则</p>
+<ul>
+<li><p>编写一个多数据类型的对象</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> class FoobarVO &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">String</span> <span class="built_in">string</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Integer</span> <span class="built_in">integer</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">List</span> <span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Boolean</span> bool;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Map</span> <span class="built_in">map</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> LocalDate <span class="built_in">date</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加配置</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line"><span class="keyword">public</span> HttpMessageConverters fastJsonHttpMessageConverters() &#123;</span><br><span class="line">    FastJsonHttpMessageConverter fastJsonHttpMessageConverter = <span class="keyword">new</span> <span class="type">FastJsonHttpMessageConverter</span>();</span><br><span class="line"></span><br><span class="line">    FastJsonConfig fastJsonConfig = <span class="keyword">new</span> <span class="type">FastJsonConfig</span>();</span><br><span class="line">    <span class="comment">// 设置字符集</span></span><br><span class="line">    fastJsonConfig.setCharset(StandardCharsets.UTF_8);</span><br><span class="line">    <span class="comment">// 设置序列化规则</span></span><br><span class="line">    fastJsonConfig.setSerializerFeatures(</span><br><span class="line">            <span class="comment">// 如果是数据类型【字符串】为null时则输出""</span></span><br><span class="line">            SerializerFeature.WriteNullStringAsEmpty,</span><br><span class="line">            <span class="comment">// 如果是数据类型【数值】为null时则输出0</span></span><br><span class="line">            SerializerFeature.WriteNullNumberAsZero,</span><br><span class="line">            <span class="comment">// 如果是数据类型【集合】为null时则输出[]</span></span><br><span class="line">            SerializerFeature.WriteNullListAsEmpty,</span><br><span class="line">            <span class="comment">// 如果是数据类型【Map】填充null</span></span><br><span class="line">            SerializerFeature.WriteMapNullValue,</span><br><span class="line">            <span class="comment">// 如果是数据类型【布尔】为null时则输出false</span></span><br><span class="line">            SerializerFeature.WriteNullBooleanAsFalse,</span><br><span class="line">            <span class="comment">// 日期转换</span></span><br><span class="line">            SerializerFeature.WriteDateUseDateFormat</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置fastJson配置</span></span><br><span class="line">    fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);</span><br><span class="line">    <span class="comment">// 设置支持的媒体类型</span></span><br><span class="line">    fastJsonHttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON_UTF8));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">HttpMessageConverters</span>(fastJsonHttpMessageConverter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写WebMvcConfigurer类的extendMessageConverters方法（检查我们添加的FastJson配置是否加载了）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">Override</span></span><br><span class="line"><span class="keyword">public</span> void extendMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) &#123;</span><br><span class="line">    <span class="selector-tag">converters</span><span class="selector-class">.forEach</span>(<span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-pseudo">::println)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>控制台输出（能看到FastJsonHttpMessageConverter被加载到第一项）<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">com<span class="selector-class">.alibaba</span><span class="selector-class">.fastjson</span><span class="selector-class">.support</span><span class="selector-class">.spring</span><span class="selector-class">.FastJsonHttpMessageConverter</span>@<span class="number">5</span>fb7b227</span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.ByteArrayHttpMessageConverter</span>@<span class="number">12</span>ce9299</span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.StringHttpMessageConverter</span>@<span class="number">12</span>aa9370</span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.ResourceHttpMessageConverter</span>@<span class="number">2338</span>eeef</span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.ResourceRegionHttpMessageConverter</span>@<span class="number">41</span>fc5625</span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.xml</span><span class="selector-class">.SourceHttpMessageConverter</span>@<span class="number">27</span>c05ed9</span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.support</span><span class="selector-class">.AllEncompassingFormHttpMessageConverter</span>@<span class="number">61377842</span></span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.json</span><span class="selector-class">.MappingJackson2HttpMessageConverter</span>@<span class="number">51</span>cbd1d</span><br><span class="line">org<span class="selector-class">.springframework</span><span class="selector-class">.http</span><span class="selector-class">.converter</span><span class="selector-class">.xml</span><span class="selector-class">.Jaxb2RootElementHttpMessageConverter</span>@<span class="number">26</span>f29ee5</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>验证结果（能明显的看出使用FastJson的配置生效了）</p>
+<ul>
+<li><p>默认消息转换器输出（MappingJackson2HttpMessageConverter）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"resultCode"</span>: <span class="string">"0000"</span>,</span><br><span class="line">    <span class="attr">"resultMessage"</span>: <span class="string">"操作成功"</span>,</span><br><span class="line">    <span class="attr">"resultObj"</span>: &#123;</span><br><span class="line">        <span class="attr">"string"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"integer"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"list"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"bool"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"map"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"date"</span>: <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用FastJson消息转换器方式输出</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"resultCode"</span>: <span class="string">"0000"</span>,</span><br><span class="line">    <span class="attr">"resultMessage"</span>: <span class="string">"操作成功"</span>,</span><br><span class="line">    <span class="attr">"resultObj"</span>: &#123;</span><br><span class="line">        <span class="attr">"bool"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"date"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"integer"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"list"</span>: [],</span><br><span class="line">        <span class="attr">"map"</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="attr">"string"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>方式二：自定义消息转换器（需要像其他消息转换器一样重写AbstractHttpMessageConverter)</p>
+<ul>
+<li><p>编写自定义消息转换器</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">CustomHttpMessageConverter</span> <span class="keyword">extends</span> <span class="title">AbstractHttpMessageConverter&lt;FoobarVO&gt;</span> </span>&#123;</span><br><span class="line">    public <span class="type">CustomHttpMessageConverter</span>() &#123;</span><br><span class="line">        <span class="comment">// 添加支持的媒体类型</span></span><br><span class="line">        <span class="keyword">super</span>(<span class="keyword">new</span> <span class="type">MediaType</span>(<span class="string">"application"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> boolean supports(<span class="type">Class</span>&lt;?&gt; clazz) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="type">FoobarVO</span> readInternal(<span class="type">Class</span>&lt;? <span class="keyword">extends</span> <span class="type">FoobarVO</span>&gt; clazz, <span class="type">HttpInputMessage</span> inputMessage) <span class="keyword">throws</span> <span class="type">IOException</span>, <span class="type">HttpMessageNotReadableException</span> &#123;</span><br><span class="line">        <span class="comment">// 原始数据</span></span><br><span class="line">        <span class="type">InputStream</span> body = inputMessage.getBody();</span><br><span class="line">        <span class="comment">// 读取数据</span></span><br><span class="line">        <span class="type">BufferedReader</span> reader = <span class="keyword">new</span> <span class="type">BufferedReader</span>(<span class="keyword">new</span> <span class="type">InputStreamReader</span>(body));</span><br><span class="line">        <span class="type">StringBuilder</span> stringBuilder = <span class="keyword">new</span> <span class="type">StringBuilder</span>();</span><br><span class="line">        <span class="type">String</span> str;</span><br><span class="line">        <span class="keyword">while</span> ((str = reader.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">            stringBuilder.append(str);</span><br><span class="line">        &#125;</span><br><span class="line">        stringBuilder.trimToSize();</span><br><span class="line">        <span class="keyword">return</span> <span class="type">JSON</span>.parseObject(stringBuilder.toString(), clazz);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> void writeInternal(<span class="type">FoobarVO</span> foobarVO, <span class="type">HttpOutputMessage</span> outputMessage) <span class="keyword">throws</span> <span class="type">IOException</span>, <span class="type">HttpMessageNotWritableException</span> &#123;</span><br><span class="line">        <span class="comment">// 直接输出对象</span></span><br><span class="line">        outputMessage.getBody().write(foobarVO.setTips(<span class="string">"Used CustomHttpMessageConverter~"</span>).toString().getBytes());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加到全局消息转换器中</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">extendMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</span><br><span class="line">    converters.add(<span class="keyword">new</span> CustomHttpMessageConverter());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>控制台输出<pre><code>com.egovchina.partybuilding.mobile.config.CustomHttpMessageConverter$$EnhancerBySpringCGLIB$$4a5e212f@6ea0dfaa
+org.springframework.http.converter.ByteArrayHttpMessageConverter@7b7695f
+org.springframework.http.converter.StringHttpMessageConverter@70a9f6c
+org.springframework.http.converter.StringHttpMessageConverter@4476ac12
+org.springframework.http.converter.ResourceHttpMessageConverter@447522b4
+org.springframework.http.converter.ResourceRegionHttpMessageConverter@3569f0f1
+org.springframework.http.converter.xml.SourceHttpMessageConverter@9a88a92
+org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter@784fb189
+org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@5bddb619
+org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@15c25cb6
+org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter@6fd6d887
+</code></pre></li>
+<li>控制台输出<center><img src="/assets/httpMessageConverters.png" alt="image.png"></center></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/00e5cee/" title="HttpMessageConverter转换器" target="_blank" rel="external">http://yoursite.com/child/posts/00e5cee/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/e27ae85/" title="使用RequestInterceptor实现Feign向下游服务传递Token"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/26f10a8/" title="记录使用Arrays.asList()时异常事故"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

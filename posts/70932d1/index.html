@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>【ETL】基于Flink SQL CDC+MQ Connect同步数据 | Ronaldo</title>
+  <meta name="description" content="一、代码实现1234567891011121314151617public class MySQLDataToMQ &amp;#123;    public static void main(String[] args) throws Exception &amp;#123;        // 获取执行环境        StreamExecutionEnvironment executeEnv = Envir">
+<meta name="keywords" content="flink&amp;mq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ETL】基于Flink SQL CDC+MQ Connect同步数据">
+<meta property="og:url" content="http://yoursite.com/child/posts/70932d1/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、代码实现1234567891011121314151617public class MySQLDataToMQ &amp;#123;    public static void main(String[] args) throws Exception &amp;#123;        // 获取执行环境        StreamExecutionEnvironment executeEnv = Envir">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc14.png">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc15.png">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc16.png">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc17.png">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc18.png">
+<meta property="og:updated_time" content="2022-03-27T13:30:38.681Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ETL】基于Flink SQL CDC+MQ Connect同步数据">
+<meta name="twitter:description" content="一、代码实现1234567891011121314151617public class MySQLDataToMQ &amp;#123;    public static void main(String[] args) throws Exception &amp;#123;        // 获取执行环境        StreamExecutionEnvironment executeEnv = Envir">
+<meta name="twitter:image" content="http://yoursite.com/assets/flink-cdc14.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/70932d1/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/【ETL】基于Flink SQL CDC+MQ Connect同步数据" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【ETL】基于Flink SQL CDC+MQ Connect同步数据
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/70932d1/" class="article-date">
+	  <time datetime="2022-02-26T16:00:00.000Z" itemprop="datePublished">2022-02-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/ETL/">ETL</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/flink-mq/">flink&mq</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/70932d1/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="一、代码实现"><a href="#一、代码实现" class="headerlink" title="一、代码实现"></a><strong>一、代码实现</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySQLDataToMQ</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 获取执行环境</span></span><br><span class="line">        StreamExecutionEnvironment executeEnv = EnvironmentUtils.getStreamExecutionEnvironment();</span><br><span class="line">        StreamTableEnvironment tableEnv = EnvironmentUtils.getStreamTableEnvironment();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从源表同步数据到目标表</span></span><br><span class="line">        tableEnv.executeSql(</span><br><span class="line">                <span class="string">"INSERT INTO target_kafka_t_regulation_matter SELECT * FROM source_mysql_t_regulation_matter"</span></span><br><span class="line">        ).print();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 提交任务</span></span><br><span class="line">        executeEnv.execute(<span class="string">"从【MySQL监管事项源表】同步数据到【Kafka监管事项目标表】"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、创建Kafka-Topic"><a href="#二、创建Kafka-Topic" class="headerlink" title="二、创建Kafka Topic"></a>二、创建Kafka Topic</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 格式</span></span><br><span class="line">kafka-topics.sh --create --zookeeper $&#123;zookeeperIP&#125;:$&#123;zookeeper端口&#125; --replication-factor 1 --partitions 1 --topic $&#123;Topic-Name&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 示例</span></span><br><span class="line">kafka-topics.sh --create --zookeeper 127.0.0.1:2181 --replication-factor 1 --partitions 1 --topic t_regulation_matter-change_log</span><br></pre></td></tr></table></figure>
+<h2 id="三、任务提交"><a href="#三、任务提交" class="headerlink" title="三、任务提交"></a>三、任务提交</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 提交初始化任务</span><br><span class="line">bin/flink run -m <span class="number">127.0</span>.0.1:<span class="number">8081</span> -c io.cheery.flink.example.MySQLDataToMQ ./app-jar/Flink-SQL-CDC-<span class="number">0.0</span>.1-SNAPSHOT-jar-with-dependencies.jar</span><br><span class="line"></span><br><span class="line"># 开启任务增量checkpoint</span><br><span class="line">bin/flink savepoint <span class="number">943f</span>8665978b9c71b930139dc9910f7a hdfs:<span class="comment">//127.0.0.1:8082/flink/savepoint</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>访问Flink管理页面查看任务运行情况（</strong><a href="http://127.0.0.1:8081/#/overview" target="_blank" rel="noopener"><strong>http://127.0.0.1:8081/#/overview</strong></a><strong>）</strong></li>
+</ul>
+<center><img src="/assets/flink-cdc14.png" alt="image.png"></center>
+
+<ul>
+<li><p><strong>监听【t_regulation_matter-change_log】topic</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 格式</span></span><br><span class="line">kafka-console-consumer.sh --bootstrap-server $&#123;KafkaIP&#125;:$&#123;Kafka端口&#125; --topic $&#123;Topic-Name&#125; --from-beginning</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 示例</span></span><br><span class="line">kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic t_regulation_matter-change_log --from-beginning</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>查看输出</strong></li>
+</ul>
+</li>
+</ul>
+<center><img src="/assets/flink-cdc15.png" alt="image.png"></center>
+
+<h2 id="四、业务测试"><a href="#四、业务测试" class="headerlink" title="四、业务测试"></a>四、业务测试</h2><h3 id="测试一：测试任务意外中断并且MySQL数据数据已发生变化的场景"><a href="#测试一：测试任务意外中断并且MySQL数据数据已发生变化的场景" class="headerlink" title="测试一：测试任务意外中断并且MySQL数据数据已发生变化的场景"></a>测试一：测试任务意外中断并且MySQL数据数据已发生变化的场景</h3><ul>
+<li><strong>关闭任务</strong></li>
+</ul>
+<center><img src="/assets/flink-cdc16.png" alt="image.png"></center>
+
+<ul>
+<li><p><strong>MySQL数据改变</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_regulation_matter ( matter_code,matter_name ) <span class="keyword">VALUES</span> (<span class="string">'00000000'</span>, <span class="string">'测试事项数据'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line"><span class="keyword">UPDATE</span> t_regulation_matter <span class="keyword">SET</span> matter_name=<span class="string">'对经营者利用合同格式条款排除消费者权利行为的监管-修改'</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> t_regulation_matter <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从checkpoint恢复任务</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/flink run -m 127.0.0.1:8081 -s hdfs://127.0.0.1:8082/flink/<span class="keyword">savepoint</span>/<span class="keyword">savepoint</span><span class="number">-943</span>f86<span class="number">-5</span>cd41f0130bb -c io.cheery.flink.example.MySQLDataToMQ ./app-jar/Flink-<span class="keyword">SQL</span>-CDC<span class="number">-0.0</span><span class="number">.1</span>-<span class="keyword">SNAPSHOT</span>-jar-<span class="keyword">with</span>-dependencies.jar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看数据是否丢失</strong></p>
+</li>
+</ul>
+<center><img src="/assets/flink-cdc17.png" alt="image.png"></center>
+
+<h3 id="测试二：测试下游接收端Kafka意外中断并且MySQL数据数据已发生变化的场景"><a href="#测试二：测试下游接收端Kafka意外中断并且MySQL数据数据已发生变化的场景" class="headerlink" title="测试二：测试下游接收端Kafka意外中断并且MySQL数据数据已发生变化的场景"></a>测试二：测试下游接收端Kafka意外中断并且MySQL数据数据已发生变化的场景</h3><ul>
+<li><p><strong>关闭Kafka</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop $&#123;容器ID或容器名&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>MySQL数据改变</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_regulation_matter ( matter_code,matter_name ) <span class="keyword">VALUES</span> (<span class="string">'00000000'</span>, <span class="string">'测试事项数据-1'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line"><span class="keyword">UPDATE</span> t_regulation_matter <span class="keyword">SET</span> matter_name=<span class="string">'对经营者利用合同格式条款排除消费者权利行为的监管-修改-再次修改'</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> t_regulation_matter <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>开启MySQL</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start $&#123;容器ID或容器名&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看数据是否丢失</strong></p>
+</li>
+</ul>
+<center><img src="/assets/flink-cdc18.png" alt="image.png"></center>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/70932d1/" title="【ETL】基于Flink SQL CDC+MQ Connect同步数据" target="_blank" rel="external">http://yoursite.com/child/posts/70932d1/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/posts/acc24ab/" title="【ETL】基于Flink SQL CDC表对表之间同步数据"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

@@ -3596,6 +3596,7 @@ svg {
 }
 
 .mt-2x {
+  display: none;
   margin-top: 20px !important;
 }
 
@@ -5768,7 +5769,7 @@ body.no-sidebar .sidebar {
 }
 
 #avatar img {
-  width: 60%;
+  width: 50%;
   max-height: 100%;
   height: auto !important;
 }

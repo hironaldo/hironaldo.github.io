@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/posts/7858/</loc>
-    <lastmod>2019-10-26T12:40:02.850Z</lastmod>
-  </url>  <url>
-    <loc>/posts/6642/</loc>
-    <lastmod>2019-10-26T08:36:49.510Z</lastmod>
+    <loc>http://yoursite.com/child/posts/70932d1/</loc>
+    <lastmod>2022-03-27</lastmod>
   </url>
-</urlset>
+  <url>
+    <loc>http://yoursite.com/child/posts/acc24ab/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/b78e417/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/7bb813a/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/42b1cdd/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/3de88dc/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/e00738f/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/92330f4/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/663210d/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/26f10a8/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/03b1a11/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/e27ae85/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/00e5cee/</loc>
+    <lastmod>2022-03-27</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/c3141c1/</loc>
+    <lastmod>2022-03-26</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/c3141c4/</loc>
+    <lastmod>2022-03-26</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/c3141c2/</loc>
+    <lastmod>2022-03-26</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/child/posts/c3141cd/</loc>
+    <lastmod>2022-03-26</lastmod>
+  </url>
+</urlset> 

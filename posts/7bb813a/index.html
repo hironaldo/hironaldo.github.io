@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>【ETL】Flink SQL CDC实时数据同步实战 | Ronaldo</title>
+  <meta name="description" content="一、CDC技术方案比较    定时任务+时间戳 Canal Flink SQL CDC     CDC机制 查询 日志 日志   全量同步 是 否 是   增量同步 是（实现较麻烦） 是 是   全量+增量同步 否 否 是   断点续传 否 是 是   低延迟+不增加数据库负载 否 是 是   丰富的数据源 是 否（仅支持MySQL） 是（DB、MQ、FS….）   与业务隔离 否 是 是   同">
+<meta name="keywords" content="flink">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ETL】Flink SQL CDC实时数据同步实战">
+<meta property="og:url" content="http://yoursite.com/child/posts/7bb813a/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、CDC技术方案比较    定时任务+时间戳 Canal Flink SQL CDC     CDC机制 查询 日志 日志   全量同步 是 否 是   增量同步 是（实现较麻烦） 是 是   全量+增量同步 否 否 是   断点续传 否 是 是   低延迟+不增加数据库负载 否 是 是   丰富的数据源 是 否（仅支持MySQL） 是（DB、MQ、FS….）   与业务隔离 否 是 是   同">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc1.png">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc2.png">
+<meta property="og:image" content="http://yoursite.com/assets/flink-cdc3.png">
+<meta property="og:updated_time" content="2022-03-27T13:11:04.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ETL】Flink SQL CDC实时数据同步实战">
+<meta name="twitter:description" content="一、CDC技术方案比较    定时任务+时间戳 Canal Flink SQL CDC     CDC机制 查询 日志 日志   全量同步 是 否 是   增量同步 是（实现较麻烦） 是 是   全量+增量同步 否 否 是   断点续传 否 是 是   低延迟+不增加数据库负载 否 是 是   丰富的数据源 是 否（仅支持MySQL） 是（DB、MQ、FS….）   与业务隔离 否 是 是   同">
+<meta name="twitter:image" content="http://yoursite.com/assets/flink-cdc1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/7bb813a/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/【ETL】Flink SQL CDC实时数据同步实战" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【ETL】Flink SQL CDC实时数据同步实战
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/7bb813a/" class="article-date">
+	  <time datetime="2022-02-22T16:00:00.000Z" itemprop="datePublished">2022-02-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/ETL/">ETL</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/flink/">flink</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/7bb813a/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="一、CDC技术方案比较"><a href="#一、CDC技术方案比较" class="headerlink" title="一、CDC技术方案比较"></a>一、CDC技术方案比较</h2><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>定时任务+时间戳</strong></th>
+<th><strong>Canal</strong></th>
+<th><strong>Flink SQL CDC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CDC机制</strong></td>
+<td><strong>查询</strong></td>
+<td><strong>日志</strong></td>
+<td><strong>日志</strong></td>
+</tr>
+<tr>
+<td><strong>全量同步</strong></td>
+<td><strong>是</strong></td>
+<td><strong>否</strong></td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><strong>增量同步</strong></td>
+<td><strong>是（实现较麻烦）</strong></td>
+<td><strong>是</strong></td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><strong>全量+增量同步</strong></td>
+<td><strong>否</strong></td>
+<td><strong>否</strong></td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><strong>断点续传</strong></td>
+<td><strong>否</strong></td>
+<td><strong>是</strong></td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><strong>低延迟+不增加数据库负载</strong></td>
+<td><strong>否</strong></td>
+<td><strong>是</strong></td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><strong>丰富的数据源</strong></td>
+<td><strong>是</strong></td>
+<td><strong>否（仅支持MySQL）</strong></td>
+<td><strong>是（DB、MQ、FS….）</strong></td>
+</tr>
+<tr>
+<td><strong>与业务隔离</strong></td>
+<td><strong>否</strong></td>
+<td><strong>是</strong></td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><strong>同数据源多表数据关联结果集同步</strong></td>
+<td><strong>是</strong></td>
+<td><strong>否（仅支持单表数据）</strong></td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><strong>多数据源多表数据关联结果集同步</strong></td>
+<td><strong>否</strong></td>
+<td><strong>否</strong></td>
+<td><strong>是</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="二、业务需求分析"><a href="#二、业务需求分析" class="headerlink" title="二、业务需求分析"></a>二、业务需求分析</h2><h3 id="需求一：MySQL中监管事项与监管行为关联出的结果同步到ElasticSearch以提升查询速度（实时性要求严格）"><a href="#需求一：MySQL中监管事项与监管行为关联出的结果同步到ElasticSearch以提升查询速度（实时性要求严格）" class="headerlink" title="需求一：MySQL中监管事项与监管行为关联出的结果同步到ElasticSearch以提升查询速度（实时性要求严格）"></a><strong>需求一：</strong>MySQL中监管事项与监管行为关联出的结果同步到ElasticSearch以提升查询速度（实时性要求严格）</h3><ul>
+<li><strong>需要展示一张监管事项与监管行为相关联的列表，由于业务的迭代在生产环境中全省的监管事项数据已达到300w左右，监管行为数据已达到1200w左右，在MySQL加索引及其他优化的情况下查询出的结果还是大于5s，对于用户体验非常不好。</strong></li>
+<li><strong>最终采用能基于MySQL二进制日志捕获数据变更的框架（Flink SQL CDC）和全文搜索引擎（ElasticSearch）实现。</strong></li>
+<li><strong>以下是数据流向图：</strong></li>
+</ul>
+<center><img src="/assets/flink-cdc1.png" alt="image.png"></center>
+
+<h3 id="需求二：MySQL中监管事项表全量和增量数据同步到不同MySQL数据库中以支撑其他系统业务（实时性要求较严格）"><a href="#需求二：MySQL中监管事项表全量和增量数据同步到不同MySQL数据库中以支撑其他系统业务（实时性要求较严格）" class="headerlink" title="需求二：MySQL中监管事项表全量和增量数据同步到不同MySQL数据库中以支撑其他系统业务（实时性要求较严格）"></a><strong>需求二：MySQL</strong>中监管事项表全量和增量数据同步到不同MySQL数据库中以支撑其他系统业务（实时性要求较严格）</h3><ul>
+<li><strong>监管事项表存在于监管事项库用作日常对事项数据的维护</strong></li>
+<li><strong>监管平台数据库需要结合监管事项数据跟本系统产生的数据进行聚合</strong><ul>
+<li><strong>1、如根据事项类型分组查询每种事项分类产生的办件被监管了多少</strong></li>
+<li><strong>2、如根据事项编制部门分组查询每种事项分类产生的办件被监管了多少</strong></li>
+<li><strong>3、N…</strong></li>
+</ul>
+</li>
+<li><strong>以下是数据流向图：</strong></li>
+</ul>
+<center><img src="/assets/flink-cdc2.png" alt="image.png"></center>
+
+<h3 id="需求三：MySQL中监管事项表全量和增量数据同步MQ供下游业务系统消费到不同的数据存储端（实时性要求较严格）"><a href="#需求三：MySQL中监管事项表全量和增量数据同步MQ供下游业务系统消费到不同的数据存储端（实时性要求较严格）" class="headerlink" title="需求三：MySQL中监管事项表全量和增量数据同步MQ供下游业务系统消费到不同的数据存储端（实时性要求较严格）"></a><strong>需求三：MySQL</strong>中监管事项表全量和增量数据同步MQ供下游业务系统消费到不同的数据存储端（实时性要求较严格）</h3><ul>
+<li><strong>以下是数据流向图：</strong></li>
+</ul>
+<center><img src="/assets/flink-cdc3.png" alt="image.png"></center>
+
+<h2 id="三、前置环境准备（与生产环境版本保持一致）"><a href="#三、前置环境准备（与生产环境版本保持一致）" class="headerlink" title="三、前置环境准备（与生产环境版本保持一致）"></a>三、前置环境准备（与生产环境版本保持一致）</h2><ul>
+<li><strong>Kafka2.7.0</strong></li>
+<li><strong>Zookeeper3.5.5</strong></li>
+<li><strong>ElasticSearch7.1.1</strong></li>
+<li><strong>ElasticSearch-Head</strong></li>
+<li><p><strong>MySQL5.7开启binlog</strong></p>
+<ul>
+<li><strong>修改配置文件mysqld.cnf</strong><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 唯一ID（数字类型 主从情况下务必保持各个节点都唯一）</span></span><br><span class="line"><span class="attr">server-id</span>=<span class="number">10</span></span><br><span class="line"><span class="comment"># 开启binlog</span></span><br><span class="line"><span class="attr">log-bin</span>=mysql-bin</span><br><span class="line"><span class="comment"># 主从复制格式（mixed、statement（默认值）、row）</span></span><br><span class="line"><span class="attr">binlog-format</span>=row</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>Flink1.13.6安装</strong></p>
+<ul>
+<li><strong>参考 =&gt; </strong><a href="https://hironaldo.github.io/posts/e00738f/" target="_blank" rel="noopener"><strong>https://hironaldo.github.io/posts/e00738f/</strong></a></li>
+<li><strong>业务支撑依赖下载</strong><ul>
+<li><strong>MySQL驱动：</strong><a href="https://search.maven.org/artifact/mysql/mysql-connector-java/5.1.47/jar" target="_blank" rel="noopener"><strong>mysql-connector-java-5.1.47.jar</strong></a></li>
+<li><strong>MySQL-CDC：</strong><a href="https://search.maven.org/artifact/com.ververica/flink-connector-mysql-cdc/2.0.0/jar" target="_blank" rel="noopener"><strong>flink-connector-mysql-cdc-2.0.0.jar</strong></a></li>
+<li><strong>JDBC-Connector：</strong><a href="https://search.maven.org/artifact/org.apache.flink/flink-connector-jdbc_2.12/1.13.6/jar" target="_blank" rel="noopener"><strong>flink-connector-jdbc_2.12-1.13.6.jar</strong></a></li>
+<li><strong>Kafka-Connector：</strong><a href="https://search.maven.org/artifact/org.apache.flink/flink-connector-kafka_2.12/1.13.6/jar" target="_blank" rel="noopener"><strong>flink-connector-kafka_2.12-1.13.6.jar</strong></a></li>
+<li><strong>ElasticSearch-Connector：</strong><a href="https://search.maven.org/artifact/org.apache.flink/flink-sql-connector-elasticsearch7_2.12/1.13.6/jar" target="_blank" rel="noopener"><strong>flink-sql-connector-elasticsearch7_2.12-1.13.6.jar</strong></a></li>
+<li><strong>flink-shaded-hadoop-2-uber：</strong><a href="https://search.maven.org/artifact/org.apache.flink/flink-shaded-hadoop-2-uber/2.8.3-10.0/jar" target="_blank" rel="noopener"><strong>flink-shaded-hadoop-2-uber-2.8.3-10.0.jar</strong></a></li>
+</ul>
+</li>
+<li><strong>将依赖包放入（${flink安装目录}/flink-1.13.6/lib）</strong></li>
+</ul>
+</li>
+<li><strong>Hadoop2.10.1安装</strong><ul>
+<li><strong>参考 =&gt; </strong><a href="https://hironaldo.github.io/posts/3de88dc/" target="_blank" rel="noopener"><strong>https://hironaldo.github.io/posts/3de88dc/</strong></a></li>
+</ul>
+</li>
+<li><strong>Hive2.3.4安装</strong><ul>
+<li><strong>参考 =&gt; </strong><a href="https://hironaldo.github.io/posts/42b1cdd/" target="_blank" rel="noopener"><strong>https://hironaldo.github.io/posts/42b1cdd/</strong></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="四、表结构初始化（只展示部分关键字段）"><a href="#四、表结构初始化（只展示部分关键字段）" class="headerlink" title="四、表结构初始化（只展示部分关键字段）"></a>四、表结构初始化（只展示部分关键字段）</h2><ul>
+<li><p><strong>MySQL监管事项源表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">NAMES</span> utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`t_regulation_matter`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t_regulation_matter`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'主键ID'</span>,</span><br><span class="line">  <span class="string">`matter_code`</span> <span class="built_in">varchar</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'事项编码'</span>,</span><br><span class="line">  <span class="string">`matter_name`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'事项名称'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_matter`</span> <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">'00250002'</span>, <span class="string">'对相关行业生产经营单位的应急预案的监管'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_matter`</span> <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="string">'00230004'</span>, <span class="string">'对职业病危害场所、单位和建设项目的监管'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_matter`</span> <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="string">'00230034'</span>, <span class="string">'对医疗机构抗菌药物临床应用的监管'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_matter`</span> <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="string">'00310107'</span>, <span class="string">'对经营者利用合同格式条款排除消费者权利行为的监管'</span>);</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>MySQL监管事项目标表2</strong></p>
+<ul>
+<li><strong>该表位于数据库2用户接收数据库1源表同步的数据</strong></li>
+<li><strong>多了一个sync_time同步时间的字段</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">NAMES</span> utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`t_regulation_matter`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t_regulation_matter`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'主键ID'</span>,</span><br><span class="line">  <span class="string">`matter_code`</span> <span class="built_in">varchar</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'事项编码'</span>,</span><br><span class="line">  <span class="string">`matter_name`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'事项名称'</span>,</span><br><span class="line">  <span class="string">`sync_time`</span> <span class="built_in">timestamp</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">'同步时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>MySQL监管行为源表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">NAMES</span> utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`t_regulation_action`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t_regulation_behavior`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'主键ID'</span>,</span><br><span class="line">  <span class="string">`action_name`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'监管行为名称'</span>,</span><br><span class="line">  <span class="string">`matter_code`</span> <span class="built_in">varchar</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'事项编码'</span>,</span><br><span class="line">  <span class="string">`regulation_object_num`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'监管对象证件号码'</span>,</span><br><span class="line">  <span class="string">`regulation_object_name`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'监管对象名称'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_behavior`</span> <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">'对xx县xx镇xx村卫生室的监督'</span>, <span class="string">'00230034'</span>, <span class="string">'1232092546848774XN'</span>, <span class="string">'xx村卫生所'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_behavior`</span> <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="string">'对xx区xx口腔诊所的监督'</span>, <span class="string">'00230034'</span>, <span class="string">'92320508MA1PKLXR9W'</span>, <span class="string">'xx口腔诊所'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_behavior`</span> <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="string">'对xx区xx幼儿园的监督'</span>, <span class="string">'00250002'</span>, <span class="string">'91320400467288247U'</span>, <span class="string">'xx幼儿园'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_regulation_behavior`</span> <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="string">'对xx市xx酒店有限公司的监督'</span>, <span class="string">'00250002'</span>, <span class="string">'5232090351064181XK'</span>, <span class="string">'xx酒店有限公司'</span>);</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Flink监管事项目标表</strong></p>
+<ul>
+<li><strong>使用mysql-cdc连接器</strong></li>
+<li><strong>WITH语句中server-time-zone值必须为Asia/Shanghai</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> source_mysql_t_regulation_matter (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span>,</span><br><span class="line">    matter_code <span class="keyword">STRING</span>,</span><br><span class="line">    matter_name <span class="keyword">STRING</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>) <span class="keyword">NOT</span> <span class="keyword">ENFORCED</span></span><br><span class="line">) <span class="keyword">WITH</span> (</span><br><span class="line">    <span class="string">'connector'</span> = <span class="string">'mysql-cdc'</span>,</span><br><span class="line">    <span class="string">'server-time-zone'</span> = <span class="string">'Asia/Shanghai'</span>,</span><br><span class="line">    <span class="string">'hostname'</span> = <span class="string">'$&#123;主机名&#125;'</span>,</span><br><span class="line">    <span class="string">'port'</span> = <span class="string">'$&#123;主机端口&#125;'</span>,</span><br><span class="line">    <span class="string">'username'</span> = <span class="string">'$&#123;用户名&#125;'</span>,</span><br><span class="line">    <span class="string">'password'</span> = <span class="string">'$&#123;密码&#125;'</span>,</span><br><span class="line">    <span class="string">'database-name'</span> = <span class="string">'$&#123;源表所属数据库&#125;'</span>,</span><br><span class="line">    <span class="string">'table-name'</span> = <span class="string">'$&#123;源表名称&#125;'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>Flink监管事项目标表</strong></p>
+<ul>
+<li><strong>使用jdbc连接器</strong></li>
+<li><strong>url中serverTimezone=Asia/Shanghai不能省略 </strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> target_t_regulation_matter (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span>, </span><br><span class="line">    matter_code <span class="keyword">STRING</span>, </span><br><span class="line">    matter_name <span class="keyword">STRING</span>, </span><br><span class="line">    sync_time <span class="built_in">TIMESTAMP</span>, </span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>) <span class="keyword">NOT</span> <span class="keyword">ENFORCED</span></span><br><span class="line">)<span class="keyword">WITH</span> ( </span><br><span class="line">    <span class="string">'connector'</span> = <span class="string">'jdbc'</span>, </span><br><span class="line">    <span class="string">'url'</span> = <span class="string">'$&#123;连接地址&#125;?serverTimezone=Asia/Shanghai'</span>, </span><br><span class="line">    <span class="string">'driver'</span> = <span class="string">'com.mysql.jdbc.Driver'</span>, </span><br><span class="line">    <span class="string">'username'</span> = <span class="string">'$&#123;用户名&#125;'</span>, </span><br><span class="line">    <span class="string">'password'</span> = <span class="string">'$&#123;密码&#125;'</span>, </span><br><span class="line">    <span class="string">'table-name'</span> = <span class="string">'$&#123;源表名称&#125;'</span> </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>Flink监管行为目标表</strong></p>
+<ul>
+<li><strong>使用mysql-cdc连接器</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> source_mysql_t_regulation_action (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span>,</span><br><span class="line">    action_name <span class="keyword">STRING</span>,</span><br><span class="line">    matter_code <span class="keyword">STRING</span>,</span><br><span class="line">    regulation_object_num <span class="keyword">STRING</span>,</span><br><span class="line">  	regulation_object_name <span class="keyword">STRING</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>) <span class="keyword">NOT</span> <span class="keyword">ENFORCED</span></span><br><span class="line">) <span class="keyword">WITH</span> (</span><br><span class="line">    <span class="string">'connector'</span> = <span class="string">'mysql-cdc'</span>,</span><br><span class="line">    <span class="string">'server-time-zone'</span> = <span class="string">'Asia/Shanghai'</span>,</span><br><span class="line">    <span class="string">'hostname'</span> = <span class="string">'$&#123;主机名&#125;'</span>,</span><br><span class="line">    <span class="string">'port'</span> = <span class="string">'$&#123;主机端口&#125;'</span>,</span><br><span class="line">    <span class="string">'username'</span> = <span class="string">'$&#123;用户名&#125;'</span>,</span><br><span class="line">    <span class="string">'password'</span> = <span class="string">'$&#123;密码&#125;'</span>,</span><br><span class="line">    <span class="string">'database-name'</span> = <span class="string">'$&#123;源表所属数据库&#125;'</span>,</span><br><span class="line">    <span class="string">'table-name'</span> = <span class="string">'$&#123;源表名称&#125;'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>Flink监管事项与监管行为关联的结果目标表</strong></p>
+<ul>
+<li><strong>使用elasticsearch-7连接器</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> target_es_regulation_matter_regulation_action_rel (</span><br><span class="line">    action_id <span class="built_in">INT</span>,</span><br><span class="line">    action_name <span class="keyword">STRING</span>,</span><br><span class="line">    matter_code <span class="keyword">STRING</span>,</span><br><span class="line">    matter_name <span class="keyword">STRING</span>,</span><br><span class="line">    regulation_object_num <span class="keyword">STRING</span>,</span><br><span class="line">    regulation_object_name <span class="keyword">STRING</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (regulation_behavior_id) <span class="keyword">NOT</span> <span class="keyword">ENFORCED</span></span><br><span class="line">) <span class="keyword">WITH</span> (</span><br><span class="line">    <span class="string">'connector'</span> = <span class="string">'elasticsearch-7'</span>,</span><br><span class="line">    <span class="string">'hosts'</span> = <span class="string">'$&#123;elasticsearch地址&#125;'</span>,</span><br><span class="line">    <span class="string">'index'</span> = <span class="string">'$&#123;elasticsearch索引&#125;'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、工具类和Maven依赖"><a href="#五、工具类和Maven依赖" class="headerlink" title="五、工具类和Maven依赖"></a>五、工具类和Maven依赖</h2><ul>
+<li><p><strong>pom.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">  	<span class="comment">&lt;!-- 所用版本尽量与flink服务版本一致 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">flink-version</span>&gt;</span>1.13.6<span class="tag">&lt;/<span class="name">flink-version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Flink --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-streaming-java_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-clients_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-table-planner-blink_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-json<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Flink-MySQL连接器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.ververica<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-connector-mysql-cdc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-connector-jdbc_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Flink-Elasticsearch连接器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-sql-connector-elasticsearch7_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Flink-Kafka连接器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-connector-kafka_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Flink-Hive连接器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.flink<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flink-connector-hive_2.12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;flink-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Hadoop --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   	<span class="comment">&lt;!-- Hive --&gt;</span></span><br><span class="line">   	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   	    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   	    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hive-exec<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   	    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- MySQL驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.47<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Log --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.15.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- FastJSON --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.79<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Lombok --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-assembly-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">descriptorRef</span>&gt;</span>jar-with-dependencies<span class="tag">&lt;/<span class="name">descriptorRef</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">id</span>&gt;</span>make-assembly<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>single<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>EnvironmentUtils.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnvironmentUtils</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Hive数据库名称</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HIVE_DATABASE_NAME = <span class="string">"flink_db"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Hive Catalog名称</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HIVE_CATALOG_NAME = <span class="string">"flink_catalog"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// hdfs存放checkpoint的路径（可从配置文件或配置中心获取）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HDFS_URL = <span class="string">"hdfs://localhost:8082/flink/checkpoint"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// hive-conf路径（可从配置文件或配置中心获取）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String HIVE_CONF_PATH = <span class="string">"/Users/ronaldo/Library/ronaldo/develop/hive/apache-hive-2.3.4/conf"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取执行环境</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StreamExecutionEnvironment <span class="title">getStreamExecutionEnvironment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StreamExecutionEnvironment executeEnv = StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">        <span class="comment">// 设置并行度为1</span></span><br><span class="line">        executeEnv.setParallelism(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 每隔n毫秒进行一次checkpoint</span></span><br><span class="line">        executeEnv.enableCheckpointing(<span class="number">5000</span>);</span><br><span class="line">        <span class="comment">// 一次checkpoint超过n毫秒仍未完成直接将其终止以免占用太多资源</span></span><br><span class="line">        executeEnv.getCheckpointConfig().setCheckpointTimeout(<span class="number">60000</span>);</span><br><span class="line">        <span class="comment">// 最大只允许一个checkpoint执行 新的Checkpoint需要挂起等待</span></span><br><span class="line">        executeEnv.getCheckpointConfig().setMaxConcurrentCheckpoints(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 保证在重启恢复时 所有算子的状态对任一条数据只处理一次</span></span><br><span class="line">        executeEnv.getCheckpointConfig().setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE);</span><br><span class="line">        <span class="comment">// 使用hdfs作为State Backend</span></span><br><span class="line">        executeEnv.setStateBackend(<span class="keyword">new</span> FsStateBackend(HDFS_URL));</span><br><span class="line">        <span class="keyword">return</span> executeEnv;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取表的执行环境</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StreamTableEnvironment <span class="title">getStreamTableEnvironment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StreamTableEnvironment tableEnv = StreamTableEnvironment.create(</span><br><span class="line">            EnvironmentUtils.getStreamExecutionEnvironment(),</span><br><span class="line">            EnvironmentSettings.newInstance().useBlinkPlanner().build()</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 注册Hive Catalog</span></span><br><span class="line">        tableEnv.registerCatalog(</span><br><span class="line">            HIVE_CATALOG_NAME,</span><br><span class="line">            <span class="keyword">new</span> HiveCatalog(HIVE_CATALOG_NAME, HIVE_DATABASE_NAME, HIVE_CONF_PATH)</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 使用Hive Catalog</span></span><br><span class="line">        tableEnv.useCatalog(HIVE_CATALOG_NAME);</span><br><span class="line">        <span class="keyword">return</span> tableEnv;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TableBuildUtils.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TableBuildUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * MySQL源表模版</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MYSQL_SOURCE_TABLE_TEMPLATE = <span class="string">"CREATE TABLE IF NOT EXISTS %s (%s) "</span> +</span><br><span class="line">            <span class="string">"WITH ( 'connector' = 'mysql-cdc', 'hostname' = '%s', 'port' = '%s', "</span> +</span><br><span class="line">            <span class="string">"'username' = '%s', 'password' = '%s', 'database-name' = '%s', 'table-name' = '%s', 'server-time-zone' = 'Asia/Shanghai' )"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * MySQL目标表模版</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MYSQL_TARGET_TABLE_TEMPLATE = <span class="string">"CREATE TABLE IF NOT EXISTS %s (%s)"</span> +</span><br><span class="line">            <span class="string">"WITH ( 'connector' = 'jdbc', 'url' = 'jdbc:mysql://%s:%s/%s?serverTimezone=Asia/Shanghai', 'driver' = 'com.mysql.jdbc.Driver', "</span> +</span><br><span class="line">            <span class="string">"'username' = '%s', 'password' = '%s', 'table-name' = '%s' )"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ElasticSearch目标表模版</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ES_TARGET_TABLE_TEMPLATE = <span class="string">"CREATE TABLE IF NOT EXISTS %s (%s) "</span> +</span><br><span class="line">            <span class="string">"WITH ( 'connector' = 'elasticsearch-7', 'hosts' = '%s', 'index' = '%s' )"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Kafka目标表模版</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KAFKA_TARGET_TABLE_TEMPLATE = <span class="string">"CREATE TABLE IF NOT EXISTS %s (%s) "</span> +</span><br><span class="line">            <span class="string">"WITH ( 'connector' = 'kafka', 'format' = '%s', 'topic' = '%s', 'properties.bootstrap.servers' = '%s' )"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * desc：构建MySQL源表DDL</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 完整的建表语句</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildMySQLSourceTableDDL</span><span class="params">(MySQLConfig config)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.format(</span><br><span class="line">                MYSQL_SOURCE_TABLE_TEMPLATE, <span class="string">"source_mysql_"</span> + config.getTableName(), config.getTableSchema(), config.getHostname(),</span><br><span class="line">                config.getPort(), config.getUsername(), config.getPassword(), config.getDbName(), config.getTableName()</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * desc：批量构建MySQL源表DDL</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 完整的建表语句</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">buildBatchMySQLSourceTableDDL</span><span class="params">(MySQLConfig config)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; sql = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; ele : config.getTableInfos().entrySet()) &#123;</span><br><span class="line">            String tableName = ele.getKey();</span><br><span class="line">            String tableSchema = ele.getValue();</span><br><span class="line">            sql.add(String.format(</span><br><span class="line">                    MYSQL_SOURCE_TABLE_TEMPLATE, <span class="string">"source_mysql_"</span> + tableName, tableSchema, config.getHostname(),</span><br><span class="line">                    config.getPort(), config.getUsername(), config.getPassword(), config.getDbName(), tableName</span><br><span class="line">            ));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sql;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * desc：构建MySQL目的表DDL</span></span><br><span class="line"><span class="comment">     * p.s. url一定要加上serverTimezone=Asia/Shanghai不然时间会少八小时</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 完整的建表语句</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildMySQLTargetTableDDL</span><span class="params">(MySQLConfig config)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.format(</span><br><span class="line">                MYSQL_TARGET_TABLE_TEMPLATE, <span class="string">"target_mysql_"</span> + config.getTableName(), config.getTableSchema(), config.getHostname(),</span><br><span class="line">                config.getPort(), config.getDbName(), config.getUsername(), config.getPassword(), config.getTableName()</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * desc：构建ElasticSearch目标表DDL</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 完整的建表语句</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildEsTargetTableDDL</span><span class="params">(ElasticSearchConfig config)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.format(</span><br><span class="line">                ES_TARGET_TABLE_TEMPLATE, <span class="string">"target_es_"</span> + config.getTableName(), config.getTableSchema(), config.getHosts(), config.getIndex()</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * desc：构建Kafka目标表DDL</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 完整的建表语句</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildKafkaTargetTableDDL</span><span class="params">(KafkaConfig config)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.format(</span><br><span class="line">                KAFKA_TARGET_TABLE_TEMPLATE, <span class="string">"target_kafka_"</span> + config.getTableName(), config.getTableSchema(),</span><br><span class="line">                config.getFormat(), config.getTopic(), config.getBroker()</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>InitHiveTables.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitHiveTables</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置文件（可从配置文件或配置中心获取）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String, Object&gt; CONF;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">// 资源MySQL数据库配置</span></span><br><span class="line">        Map&lt;String, String&gt; sourceTableMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        sourceTableMap.put(<span class="string">"t_regulation_matter"</span>, <span class="string">"id INT, matter_code STRING, matter_name STRING, PRIMARY KEY (id) NOT ENFORCED"</span>);</span><br><span class="line">        sourceTableMap.put(<span class="string">"t_regulation_action"</span>, <span class="string">"id INT, action_name STRING, matter_code STRING, regulation_object_num STRING, regulation_object_name STRING, PRIMARY KEY (id) NOT ENFORCED"</span>);</span><br><span class="line">        MySQLConfig sourceDBConf = MySQLConfig.builder()</span><br><span class="line">                .hostname(<span class="string">"127.0.0.1"</span>).port(<span class="string">"3306"</span>).username(<span class="string">"root"</span>)</span><br><span class="line">                .password(<span class="string">"123456"</span>).dbName(<span class="string">"flink-test"</span>).tableInfos(sourceTableMap).build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 目标MySQL数据库配置</span></span><br><span class="line">        MySQLConfig targetDBConf = MySQLConfig.builder()</span><br><span class="line">                .hostname(<span class="string">"127.0.0.1"</span>).port(<span class="string">"3307"</span>).username(<span class="string">"root"</span>)</span><br><span class="line">                .password(<span class="string">"123456"</span>).dbName(<span class="string">"flink-test"</span>).tableName(<span class="string">"t_regulation_matter"</span>)</span><br><span class="line">                .tableSchema(<span class="string">"id INT, matter_code STRING, matter_name STRING, sync_time TIMESTAMP, PRIMARY KEY (id) NOT ENFORCED"</span>).build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 目标Kafka配置</span></span><br><span class="line">        KafkaConfig kafkaConf = KafkaConfig.builder()</span><br><span class="line">                .broker(<span class="string">"127.0.0.1:9092"</span>).topic(<span class="string">"t_regulation_matter-change_log"</span>).format(<span class="string">"debezium-json"</span>)</span><br><span class="line">                .tableName(<span class="string">"t_regulation_matter"</span>).tableSchema(<span class="string">"id INT, matter_code STRING, matter_name STRING, PRIMARY KEY (id) NOT ENFORCED"</span>).build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 目标ElasticSearch配置</span></span><br><span class="line">        ElasticSearchConfig elasticSearchConf = ElasticSearchConfig.builder()</span><br><span class="line">                .hosts(<span class="string">"http://localhost:9200"</span>).index(<span class="string">"flink-matter_behavior_rel"</span>).tableName(<span class="string">"regulation_matter_regulation_action_rel"</span>)</span><br><span class="line">                .tableSchema(<span class="string">"action_id INT, action_name STRING, matter_code STRING, matter_name STRING, regulation_object_num STRING, regulation_object_name STRING, PRIMARY KEY (action_id) NOT ENFORCED"</span>).build();</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Object&gt; conf = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        conf.put(<span class="string">"sourceDBConf"</span>, sourceDBConf);</span><br><span class="line">        conf.put(<span class="string">"targetDBConf"</span>, targetDBConf);</span><br><span class="line">        conf.put(<span class="string">"kafkaConf"</span>, kafkaConf);</span><br><span class="line">        conf.put(<span class="string">"elasticSearchConf"</span>, elasticSearchConf);</span><br><span class="line">        CONF = conf;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取执行环境</span></span><br><span class="line">        TableEnvironment tableEnvironment = EnvironmentUtils.getStreamTableEnvironment();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建MySQL源表</span></span><br><span class="line">        MySQLConfig sourceDBConf = (MySQLConfig) CONF.get(<span class="string">"sourceDBConf"</span>);</span><br><span class="line">        <span class="keyword">for</span> (String sql : TableBuildUtils.buildBatchMySQLSourceTableDDL(sourceDBConf)) &#123;</span><br><span class="line">            tableEnvironment.executeSql(sql).print();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建MySQL目标表</span></span><br><span class="line">        MySQLConfig targetDBConf = (MySQLConfig) CONF.get(<span class="string">"targetDBConf"</span>);</span><br><span class="line">        tableEnvironment.executeSql(</span><br><span class="line">                TableBuildUtils.buildMySQLTargetTableDDL(targetDBConf)</span><br><span class="line">        ).print();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建Kafka目标表</span></span><br><span class="line">        KafkaConfig kafkaConf = (KafkaConfig) CONF.get(<span class="string">"kafkaConf"</span>);</span><br><span class="line">        tableEnvironment.executeSql(</span><br><span class="line">                TableBuildUtils.buildKafkaTargetTableDDL(kafkaConf)</span><br><span class="line">        ).print();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建ElasticSearch目标表</span></span><br><span class="line">        ElasticSearchConfig elasticSearchConf = (ElasticSearchConfig) CONF.get(<span class="string">"elasticSearchConf"</span>);</span><br><span class="line">        tableEnvironment.executeSql(</span><br><span class="line">                TableBuildUtils.buildEsTargetTableDDL(elasticSearchConf)</span><br><span class="line">        ).print();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="六、提交初始化Hive表任务"><a href="#六、提交初始化Hive表任务" class="headerlink" title="六、提交初始化Hive表任务"></a>六、提交初始化Hive表任务</h2><ul>
+<li><p><strong>执行命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 任务提交格式</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;flink安装路径&#125;/flink-1.13.6/bin/flink run -m <span class="variable">$&#123;flink地址&#125;</span> -c <span class="variable">$&#123;类的全路径&#125;</span> <span class="variable">$&#123;服务jar包所在路径&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 案例（进入安装目录）</span></span><br><span class="line">bin/flink run -m 127.0.0.1:8081 -c io.cheery.flink.example.InitHiveTables ./app-jar/Flink-SQL-CDC-0.0.1-SNAPSHOT-jar-with-dependencies.jar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>进入Hive查看表</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">hive&gt;</span><span class="bash"> show tables;</span></span><br><span class="line">OK</span><br><span class="line">source_mysql_t_regulation_action</span><br><span class="line">source_mysql_t_regulation_matter</span><br><span class="line">target_es_regulation_matter_regulation_action_rel</span><br><span class="line">target_kafka_t_regulation_matter</span><br><span class="line">target_mysql_t_regulation_matter</span><br><span class="line">Time taken: 0.134 seconds, Fetched: 5 row(s)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/7bb813a/" title="【ETL】Flink SQL CDC实时数据同步实战" target="_blank" rel="external">http://yoursite.com/child/posts/7bb813a/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/b78e417/" title="【ETL】基于Flink SQL CDC+ES Connect同步数据"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/42b1cdd/" title="【ETL】Hive-v2.3.4安装"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ronaldo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/child/"/>
+  <updated>2022-03-27T13:30:38.681Z</updated>
+  <id>http://yoursite.com/child/</id>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【ETL】基于Flink SQL CDC+MQ Connect同步数据</title>
+    <link href="http://yoursite.com/child/posts/70932d1/"/>
+    <id>http://yoursite.com/child/posts/70932d1/</id>
+    <published>2022-02-26T16:00:00.000Z</published>
+    <updated>2022-03-27T13:30:38.681Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;一、代码实现&quot;&gt;&lt;a href=&quot;#一、代码实现&quot; class=&quot;headerlink&quot; title=&quot;一、代码实现&quot;&gt;&lt;/a&gt;&lt;strong&gt;一、代码实现&lt;/strong&gt;&lt;/h2&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;t
+      
+    
+    </summary>
+    
+    
+      <category term="ETL" scheme="http://yoursite.com/child/categories/ETL/"/>
+    
+    
+      <category term="flink&amp;mq" scheme="http://yoursite.com/child/tags/flink-mq/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【ETL】基于Flink SQL CDC+ES Connect同步数据</title>
+    <link href="http://yoursite.com/child/posts/b78e417/"/>
+    <id>http://yoursite.com/child/posts/b78e417/</id>
+    <published>2022-02-24T16:00:00.000Z</published>
+    <updated>2022-03-27T13:17:51.395Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;一、代码实现&quot;&gt;&lt;a href=&quot;#一、代码实现&quot; class=&quot;headerlink&quot; title=&quot;一、代码实现&quot;&gt;&lt;/a&gt;一、代码实现&lt;/h2&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutt
+      
+    
+    </summary>
+    
+    
+      <category term="ETL" scheme="http://yoursite.com/child/categories/ETL/"/>
+    
+    
+      <category term="flink&amp;es" scheme="http://yoursite.com/child/tags/flink-es/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【ETL】基于Flink SQL CDC表对表之间同步数据</title>
+    <link href="http://yoursite.com/child/posts/acc24ab/"/>
+    <id>http://yoursite.com/child/posts/acc24ab/</id>
+    <published>2022-02-24T16:00:00.000Z</published>
+    <updated>2022-03-27T13:24:48.320Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;一、代码实现&quot;&gt;&lt;a href=&quot;#一、代码实现&quot; class=&quot;headerlink&quot; title=&quot;一、代码实现&quot;&gt;&lt;/a&gt;&lt;strong&gt;一、代码实现&lt;/strong&gt;&lt;/h2&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;t
+      
+    
+    </summary>
+    
+    
+      <category term="ETL" scheme="http://yoursite.com/child/categories/ETL/"/>
+    
+    
+      <category term="flink&amp;mysql" scheme="http://yoursite.com/child/tags/flink-mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【ETL】Flink SQL CDC实时数据同步实战</title>
+    <link href="http://yoursite.com/child/posts/7bb813a/"/>
+    <id>http://yoursite.com/child/posts/7bb813a/</id>
+    <published>2022-02-22T16:00:00.000Z</published>
+    <updated>2022-03-27T13:11:04.762Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;一、CDC技术方案比较&quot;&gt;&lt;a href=&quot;#一、CDC技术方案比较&quot; class=&quot;headerlink&quot; title=&quot;一、CDC技术方案比较&quot;&gt;&lt;/a&gt;一、CDC技术方案比较&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;s
+      
+    
+    </summary>
+    
+    
+      <category term="ETL" scheme="http://yoursite.com/child/categories/ETL/"/>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/child/tags/flink/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【ETL】Hive-v2.3.4安装</title>
+    <link href="http://yoursite.com/child/posts/42b1cdd/"/>
+    <id>http://yoursite.com/child/posts/42b1cdd/</id>
+    <published>2022-02-20T16:00:00.000Z</published>
+    <updated>2022-03-27T13:10:31.570Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;下载地址&quot;&gt;&lt;a href=&quot;#下载地址&quot; class=&quot;headerlink&quot; title=&quot;下载地址&quot;&gt;&lt;/a&gt;下载地址&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://archive.apache.org/dist/hive/hive-2.3.4/
+      
+    
+    </summary>
+    
+    
+      <category term="软件安装" scheme="http://yoursite.com/child/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="hive" scheme="http://yoursite.com/child/tags/hive/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【ETL】Hadoop-v2.10.1安装</title>
+    <link href="http://yoursite.com/child/posts/3de88dc/"/>
+    <id>http://yoursite.com/child/posts/3de88dc/</id>
+    <published>2022-02-20T16:00:00.000Z</published>
+    <updated>2022-03-27T13:10:25.076Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;下载地址&quot;&gt;&lt;a href=&quot;#下载地址&quot; class=&quot;headerlink&quot; title=&quot;下载地址&quot;&gt;&lt;/a&gt;下载地址&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://downloads.apache.org/hadoop/common/hado
+      
+    
+    </summary>
+    
+    
+      <category term="软件安装" scheme="http://yoursite.com/child/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="hadoop" scheme="http://yoursite.com/child/tags/hadoop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【ETL】Flink-v1.13.6安装</title>
+    <link href="http://yoursite.com/child/posts/e00738f/"/>
+    <id>http://yoursite.com/child/posts/e00738f/</id>
+    <published>2022-02-19T16:00:00.000Z</published>
+    <updated>2022-03-27T13:10:12.743Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;下载地址&quot;&gt;&lt;a href=&quot;#下载地址&quot; class=&quot;headerlink&quot; title=&quot;下载地址&quot;&gt;&lt;/a&gt;下载地址&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://downloads.apache.org/flink/flink-1.13.6
+      
+    
+    </summary>
+    
+    
+      <category term="软件安装" scheme="http://yoursite.com/child/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="flink" scheme="http://yoursite.com/child/tags/flink/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【软考中级】信息安全</title>
+    <link href="http://yoursite.com/child/posts/c3141c4/"/>
+    <id>http://yoursite.com/child/posts/c3141c4/</id>
+    <published>2021-04-01T16:00:00.000Z</published>
+    <updated>2022-03-26T08:32:26.760Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、对称型加密&quot;&gt;&lt;a href=&quot;#一、对称型加密&quot; class=&quot;headerlink&quot; title=&quot;一、对称型加密&quot;&gt;&lt;/a&gt;一、对称型加密&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;使用同一套密钥 Ke = Kd&lt;/li&gt;
+&lt;li&gt;加密强度不高，效率高&lt;/li&gt;
+&lt;li
+      
+    
+    </summary>
+    
+    
+      <category term="软考笔记" scheme="http://yoursite.com/child/categories/%E8%BD%AF%E8%80%83%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软考软件设计师" scheme="http://yoursite.com/child/tags/%E8%BD%AF%E8%80%83%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【软考中级】计算机网络</title>
+    <link href="http://yoursite.com/child/posts/c3141c2/"/>
+    <id>http://yoursite.com/child/posts/c3141c2/</id>
+    <published>2021-03-28T16:00:00.000Z</published>
+    <updated>2022-03-26T08:17:40.153Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、OSI七层模型&quot;&gt;&lt;a href=&quot;#一、OSI七层模型&quot; class=&quot;headerlink&quot; title=&quot;一、OSI七层模型&quot;&gt;&lt;/a&gt;一、OSI&lt;strong&gt;七层模型&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;层次&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="软考笔记" scheme="http://yoursite.com/child/categories/%E8%BD%AF%E8%80%83%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软考软件设计师" scheme="http://yoursite.com/child/tags/%E8%BD%AF%E8%80%83%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【软考中级】数据库系统</title>
+    <link href="http://yoursite.com/child/posts/c3141c1/"/>
+    <id>http://yoursite.com/child/posts/c3141c1/</id>
+    <published>2021-03-27T16:00:00.000Z</published>
+    <updated>2022-03-26T08:46:52.931Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、三级模式、两级映射&quot;&gt;&lt;a href=&quot;#一、三级模式、两级映射&quot; class=&quot;headerlink&quot; title=&quot;一、三级模式、两级映射&quot;&gt;&lt;/a&gt;一、&lt;strong&gt;三级模式、两级映射&lt;/strong&gt;&lt;/h3&gt;&lt;center&gt;&lt;img src=&quot;/a
+      
+    
+    </summary>
+    
+    
+      <category term="软考笔记" scheme="http://yoursite.com/child/categories/%E8%BD%AF%E8%80%83%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软考软件设计师" scheme="http://yoursite.com/child/tags/%E8%BD%AF%E8%80%83%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【软考中级】计算机组成与结构</title>
+    <link href="http://yoursite.com/child/posts/c3141cd/"/>
+    <id>http://yoursite.com/child/posts/c3141cd/</id>
+    <published>2021-03-24T16:00:00.000Z</published>
+    <updated>2022-03-26T08:06:59.470Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、数据的表示&quot;&gt;&lt;a href=&quot;#一、数据的表示&quot; class=&quot;headerlink&quot; title=&quot;一、数据的表示&quot;&gt;&lt;/a&gt;一、数据的表示&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;R进制转十进制【按权展开法】&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;概念&lt;ul&gt;
+&lt;li&gt;R进
+      
+    
+    </summary>
+    
+    
+      <category term="软考笔记" scheme="http://yoursite.com/child/categories/%E8%BD%AF%E8%80%83%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软考软件设计师" scheme="http://yoursite.com/child/tags/%E8%BD%AF%E8%80%83%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微信小程序消息推送开发调用流程</title>
+    <link href="http://yoursite.com/child/posts/663210d/"/>
+    <id>http://yoursite.com/child/posts/663210d/</id>
+    <published>2020-11-19T16:00:00.000Z</published>
+    <updated>2022-03-27T08:36:16.463Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、官方文档&quot;&gt;&lt;a href=&quot;#一、官方文档&quot; class=&quot;headerlink&quot; title=&quot;一、官方文档&quot;&gt;&lt;/a&gt;一、&lt;strong&gt;官方文档&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://developers.weixin.qq
+      
+    
+    </summary>
+    
+    
+      <category term="小程序" scheme="http://yoursite.com/child/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+      <category term="小程序" scheme="http://yoursite.com/child/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记录项目OpenAPI服务调用交互</title>
+    <link href="http://yoursite.com/child/posts/92330f4/"/>
+    <id>http://yoursite.com/child/posts/92330f4/</id>
+    <published>2020-10-22T16:00:00.000Z</published>
+    <updated>2022-03-27T09:38:32.119Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、前置准备&quot;&gt;&lt;a href=&quot;#一、前置准备&quot; class=&quot;headerlink&quot; title=&quot;一、前置准备&quot;&gt;&lt;/a&gt;一、前置准备&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第三方系统需要向党建项目组订阅需要调用的API&lt;/li&gt;
+&lt;li&gt;第三方系统需要向党建项目组提供
+      
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="http://yoursite.com/child/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="解决方案" scheme="http://yoursite.com/child/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用RequestInterceptor实现Feign向下游服务传递Token</title>
+    <link href="http://yoursite.com/child/posts/e27ae85/"/>
+    <id>http://yoursite.com/child/posts/e27ae85/</id>
+    <published>2020-07-12T16:00:00.000Z</published>
+    <updated>2022-03-27T08:16:55.330Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;实现&quot;&gt;&lt;a href=&quot;#实现&quot; class=&quot;headerlink&quot; title=&quot;实现&quot;&gt;&lt;/a&gt;实现&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/child/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/child/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HttpMessageConverter转换器</title>
+    <link href="http://yoursite.com/child/posts/00e5cee/"/>
+    <id>http://yoursite.com/child/posts/00e5cee/</id>
+    <published>2020-06-26T16:00:00.000Z</published>
+    <updated>2022-03-27T08:16:44.630Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、数据序列化和反序列化&quot;&gt;&lt;a href=&quot;#一、数据序列化和反序列化&quot; class=&quot;headerlink&quot; title=&quot;一、数据序列化和反序列化&quot;&gt;&lt;/a&gt;一、数据序列化和反序列化&lt;/h3&gt;&lt;p&gt;&amp;ensp; &amp;ensp; 序列化（serializatio
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/child/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/child/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记录使用Arrays.asList()时异常事故</title>
+    <link href="http://yoursite.com/child/posts/26f10a8/"/>
+    <id>http://yoursite.com/child/posts/26f10a8/</id>
+    <published>2020-06-17T16:00:00.000Z</published>
+    <updated>2022-03-27T08:17:21.563Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、问题背景&quot;&gt;&lt;a href=&quot;#一、问题背景&quot; class=&quot;headerlink&quot; title=&quot;一、问题背景&quot;&gt;&lt;/a&gt;一、问题背景&lt;/h3&gt;&lt;p&gt;&amp;ensp; &amp;ensp; 项目中新的需求，后台登录需要限制非党务工作者进入。首先想到的解决思路，先构造一个
+      
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="http://yoursite.com/child/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="解决方案" scheme="http://yoursite.com/child/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈API安全及版本控制</title>
+    <link href="http://yoursite.com/child/posts/03b1a11/"/>
+    <id>http://yoursite.com/child/posts/03b1a11/</id>
+    <published>2020-05-27T16:00:00.000Z</published>
+    <updated>2022-03-27T08:17:10.856Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h3&gt;&lt;p&gt;&amp;ensp; &amp;ensp; 数据安全是互联网永恒的话题，API直接基于公开的外网请求必将产生，数据被抓包窃取、数据被篡改、数
+      
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="http://yoursite.com/child/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="解决方案" scheme="http://yoursite.com/child/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+  </entry>
+  
+</feed>

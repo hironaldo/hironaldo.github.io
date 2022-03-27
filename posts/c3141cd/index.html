@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>【软考中级】计算机组成与结构 | Ronaldo</title>
+  <meta name="description" content="一、数据的表示 R进制转十进制【按权展开法】  概念 R进制转十进制使用按权展开法，其具体操作方式为:将R^k进制数的每位数值用R形式表示，即幂的底数是R，指数为k，k与该位和小数点之间的距离有关。当该位位于小数点左边，k值是该位和小数点之间数码的个数，而当该位位于小数点右边，k值是负值，其绝对值是该位和小数点之间数码的个数加1。   案例 二进制4792.053 4x2^3 + 7x2^2 +">
+<meta name="keywords" content="软考软件设计师">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【软考中级】计算机组成与结构">
+<meta property="og:url" content="http://yoursite.com/child/posts/c3141cd/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、数据的表示 R进制转十进制【按权展开法】  概念 R进制转十进制使用按权展开法，其具体操作方式为:将R^k进制数的每位数值用R形式表示，即幂的底数是R，指数为k，k与该位和小数点之间的距离有关。当该位位于小数点左边，k值是该位和小数点之间数码的个数，而当该位位于小数点右边，k值是负值，其绝对值是该位和小数点之间数码的个数加1。   案例 二进制4792.053 4x2^3 + 7x2^2 +">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/十进制转R进制.png">
+<meta property="og:image" content="http://yoursite.com/assets/进制之间的关系.png">
+<meta property="og:image" content="http://yoursite.com/assets/数据的表示范围.png">
+<meta property="og:image" content="http://yoursite.com/assets/浮点的运算.png">
+<meta property="og:image" content="http://yoursite.com/assets/计算机结构.png">
+<meta property="og:image" content="http://yoursite.com/assets/Flynn分类法.png">
+<meta property="og:image" content="http://yoursite.com/assets/寻指方式.png">
+<meta property="og:image" content="http://yoursite.com/assets/指令集.png">
+<meta property="og:image" content="http://yoursite.com/assets/结构概念图.png">
+<meta property="og:image" content="http://yoursite.com/assets/编址与计算.png">
+<meta property="og:image" content="http://yoursite.com/assets/串联系统.png">
+<meta property="og:image" content="http://yoursite.com/assets/并联系统.png">
+<meta property="og:image" content="http://yoursite.com/assets/串联+并联系统.png">
+<meta property="og:updated_time" content="2022-03-26T08:06:59.470Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【软考中级】计算机组成与结构">
+<meta name="twitter:description" content="一、数据的表示 R进制转十进制【按权展开法】  概念 R进制转十进制使用按权展开法，其具体操作方式为:将R^k进制数的每位数值用R形式表示，即幂的底数是R，指数为k，k与该位和小数点之间的距离有关。当该位位于小数点左边，k值是该位和小数点之间数码的个数，而当该位位于小数点右边，k值是负值，其绝对值是该位和小数点之间数码的个数加1。   案例 二进制4792.053 4x2^3 + 7x2^2 +">
+<meta name="twitter:image" content="http://yoursite.com/assets/十进制转R进制.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/c3141cd/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/软考中级-计算机组成与结构" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【软考中级】计算机组成与结构
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/c3141cd/" class="article-date">
+	  <time datetime="2021-03-24T16:00:00.000Z" itemprop="datePublished">2021-03-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/软考笔记/">软考笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/软考软件设计师/">软考软件设计师</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/c3141cd/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、数据的表示"><a href="#一、数据的表示" class="headerlink" title="一、数据的表示"></a>一、数据的表示</h3><ul>
+<li><p>R进制转十进制【按权展开法】</p>
+<ul>
+<li>概念<ul>
+<li>R进制转十进制使用按权展开法，其具体操作方式为:将R^k进制数的每位数值用R形式表示，即<font color="red">幂的底数是R，指数为k</font>，k与该位和小数点之间的距离有关。当该位位于小数点左边，<font color="red">k值是该位和小数点之间数码的个数，而当该位位于小数点右边，k值是负值，其绝对值是该位和小数点之间数码的个数加1。</font></li>
+</ul>
+</li>
+<li>案例<ul>
+<li>二进制4792.053<ul>
+<li>4x2^3 + 7x2^2 + 9x2^1 + 2x2^0 + 0x2^-1 + 5x2^-2 + 3x2^-3</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>十进制转R进制【短除法】</p>
+<center><img src="/assets/十进制转R进制.png" alt="image.png"></center></li>
+<li>二进制转八进制【取三合一法】<ul>
+<li>概念<ul>
+<li>从二进制的小数点为分界点，<font color="red">向左（向右）每三位取成一位</font>，接着将这<font color="red">三位二进制按权相加</font>，得到的数就是一位八位二进制数，然后，<font color="red">按顺序进行排列，小数点的位置不变</font>，得到的数字就是我们所求的八进制数。如果向左（向右）取三位后，取到最高（最低）位时候，如果无法凑足三位，可以在小数点最左边（最右边），即<font color="red">整数的最高位（最低位）添0</font>，凑足三位。</li>
+</ul>
+</li>
+<li>案例<ul>
+<li>二进制101110.101<ul>
+<li>从右到左每三位取成一位 101 / 110 / 101<ul>
+<li>101 =&gt; 1x2^2 + 0x2^1 + 1x2^0 =&gt; 5</li>
+<li>110 =&gt; 1x2^2 + 1x2^1 + 0x2^0 =&gt; 6</li>
+<li>101 =&gt; 1x2^2 + 0x2^1 + 1x2^0 =&gt; 5</li>
+</ul>
+</li>
+<li>小数点不变得出的结果是 =&gt; <font color="red">56.5</font></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>八进制转二进制【除2取余法】<ul>
+<li>概念</li>
+<li>八进制数通过<font color="red">除2取余法</font>，得到二进制数，对每个八进制为3个二进制，不足时在最左边补零。</li>
+<li>案例<ul>
+<li>八进制数326 <ul>
+<li>6 =&gt; 110</li>
+<li>2 =&gt; 010</li>
+<li>3 =&gt; 011</li>
+</ul>
+</li>
+<li>结果为 =&gt; <font color="red">11010110</font></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二进制转十六进制【取四合一法】【8421法】<ul>
+<li>概念</li>
+<li>二进制转换成十六进制的方法是，取<font color="red">四合一法</font>，即从二进制的小数点为分界点，<font color="red">向左（或向右）每四位取成一组</font>。组分好以后，对照二进制与十六进制数的对应关系，将<font color="red">四位二进制按权相加</font>，得到的数就是一位十六进制数，然后按顺序排列，<font color="red">小数点的位置不变</font>，最后得到的就是十六进制数。</li>
+<li>案例<ul>
+<li>二进制10101101110<ul>
+<li>从右到左每四位取成一位 1110 / 0110 / 0101<ul>
+<li>1110 =&gt; 0x1 + 1x2 + 1x4 + 1x8 = 14 =&gt; E</li>
+<li>0110 =&gt; 0x1 + 1x2 + 1x4 +0x8 = 6</li>
+<li>0101 =&gt; 1x1 + 0x2 + 1x4 + 0x8 = 5</li>
+<li>结果为 =&gt; <font color="red">56E</font></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>十六进制转二进制【一分为四法】【8421法】<ul>
+<li>十六进制基于0～9 A～F的基数</li>
+<li>概念<ul>
+<li>每一位十六进制数，转换为四位二进制数。</li>
+</ul>
+</li>
+<li>案例<ul>
+<li>十六进制数8<ul>
+<li>8 / 4 / 2 / 1</li>
+<li>1 / 0 / 0 / 0</li>
+</ul>
+</li>
+<li>十六进制数E（14）<ul>
+<li>8 / 4 / 2 / 1</li>
+<li>1 / 1 / 1 / 0</li>
+</ul>
+</li>
+<li>十六进制数E8<ul>
+<li>将8和E分别拆开组合</li>
+<li>11101000</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二进制、八进制、十六进制之间的关系<center><img src="/assets/进制之间的关系.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="二、原码、反码、补码、移码"><a href="#二、原码、反码、补码、移码" class="headerlink" title="二、原码、反码、补码、移码"></a>二、原码、反码、补码、移码</h3><ul>
+<li>概念</li>
+<li>一个数在计算机中的二进制表示形式,  叫做这个数的机器数。码值用8位表示，<font color="red">高位表示符号(0为正数1为负数)</font>。<ul>
+<li>正数的原码、反码、补码一致，移码基于补码将符号位取反。</li>
+<li>负数的反码与原码后7位相反，补码等于反码加一，移码基于补码将符号位取反。</li>
+<li>案例<br>| 数/码 | 数值1 | 数值-1 | 数值1+(-1) |<br>| :—: | :—: | :—: | :—: |<br>| 原码 | 00000001 | 10000001 | 10000010 |<br>| 反码 | 00000001 | 11111110 | 11111111 |<br>| 补码 | 00000001 | 11111111 | 00000000 |<br>| 移码 | 10000001 | 01111111 | 10000000 |</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、-数值表示范围和浮点的运算"><a href="#三、-数值表示范围和浮点的运算" class="headerlink" title="三、 数值表示范围和浮点的运算"></a>三、 数值表示范围和浮点的运算</h3><ul>
+<li><p>数据的表示范围</p>
+<center><img src="/assets/数据的表示范围.png" alt="image.png"></center>
+</li>
+<li><p>浮点的运算</p>
+<center><img src="/assets/浮点的运算.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="四、计算机结构"><a href="#四、计算机结构" class="headerlink" title="四、计算机结构"></a>四、计算机结构</h3><center><img src="/assets/计算机结构.png" alt="image.png"></center>
+
+<ul>
+<li>主机<ul>
+<li>主储存器</li>
+<li>运算器【CPU的重要组成部分】<ul>
+<li>算数逻辑单元ALU<ul>
+<li>数据的算术运算和逻辑运算</li>
+</ul>
+</li>
+<li>累加寄存器AC<ul>
+<li>通用寄存器，为ALU提供一个工作区 ，用在暂存数据</li>
+</ul>
+</li>
+<li>数据缓冲寄存器DR<ul>
+<li>写内存时，暂存指令或数据</li>
+</ul>
+</li>
+<li>状态条件寄存器（特殊情况下可归为控制器）<ul>
+<li>存状态标志与控制标志</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>控制器【CPU的重要组成部分】<ul>
+<li>程序计数器PC<ul>
+<li>存储下一条要执行指令的地址</li>
+</ul>
+</li>
+<li>指令寄存器IR<ul>
+<li>存储即将执行的指令</li>
+</ul>
+</li>
+<li>地址寄存器AR<ul>
+<li>用来保存当前CPU所访问的内存单元的地址</li>
+</ul>
+</li>
+<li>指令编译器IR<ul>
+<li>对指令中的操作码字段进行分析解释</li>
+</ul>
+</li>
+<li>时序部件<ul>
+<li>提供时序控制信号</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>外设<ul>
+<li>辅助储存器</li>
+<li>输入输出设备</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、-计算机体系结构分类"><a href="#五、-计算机体系结构分类" class="headerlink" title="五、 计算机体系结构分类"></a>五、 计算机体系结构分类</h3><ul>
+<li><p>Flynn分类法</p>
+<center><img src="/assets/Flynn分类法.png" alt="image.png"></center>
+
+<ul>
+<li>英文全称<ul>
+<li>单个 =&gt; Single</li>
+<li>多个 =&gt; Multiple</li>
+<li>指令 =&gt; Instructions</li>
+<li>数据 =&gt; Data</li>
+<li>流 =&gt; Stream</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>指令的基本概念<ul>
+<li>一条指令就是<font color="red">机器语言的一个语句</font>，它是一组有意义的<font color="red">二进制代码</font>，指令的基本格式如下:<ul>
+<li>操作码字段<ul>
+<li>指出计算机要执行什么样的操作，比如: 加减乘除法</li>
+</ul>
+</li>
+<li>地址码字段<ul>
+<li>包含各操作数的地址及操作结果的存放地址</li>
+<li>从地址结构的角度可以分为<ul>
+<li>三地址指令<ul>
+<li>OP / A1 / A2 / A3</li>
+<li>操作 / 操作值1 / 操作值2 / 操作值3<ul>
+<li>案例<ul>
+<li>a+b=c </li>
+<li>加法代表指令，abc分别代表值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二地址指令<ul>
+<li>OP / A1 / A2</li>
+<li>操作 / 操作值1 / 操作值2<ul>
+<li>案例<ul>
+<li>a+=b</li>
+<li>加法代表指令，ab分别代表值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一地址指令<ul>
+<li>OP / A1</li>
+<li>操作 / 操作值1   </li>
+</ul>
+</li>
+<li>零地址指令<ul>
+<li>OP</li>
+<li>操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>寻指方式</p>
+<center><img src="/assets/寻指方式.png" alt="image.png"></center>
+</li>
+<li><p>复杂指令集【CISC】和精简指令集【RISC】</p>
+<ul>
+<li>【CISC】<ul>
+<li>复杂 / 指令数量多 / 频率差别大 / 多寻址</li>
+</ul>
+</li>
+<li>【RISC】<ul>
+<li>精简 / 指令数量少 / 操作寄存器 / 单周期 / 少寻址 / 多通用寄存器 / 支持流水线<center><img src="/assets/指令集.png" alt="image.png"></center>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、-流水线"><a href="#六、-流水线" class="headerlink" title="六、 流水线"></a>六、 流水线</h3><ul>
+<li>概念<ul>
+<li>流水线是指在程序执行时<font color="red">多条指令重叠</font>进行操作的一种<font color="red">准并行处理</font>实现技术。即可以同时为多条指令的不同部分进行工作，以提高各部件的利用率和指令的平均执行速度。</li>
+<li>执行一条指令的过程中，最少要经历（取指 -&gt; 分析 -&gt; 执行）三个步骤。</li>
+</ul>
+</li>
+<li>流水线的计算<ul>
+<li>流水线的执行时长<ul>
+<li>流水线周期（△t）为指令执行阶段中执行<font color="red">时间最长</font>的一段。</li>
+</ul>
+</li>
+<li>流水线计算公式<ul>
+<li>一条指令的执行时间 + (指令条数 - 1) * 流水线周期</li>
+<li>理论公式<ul>
+<li>(t1 + t2 + …tk) + (n - 1) * △t</li>
+</ul>
+</li>
+<li>实践公式<ul>
+<li><font color="red">(k + n - 1) * △t </font><ul>
+<li>k为一条指令所包含的部分的多少</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>案例<ul>
+<li>一条指令的执行过程可以分解为取指、分析和执行三步，在<font color="red">取指时间t取指=3△t</font>、<font color="red">分析时间t分析=2△t</font>、<font color="red">执行时间t执行=4△t</font>的情况下，若按<font color="red">串行方式</font>执行，则10条指令全部执行完需要( )△t;若按<font color="red">流水线的方式</font>执行，流水线周期为( ) △t ,则10条指令全部执行完需要( ) △t。<ul>
+<li>第一空 ==&gt; (3 + 2 + 4) x 10 = 90△t</li>
+<li>第二空 ==&gt; 4△t</li>
+<li>第三空 ==&gt; <ul>
+<li>理论公式得出的结果 ==&gt; (3 + 2 + 4) + (10 -1) x 4 = 45△t</li>
+<li>实际公式得出的结果 ==&gt; (3 + 10 - 1) x 4△t = 48△t</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流水线的加速比计算<ul>
+<li>概念<ul>
+<li>流水线的加速比指的是在完成同一批任务时，<font color="red">不使用流水线所用的时间</font>与<font color="red">使用流水线所用的时间</font>之比称之为流水下的加速比。<font color="red">加速比是越大越好的</font>，它呈现了使用流水线的效果的好坏程度。</li>
+</ul>
+</li>
+<li>计算公式<ul>
+<li>S = 不使用流水线执行时间 / 使用流水线的执行时间</li>
+</ul>
+</li>
+<li>案例（题目同上）<ul>
+<li>得出的结果 ==&gt; S = 90 / 45 = 2</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流水线的吞吐率<ul>
+<li>概念<ul>
+<li>流水线的吞吐率指的是在<font color="red">单位时间内</font>流水线所完成的<font color="red">任务数量</font>或<font color="red">输出的结果</font>数量。</li>
+</ul>
+</li>
+<li>计算公式<ul>
+<li>基本公式<ul>
+<li>TP = 指令条数 / 流水线执行时间</li>
+</ul>
+</li>
+<li>最大吞吐率公式<ul>
+<li>TP(max) = 1 / △t</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>案例（题目同上）<ul>
+<li>TP ==&gt; 10 / 45 = 2 / 9</li>
+<li>TP(max) ==&gt; 1 / 4</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="七、-层次化储存结构"><a href="#七、-层次化储存结构" class="headerlink" title="七、 层次化储存结构"></a>七、 层次化储存结构</h3><ul>
+<li><p>结构概念图</p>
+<center><img src="/assets/结构概念图.png" alt="image.png"></center>
+</li>
+<li><p>Cache概念</p>
+<ul>
+<li>Cache（高速缓存）处于<font color="red">CPU和主存之间</font>，它是为了提高访问的速度而提出来的一种设计方案。</li>
+<li>在计算机的存储系统体系中，Cache是访问速度最快的层次(若有寄存器，则寄存器最快)。</li>
+<li>使用Cache改善系统性能的依据是程序的局部性原理。</li>
+<li>CPU要获取数据的流程是先从<font color="red">Cache</font>中找，如果找不到的话，就去<font color="red">内存</font>中找。而从Cache中找到的概率叫做访问命中率，比如说100次访问Cache，有95次能找到要的数据，那么访问命中率就是95%。</li>
+<li>案例<ul>
+<li>我们假设Cache的访问命中率是95%，Cache的存取周期是1ns，主存的存期周期是1ms，求平均周期。<ul>
+<li>1ms = 1000ns</li>
+<li>95% x 1 + (1 - 95%) x 1000 = 50.95ns</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cache映像<ul>
+<li>直接相连映像：硬件电路比较简单，但是<font color="red">冲突率高</font>。</li>
+<li>全相联映像：电路难于设计和实现，只适用于小容量的cache，冲突率较低，空间利用率高 。</li>
+<li>组相联映像：<font color="red">直接相联与全相联的折中</font>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="八、-主存-编址与计算"><a href="#八、-主存-编址与计算" class="headerlink" title="八、 主存-编址与计算"></a>八、 主存-编址与计算</h3><center><img src="/assets/编址与计算.png" alt="image.png"></center>
+
+<h3 id="九、-总线"><a href="#九、-总线" class="headerlink" title="九、 总线"></a>九、 总线</h3><ul>
+<li>一条总线统一时刻仅允许<font color="red">一个设备发送</font>，但是允许<font color="red">多个设备接收</font>。</li>
+<li>总线三大分类:<ul>
+<li>数据总线(Data Bus):在CPU与RAM之间来回传送需要处理或是需要储存的数据。</li>
+<li>地址总线(Address Bus):用来指定在RAM ( Random Access Memory)之中储存的数据的地址。</li>
+<li>控制总线(Control Bus): 将微处理器控制单元( Control Unit )的信号,传送到周边设备，一般常见的为USB Bus和1394 Bus。</li>
+</ul>
+</li>
+</ul>
+<h3 id="十、-串联系统与并联系统可靠度计算"><a href="#十、-串联系统与并联系统可靠度计算" class="headerlink" title="十、 串联系统与并联系统可靠度计算"></a>十、 串联系统与并联系统可靠度计算</h3><ul>
+<li><p>串联系统</p>
+<center><img src="/assets/串联系统.png" alt="image.png"></center>
+
+<ul>
+<li>所有子系统都必须正常运行，整个系统才能正常，只要有一个环节出问题了，整个系统就不能正常运行。</li>
+<li>可靠度<ul>
+<li>将所有子系统的可靠度累乘起来</li>
+</ul>
+</li>
+<li>失效率<ul>
+<li>各个环节失效率累加起来</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>并联系统</p>
+<center><img src="/assets/并联系统.png" alt="image.png"></center>
+
+<ul>
+<li>只要有一个子系统能够正常运行，那整个系统都能正常运行</li>
+<li>可靠度<ul>
+<li>1 - 所有子系统都失效的概率</li>
+</ul>
+</li>
+<li>失效率<ul>
+<li>子系统的失效率累乘，就得到了串联模型的失效率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>串联+并联系统</p>
+<center><img src="/assets/串联+并联系统.png" alt="image.png"></center>
+
+<ul>
+<li>可靠度<ul>
+<li>根据实际情况拆分，再根据不同系统的可靠度公式进行计算</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/c3141cd/" title="【软考中级】计算机组成与结构" target="_blank" rel="external">http://yoursite.com/child/posts/c3141cd/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/c3141c1/" title="【软考中级】数据库系统"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/663210d/" title="微信小程序消息推送开发调用流程"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

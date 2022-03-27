@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>【软考中级】计算机网络 | Ronaldo</title>
+  <meta name="description" content="一、OSI七层模型   层次 名称 功能 主要设备 协议     7 应用层 为应用程序提供服务 / POP3、FTP、HTTP、Telnet、SMTP、DHCP、TFTP、SNMP、DNS   6 表示层 数据的格式与表达、加密、压缩     5 会话层 建立、管理和终止会话     4 传输层 端到端的连接 / TCP、UDP   3 网络层 实现两个端系统之间的数据透明传送，使传输层不需要了">
+<meta name="keywords" content="软考软件设计师">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【软考中级】计算机网络">
+<meta property="og:url" content="http://yoursite.com/child/posts/c3141c2/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、OSI七层模型   层次 名称 功能 主要设备 协议     7 应用层 为应用程序提供服务 / POP3、FTP、HTTP、Telnet、SMTP、DHCP、TFTP、SNMP、DNS   6 表示层 数据的格式与表达、加密、压缩     5 会话层 建立、管理和终止会话     4 传输层 端到端的连接 / TCP、UDP   3 网络层 实现两个端系统之间的数据透明传送，使传输层不需要了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/IP地址.png">
+<meta property="og:image" content="http://yoursite.com/assets/网络规划与设计.png">
+<meta property="og:image" content="http://yoursite.com/assets/网络规划与设计1.png">
+<meta property="og:updated_time" content="2022-03-26T08:17:40.153Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【软考中级】计算机网络">
+<meta name="twitter:description" content="一、OSI七层模型   层次 名称 功能 主要设备 协议     7 应用层 为应用程序提供服务 / POP3、FTP、HTTP、Telnet、SMTP、DHCP、TFTP、SNMP、DNS   6 表示层 数据的格式与表达、加密、压缩     5 会话层 建立、管理和终止会话     4 传输层 端到端的连接 / TCP、UDP   3 网络层 实现两个端系统之间的数据透明传送，使传输层不需要了">
+<meta name="twitter:image" content="http://yoursite.com/assets/IP地址.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/c3141c2/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/软考中级-计算机网络" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【软考中级】计算机网络
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/c3141c2/" class="article-date">
+	  <time datetime="2021-03-28T16:00:00.000Z" itemprop="datePublished">2021-03-29</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/软考笔记/">软考笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/软考软件设计师/">软考软件设计师</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/c3141c2/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、OSI七层模型"><a href="#一、OSI七层模型" class="headerlink" title="一、OSI七层模型"></a>一、OSI<strong>七层模型</strong></h3><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>名称</th>
+<th>功能</th>
+<th>主要设备</th>
+<th>协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>应用层</td>
+<td>为应用程序提供服务</td>
+<td>/</td>
+<td>POP3、FTP、HTTP、Telnet、SMTP、DHCP、TFTP、SNMP、DNS</td>
+</tr>
+<tr>
+<td>6</td>
+<td>表示层</td>
+<td>数据的格式与表达、加密、压缩</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>会话层</td>
+<td>建立、管理和终止会话</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>传输层</td>
+<td>端到端的连接</td>
+<td>/</td>
+<td>TCP、UDP</td>
+</tr>
+<tr>
+<td>3</td>
+<td>网络层</td>
+<td>实现两个端系统之间的数据透明传送，使传输层不需要了解网络中的数据传输和交换技术。这一层开始涉及到IP</td>
+<td>三层交换机、路由器</td>
+<td>ARP、RARP、IP、ICMP、IGMP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数据链路层</td>
+<td>传送以帧位单位的信息</td>
+<td>网桥、交换机、网卡</td>
+<td>PPTP、L2TP、SLIP、PPP</td>
+</tr>
+<tr>
+<td>1</td>
+<td>物理层</td>
+<td>规范传输介质的规格特性（接口大小、形状、引线数量、电压范围等），让比特流能在各种传输媒体之间传输。</td>
+<td>中继器、集线器</td>
+<td>/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二、TCP-IP协议族"><a href="#二、TCP-IP协议族" class="headerlink" title="二、TCP/IP协议族"></a>二、TCP/IP协议族</h3><ul>
+<li>TCP/IP协议称为可靠的连接，因为TCP在建立连接时会进行三次握手</li>
+<li>UDP直接将数据包从源地址发到目标地址，而没有验证反馈的过程，所以UDP的性能较好，但是它的可靠性较差</li>
+<li>DNS（Domain Name System）协议，将域名和IP地址相互映射的一个分布式数据库，能够使人更方便地访问互联网<ul>
+<li>递归查询：服务器必需回答目标IP与域名的映射关系</li>
+<li>迭代查询：服务器收到一次迭代查询回复一次结果，这个结果不一定是目标IP与域名的映射关系，也可以是其他DNS服务器地址</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>TCP/IP模型</th>
+<th>OSI七层模型</th>
+<th>协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络接口层</td>
+<td>数据链路层</td>
+<td>CSMA/CD、TokingRing</td>
+</tr>
+<tr>
+<td>网络接口层</td>
+<td>物理层</td>
+<td>CSMA/CD、TokingRing</td>
+</tr>
+<tr>
+<td>网际层</td>
+<td>网络层</td>
+<td>ARP、RARP、IP、ICMP、IGMP</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>传输层</td>
+<td>TCP、UDP</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>应用层</td>
+<td>网络文件系统=&gt;NFS</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>表示层</td>
+<td>基于TCP=&gt; Telent(23)、SMTP(25)、FTP(20/21)、HTTP(80)、HTTPS(443)、 POP3(110)</td>
+</tr>
+<tr>
+<td>应用层</td>
+<td>会话层</td>
+<td>基于UDP=&gt; SNMP(161)、DNS(53)、DHCP(67)、TFTP(69)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="三、IP地址"><a href="#三、IP地址" class="headerlink" title="三、IP地址"></a>三、IP地址</h3><center><img src="/assets/IP地址.png" alt="image.png"></center>
+
+<ul>
+<li>A类<ul>
+<li>取值范围为0～127</li>
+<li>前8位为网络号，后24位为主机号，所以分配给主机的IP数量是$2^{24} - 2$<ul>
+<li>$2^{24} - 2$：IPv4规定了地址一共有32个bit位，而A类地址规定了前8位是网络号，后面的24个bit位都是主机号。但二进制全0和全1的IP地址有特殊含义，不能分配出去，所以能分配给主机的IP数量就是$2^{24} - 2$个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B类<ul>
+<li>取值范围为128～191</li>
+<li>前16位为网络号，后16位为主机号，所以分配给主机的IP数量是$2^{16} - 2$</li>
+</ul>
+</li>
+<li>C类<ul>
+<li>取值范围为192～223</li>
+<li>前124位为网络号，后8位为主机号，所以分配给主机的IP数量是$2^{8} - 2$</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、子网划分"><a href="#四、子网划分" class="headerlink" title="四、子网划分"></a>四、子网划分</h3><ul>
+<li>子网掩码</li>
+<li>将一个网络划分为多个子网(取部分主机号当子网号)</li>
+<li>将多个网络合并成一个大的网络(取部分网络号当主机号)</li>
+<li>考试中常见题型<ul>
+<li>1、将B类IP地址168.195.0.0划分成27个子网，子网掩码是多少？<ul>
+<li>解题思路<ul>
+<li>由于题干中已经告诉我们是B类IP，所以前16位是网络号</li>
+<li>其次将IP转为转为二进制<ul>
+<li>10101000 11000011 00000000 00000000</li>
+</ul>
+</li>
+<li>现在我们要划分为27个子网(其实就是从主机号借N位当子网号)，取1个bit位，可以得到2个子网，取2个bit位可以得到4个子网，取3个bit位可以得到8个子网……以此类推，所以27个子网需要取5个bit位来做子网号</li>
+</ul>
+</li>
+<li>得到子网掩码为 11111111 11111111 11111000 00000000，将其转为十进制255.255.248.0<ul>
+<li>8个1代表255</li>
+<li>11111000后三位为0，所以可以转换为2^2+2^1+2^0=7，255-7=248</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、将B类IP地址168.195.0.0划分成若干子网，每个子网内有主机700台，子网掩码为多少？<ul>
+<li>解题思路<ul>
+<li>由于题干中已经告诉我们是B类IP，所以前16位是网络号</li>
+<li>已知子网内有主机700台，所以可以套用如下公示2^N - 2 &gt;= 主机数<ul>
+<li>2^N - 2 &gt;= 700，得出N=10</li>
+</ul>
+</li>
+<li>所以主机号需要占10位，剩下的6位可以借给当网络号</li>
+</ul>
+</li>
+<li>得到子网掩码为 11111111 11111111 11111100 00000000，将其转为十进制255.255.252.0<ul>
+<li>8个1代表255</li>
+<li>11111100后二位为0，所以可以转换为2^1+2^0=3，255-3=252<h3 id="五、网络规划与设计"><a href="#五、网络规划与设计" class="headerlink" title="五、网络规划与设计"></a>五、网络规划与设计</h3><center><img src="/assets/网络规划与设计.png" alt="image.png"></center><br><center><img src="/assets/网络规划与设计1.png" alt="image.png"></center></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/c3141c2/" title="【软考中级】计算机网络" target="_blank" rel="external">http://yoursite.com/child/posts/c3141c2/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/c3141c4/" title="【软考中级】信息安全"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/c3141c1/" title="【软考中级】数据库系统"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>微信小程序消息推送开发调用流程 | Ronaldo</title>
+  <meta name="description" content="一、官方文档https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message.html 二、使用 前置准备  登录微信公众平台配置模版【https://mp.weixin.qq.com】 点击添加可以从模板库中选择或者创建等待微信审批    该页面的进入需要翻到最后一页    从公共模">
+<meta name="keywords" content="小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序消息推送开发调用流程">
+<meta property="og:url" content="http://yoursite.com/child/posts/663210d/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、官方文档https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message.html 二、使用 前置准备  登录微信公众平台配置模版【https://mp.weixin.qq.com】 点击添加可以从模板库中选择或者创建等待微信审批    该页面的进入需要翻到最后一页    从公共模">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/小程序1.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序2.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序3.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序4.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序5.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序6.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序7.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序8.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序9.png">
+<meta property="og:image" content="http://yoursite.com/assets/小程序10.png">
+<meta property="og:updated_time" content="2022-03-27T08:36:16.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序消息推送开发调用流程">
+<meta name="twitter:description" content="一、官方文档https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message.html 二、使用 前置准备  登录微信公众平台配置模版【https://mp.weixin.qq.com】 点击添加可以从模板库中选择或者创建等待微信审批    该页面的进入需要翻到最后一页    从公共模">
+<meta name="twitter:image" content="http://yoursite.com/assets/小程序1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/663210d/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-WEB/微信小程序消息推送开发调用流程" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信小程序消息推送开发调用流程
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/663210d/" class="article-date">
+	  <time datetime="2020-11-19T16:00:00.000Z" itemprop="datePublished">2020-11-20</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/小程序/">小程序</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/小程序/">小程序</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/663210d/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、官方文档"><a href="#一、官方文档" class="headerlink" title="一、官方文档"></a>一、<strong>官方文档</strong></h3><p><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message.html</a></p>
+<h3 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、<strong>使用</strong></h3><ul>
+<li><p>前置准备</p>
+<ul>
+<li>登录微信公众平台配置模版【<a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">https://mp.weixin.qq.com</a>】<center><img src="/assets/小程序1.png" alt="image.png"></center></li>
+<li><p>点击添加可以从模板库中选择或者创建等待微信审批</p>
+<center><img src="/assets/小程序2.png" alt="image.png"></center><br><center><img src="/assets/小程序3.png" alt="image.png"></center>
+
+<ul>
+<li>该页面的进入需要翻到最后一页<center><img src="/assets/小程序4.png" alt="image.png"></center>
+</li>
+</ul>
+</li>
+<li><p>从公共模板库中添加一个模板</p>
+<center><img src="/assets/小程序5.png" alt="image.png"></center></li>
+<li>回到列表页后就能看到刚申请到的模板信息【模板ID在之后的接口需要用到】<center><img src="/assets/小程序6.png" alt="image.png"></center></li>
+<li>点击详情可以看到模板参数名【在之后的接口需要用到】<center><img src="/assets/小程序7.png" alt="image.png"></center>
+</li>
+</ul>
+</li>
+<li><p>前端</p>
+<ul>
+<li>需要调用该API引导用户订阅消息<ul>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/subscribe-message/wx.requestSubscribeMessage.html" target="_blank" rel="noopener">wx.requestSubscribeMessage</a></li>
+</ul>
+</li>
+<li><p>伪代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 必须使用点击事件触发该API原因是需要用户授权</span></span><br><span class="line">wx.showModal(&#123;</span><br><span class="line">    title: <span class="string">'提示'</span>,</span><br><span class="line">    content: <span class="string">'是否开启订阅'</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (res.confirm) &#123;</span><br><span class="line">            wx.requestSubscribeMessage(&#123;</span><br><span class="line">                tmplIds: [<span class="string">''</span>], <span class="comment">// 需要订阅的消息模板的ID的集合，一次调用最多可订阅3条消息！</span></span><br><span class="line">                success(res) &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(res)</span><br><span class="line">                &#125;,</span><br><span class="line">                fail(res) &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(res)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>订阅成功返回</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  模板ID: "accept",	// [TEMPLATE_ID]是动态的键，即模板id，值包括'accept'、'reject'、'ban'。'accept'表示用户同意订阅该条id对应的模板消息，'reject'表示用户拒绝订阅该条id对应的模板消息，'ban'表示已被后台封禁。</span><br><span class="line">  errMsg: "requestSubscribeMessage:ok" // 接口调用成功时errMsg值为'requestSubscribeMessage:ok'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>后端</p>
+<ul>
+<li><p>需要调用该API实现消息推送</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>api.weixin.qq.com<span class="regexp">/cgi-bin/m</span>essage<span class="regexp">/subscribe/</span>send?access_token=ACCESS_TOKEN</span><br></pre></td></tr></table></figure>
+<ul>
+<li>官方参数如下<center><img src="/assets/小程序8.png" alt="image.png"></center></li>
+<li>伪代码参数如下</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"touser"</span>: <span class="string">"xxx"</span>,</span><br><span class="line">    <span class="attr">"template_id"</span>: <span class="string">"xxx"</span>,</span><br><span class="line">    <span class="attr">"miniprogram_state"</span>: <span class="string">"developer"</span>,</span><br><span class="line">    <span class="attr">"lang"</span>: <span class="string">"zh_CN"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"thing1"</span>: &#123;</span><br><span class="line">            <span class="attr">"value"</span>: <span class="string">"中共长沙市委常委会"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"date2"</span>: &#123;</span><br><span class="line">            <span class="attr">"value"</span>: <span class="string">"2020年11月20日"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"thing3"</span>: &#123;</span><br><span class="line">            <span class="attr">"value"</span>: <span class="string">"市委大楼"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"thing4"</span>: &#123;</span><br><span class="line">            <span class="attr">"value"</span>: <span class="string">"推进"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"thing5"</span>: &#123;</span><br><span class="line">            <span class="attr">"value"</span>: <span class="string">"请各位委员及时参加"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>PostMan请求示例<center><img src="/assets/小程序9.png" alt="image.png"></center></li>
+<li>登录微信查看消息服务就能接收到该条消息<center><img src="/assets/小程序10.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="三、问题"><a href="#三、问题" class="headerlink" title="三、问题"></a>三、问题</h3><ul>
+<li>消息推送接口中的【<a href="https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN" target="_blank" rel="noopener">access_token</a>】如何获取？<ul>
+<li>官方文档：<a href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html</a></li>
+</ul>
+</li>
+<li>消息推送接口中的【<a href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.htmltouser" target="_blank" rel="noopener">touser</a>】如何获取？<ul>
+<li>官方文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/663210d/" title="微信小程序消息推送开发调用流程" target="_blank" rel="external">http://yoursite.com/child/posts/663210d/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/c3141cd/" title="【软考中级】计算机组成与结构"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/92330f4/" title="记录项目OpenAPI服务调用交互"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

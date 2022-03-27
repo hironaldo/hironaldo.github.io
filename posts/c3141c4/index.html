@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>【软考中级】信息安全 | Ronaldo</title>
+  <meta name="description" content="一、对称型加密 使用同一套密钥 Ke = Kd 加密强度不高，效率高 常见的加密算法：DES、3DES(3重DES)、RC-5、IDEA    二、非对称型加密 密钥必须成对使用(公钥加密、私钥解密)，Ke ≠ Kd 强度高，效率不高 常见的加密算法：RSA、ECC    三、数字签名 只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明">
+<meta name="keywords" content="软考软件设计师">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【软考中级】信息安全">
+<meta property="og:url" content="http://yoursite.com/child/posts/c3141c4/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、对称型加密 使用同一套密钥 Ke = Kd 加密强度不高，效率高 常见的加密算法：DES、3DES(3重DES)、RC-5、IDEA    二、非对称型加密 密钥必须成对使用(公钥加密、私钥解密)，Ke ≠ Kd 强度高，效率不高 常见的加密算法：RSA、ECC    三、数字签名 只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/对称型加密.png">
+<meta property="og:image" content="http://yoursite.com/assets/非对称型加密.png">
+<meta property="og:image" content="http://yoursite.com/assets/数字签名.png">
+<meta property="og:image" content="http://yoursite.com/assets/PKI公钥体系.png">
+<meta property="og:image" content="http://yoursite.com/assets/网络层次.png">
+<meta property="og:updated_time" content="2022-03-26T08:32:26.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【软考中级】信息安全">
+<meta name="twitter:description" content="一、对称型加密 使用同一套密钥 Ke = Kd 加密强度不高，效率高 常见的加密算法：DES、3DES(3重DES)、RC-5、IDEA    二、非对称型加密 密钥必须成对使用(公钥加密、私钥解密)，Ke ≠ Kd 强度高，效率不高 常见的加密算法：RSA、ECC    三、数字签名 只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明">
+<meta name="twitter:image" content="http://yoursite.com/assets/对称型加密.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/c3141c4/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/软考中级-信息安全" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【软考中级】信息安全
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/c3141c4/" class="article-date">
+	  <time datetime="2021-04-01T16:00:00.000Z" itemprop="datePublished">2021-04-02</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/软考笔记/">软考笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/软考软件设计师/">软考软件设计师</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/c3141c4/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、对称型加密"><a href="#一、对称型加密" class="headerlink" title="一、对称型加密"></a>一、对称型加密</h3><ul>
+<li>使用同一套密钥 Ke = Kd</li>
+<li>加密强度不高，效率高</li>
+<li>常见的加密算法：DES、3DES(3重DES)、RC-5、IDEA<center><img src="/assets/对称型加密.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="二、非对称型加密"><a href="#二、非对称型加密" class="headerlink" title="二、非对称型加密"></a>二、非对称型加密</h3><ul>
+<li>密钥必须成对使用(公钥加密、私钥解密)，Ke ≠ Kd</li>
+<li>强度高，效率不高</li>
+<li>常见的加密算法：RSA、ECC<center><img src="/assets/非对称型加密.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="三、数字签名"><a href="#三、数字签名" class="headerlink" title="三、数字签名"></a>三、数字签名</h3><ul>
+<li>只有信息的发送者才能产生的别人无法伪造的一段数字串，这段数字串同时也是对信息的发送者发送信息真实性的一个有效证明</li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html</a><center><img src="/assets/数字签名.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="四、消息摘要"><a href="#四、消息摘要" class="headerlink" title="四、消息摘要"></a>四、消息摘要</h3><ul>
+<li>由单向散列函数加密成固定长度的加密值</li>
+<li>摘要算法是不可逆的</li>
+<li>常见的摘要算法：SHA、MD5</li>
+<li>SHA和MD5的散列值分别为160和128位，所以SHA相对于比较安全</li>
+</ul>
+<h3 id="五、PKI公钥体系"><a href="#五、PKI公钥体系" class="headerlink" title="五、PKI公钥体系"></a>五、PKI公钥体系</h3><ul>
+<li>管理密钥的注册、更新、销毁<center><img src="/assets/PKI公钥体系.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h3 id="六、各个网络层次的安全保障"><a href="#六、各个网络层次的安全保障" class="headerlink" title="六、各个网络层次的安全保障"></a>六、各个网络层次的安全保障</h3><center><img src="/assets/网络层次.png" alt="image.png"></center>
+
+<ul>
+<li>物理层的安全保障一般是通过物理隔离的方式，比如用铺设专线</li>
+<li>从第二层开始就是基本上都是走的协议来保证安全，所谓协议，就是通信的时候封包的一种规则</li>
+<li>SSL，它是跨越了传输层一直延伸到应用层，所以遇到SSL的时候就要注意了，不建议你直接给SSL做一个定论，说他是传输层还是应用层，应该先把SSL抛开，看看其他的备选项是属于那一个层次，然后再来依照题意来分析SSL应该属于那一层。</li>
+</ul>
+<h3 id="七、网络威胁与攻击"><a href="#七、网络威胁与攻击" class="headerlink" title="七、网络威胁与攻击"></a>七、网络威胁与攻击</h3><table>
+<thead>
+<tr>
+<th>威胁名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>重放攻击（ARP）</td>
+<td>所截获的某次合法通信数据拷贝，出于非法的目的而被重新发送</td>
+</tr>
+<tr>
+<td>拒绝服务（DOS）</td>
+<td>对信息或其他合法资源访问被无条件阻止</td>
+</tr>
+<tr>
+<td>窃听</td>
+<td>用各种可能的合法或非法的手段窃取系统中的信息资源和敏感信息。例如对通信线路中传输的信号进行搭线监听，或者利用通信设备在工作过程中产生的电磁泄露截取有用信息等。</td>
+</tr>
+<tr>
+<td>业务流分析</td>
+<td>通过对系统进行长期监听，利用统计分析方法对诸如通信频度、通信的信息流向、通信总量的变化等参数进行研究，从而发现有价值的信息和规律。</td>
+</tr>
+<tr>
+<td>信息泄漏</td>
+<td>信息被泄露或透露给某个非授权的实体</td>
+</tr>
+<tr>
+<td>破坏信息的完整性</td>
+<td>数据被非授权地进行增删、修改或破坏而受到损失</td>
+</tr>
+<tr>
+<td>非授权访问</td>
+<td>某一资源被某个非授权的人、或以非授权的方式使用</td>
+</tr>
+<tr>
+<td>假冒</td>
+<td>通过欺骗通信系统（或用户）达到非法用户冒充合法用户，或者特权小的用户冒充冲特权大的用户的目的，黑客大多是采用假冒进行攻击。</td>
+</tr>
+<tr>
+<td>旁路控制</td>
+<td>攻击者利用系统的安全缺陷或安全性伤的脆弱之处获得非授权的权利或特权。例如，攻击者通过各种攻击手段发现原本应保密，但是却又暴露出的一些系统“特性”。利用这些“特性”，攻击者可以绕过防线侵入系统的内部</td>
+</tr>
+<tr>
+<td>授权侵犯</td>
+<td>被授权以某一目的的使用某一系统或资源的某个人，却将次全县用于其它非授权的目的，也称作“内部攻击”</td>
+</tr>
+<tr>
+<td>特洛伊木马</td>
+<td>软件中含有一个察觉不出的或者无害的程序段，当它被执行时，会破坏用户的安全</td>
+</tr>
+<tr>
+<td>陷阱门</td>
+<td>在某个系统或者某个部件中设置了“机关”，使得当提供特定的输入数据时允许违反安全策略</td>
+</tr>
+<tr>
+<td>抵赖</td>
+<td>这是一种来自用户的攻击，比如：否认自己曾经发布过的某条信息，伪造一份对方的来信等</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/c3141c4/" title="【软考中级】信息安全" target="_blank" rel="external">http://yoursite.com/child/posts/c3141c4/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/e00738f/" title="【ETL】Flink-v1.13.6安装"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/c3141c2/" title="【软考中级】计算机网络"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>【软考中级】数据库系统 | Ronaldo</title>
+  <meta name="description" content="一、三级模式、两级映射  二、E-R模型 椭圆形代表属性 矩形代表实体 菱形代表关系 特殊的矩形代表实体的特殊化    三、关系代数 关系代数基本的运算有： 并：取两个表全部的数据 交：取两个表相交的数据 差：取两个表相差的数据 笛卡尔积：类似于乘法运算，比如有S1和S2两个集合，将S1集合的每一条记录都S2的每一条记录都做一次组合，所得结果就是笛卡尔积 投影：选列的一种操作，比如一个学生表中有姓">
+<meta name="keywords" content="软考软件设计师">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【软考中级】数据库系统">
+<meta property="og:url" content="http://yoursite.com/child/posts/c3141c1/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、三级模式、两级映射  二、E-R模型 椭圆形代表属性 矩形代表实体 菱形代表关系 特殊的矩形代表实体的特殊化    三、关系代数 关系代数基本的运算有： 并：取两个表全部的数据 交：取两个表相交的数据 差：取两个表相差的数据 笛卡尔积：类似于乘法运算，比如有S1和S2两个集合，将S1集合的每一条记录都S2的每一条记录都做一次组合，所得结果就是笛卡尔积 投影：选列的一种操作，比如一个学生表中有姓">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/三级模式、两级映射.png">
+<meta property="og:image" content="http://yoursite.com/assets/E-R模型.png">
+<meta property="og:image" content="http://yoursite.com/assets/E-R模型1.png">
+<meta property="og:image" content="http://yoursite.com/assets/求候选键.png">
+<meta property="og:image" content="http://yoursite.com/assets/范式.png">
+<meta property="og:image" content="http://yoursite.com/assets/第一范式.png">
+<meta property="og:image" content="http://yoursite.com/assets/第二范式.png">
+<meta property="og:image" content="http://yoursite.com/assets/第三范式.png">
+<meta property="og:image" content="http://yoursite.com/assets/并发控制.png">
+<meta property="og:image" content="http://yoursite.com/assets/并发控制1.png">
+<meta property="og:updated_time" content="2022-03-26T08:46:52.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【软考中级】数据库系统">
+<meta name="twitter:description" content="一、三级模式、两级映射  二、E-R模型 椭圆形代表属性 矩形代表实体 菱形代表关系 特殊的矩形代表实体的特殊化    三、关系代数 关系代数基本的运算有： 并：取两个表全部的数据 交：取两个表相交的数据 差：取两个表相差的数据 笛卡尔积：类似于乘法运算，比如有S1和S2两个集合，将S1集合的每一条记录都S2的每一条记录都做一次组合，所得结果就是笛卡尔积 投影：选列的一种操作，比如一个学生表中有姓">
+<meta name="twitter:image" content="http://yoursite.com/assets/三级模式、两级映射.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/c3141c1/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/软考中级-数据库系统" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【软考中级】数据库系统
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/c3141c1/" class="article-date">
+	  <time datetime="2021-03-27T16:00:00.000Z" itemprop="datePublished">2021-03-28</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/软考笔记/">软考笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/软考软件设计师/">软考软件设计师</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/c3141c1/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、三级模式、两级映射"><a href="#一、三级模式、两级映射" class="headerlink" title="一、三级模式、两级映射"></a>一、<strong>三级模式、两级映射</strong></h3><center><img src="/assets/三级模式、两级映射.png" alt="image.png"></center>
+
+<h3 id="二、E-R模型"><a href="#二、E-R模型" class="headerlink" title="二、E-R模型"></a>二、E-R模型</h3><ul>
+<li>椭圆形代表属性</li>
+<li>矩形代表实体</li>
+<li>菱形代表关系</li>
+<li>特殊的矩形代表实体的特殊化</li>
+</ul>
+<center><img src="/assets/E-R模型.png" alt="image.png"></center><br><center><img src="/assets/E-R模型1.png" alt="image.png"></center>
+
+<h3 id="三、关系代数"><a href="#三、关系代数" class="headerlink" title="三、关系代数"></a>三、关系代数</h3><ul>
+<li>关系代数基本的运算有：<ul>
+<li>并：取两个表全部的数据</li>
+<li>交：取两个表相交的数据</li>
+<li>差：取两个表相差的数据</li>
+<li>笛卡尔积：类似于乘法运算，比如有S1和S2两个集合，将S1集合的每一条记录都S2的每一条记录都做一次组合，所得结果就是笛卡尔积</li>
+<li>投影：选列的一种操作，比如一个学生表中有姓名，班级，学号等字段。我们只查其中的姓名和学号，这就是投影</li>
+<li>选择：SQL语句中WHERE后面的筛选条件</li>
+<li>联接：INNER JOIN / LEFT JOIN / RIGHT JOIN</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、规范化理论"><a href="#四、规范化理论" class="headerlink" title="四、规范化理论"></a>四、规范化理论</h3><h4 id="4-0、求候选键"><a href="#4-0、求候选键" class="headerlink" title="4.0、求候选键"></a>4.0、求候选键</h4><ul>
+<li>将关系的函数依赖关系，用“有向图”的方式表示</li>
+<li>找出入度为0的属性，并以该属性集合为起点，尝试遍历有向图，若能正常遍历图中所有结点,则该属性集即为关系模式的候选键</li>
+<li>若入度为0的属性集不能遍历图中所有结点，则需要尝试性的将一些中间结点(既有入度，也有出度的结点)并入入度为0的属性集中,直至该集合能遍历所有结点，集合为候选键</li>
+<li>案例<center><img src="/assets/求候选键.png" alt="image.png"></center>
+
+</li>
+</ul>
+<h4 id="4-1、主属性与非主属性"><a href="#4-1、主属性与非主属性" class="headerlink" title="4.1、主属性与非主属性"></a>4.1、主属性与非主属性</h4><ul>
+<li>组成候选码的属性就是主属性，其它的就是非主属性</li>
+<li>例: 关系模式CSZ(CITY，ST，ZIP)，其属性组上的函数依赖集为: F= { (CITY，ST)→ZIP，ZIP→CITY }<ul>
+<li>{ ST CITY } 可以推导出ZIP</li>
+<li>{ ST ZIP } 可以推导出CITY</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-2、范式"><a href="#4-2、范式" class="headerlink" title="4.2、范式"></a>4.2、范式</h4><center><img src="/assets/范式.png" alt="image.png"></center>
+
+<ul>
+<li>第一范式(1NF)<ul>
+<li>在关系模式R中，当且仅当所有域只包含原子值，即每个属性都是不可再分的数据项，则称关系模式R是第一范式<center><img src="/assets/第一范式.png" alt="image.png"></center></li>
+<li>该例题中将高级职称人数删除即可，才能保证原子性</li>
+</ul>
+</li>
+<li>第二范式(2NF)<ul>
+<li>当且仅当关系模式R是第一范式( 1NF) ，且每一个非主属性完全依赖候选键(没有不完全依赖)时，则称关系模式R是第二范式<center><img src="/assets/第二范式.png" alt="image.png"></center></li>
+<li>该例题所述问题分为两个表即可 Tab1=&gt;学生表{ 学号，课程号，成绩 } Tab2=&gt;学分表{ 课程号，学分 }</li>
+</ul>
+</li>
+<li>第三范式(3NF):<ul>
+<li>当且仅当关系模式R是第二范式( 2NF) ，且R中没有非主属性传递依赖于候选键时，则称关系模式R是第三范式。<center><img src="/assets/第三范式.png" alt="image.png"></center></li>
+<li>该例题所述问题分为两个表即可 Tab1=&gt;学生表{ 学号，姓名，系号 } Tab2=&gt;系表{ 系号，系名，系位置 }</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、SQL语句"><a href="#五、SQL语句" class="headerlink" title="五、SQL语句"></a>五、SQL语句</h3><ul>
+<li>DDL（Data Definition Languages）<ul>
+<li>数据定义语言，这些语句定义了不同的数据段、数据库、表、列、索引等数据库对象的定义。常用的语句关键字主要包括 create、drop、alter等。</li>
+</ul>
+</li>
+<li>DML（Data Manipulation Language）<ul>
+<li>数据操纵语句，用于添加、删除、更新和查询数据库记录，并检查数据完整性，常用的语句关键字主要包括 insert、delete、udpate 和select 等。(增添改查）</li>
+</ul>
+</li>
+<li>DCL（Data Control Language）<ul>
+<li>数据控制语句，用于控制不同数据段直接的许可和访问级别的语句。这些语句定义了数据库、表、字段、用户的访问权限和安全级别。主要的语句关键字包括 grant、revoke 等。</li>
+</ul>
+</li>
+<li><p>并发控制</p>
+<center><img src="/assets/并发控制.png" alt="image.png"></center><br><center><img src="/assets/并发控制1.png" alt="image.png"></center>
+</li>
+<li><p>数据库完整性约束</p>
+<ul>
+<li>实体完整性约束<ul>
+<li>主键 ==&gt; 非空 &amp; 唯一</li>
+</ul>
+</li>
+<li>参照完整性约束<ul>
+<li>外键 ==&gt; 可为空 || 正确的属性</li>
+</ul>
+</li>
+<li>用户自定义完整性约束<ul>
+<li>对数据库字段做约束要求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、数据备份"><a href="#六、数据备份" class="headerlink" title="六、数据备份"></a>六、数据备份</h3><table>
+<thead>
+<tr>
+<th>/</th>
+<th>概念</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冷备份</td>
+<td>冷备份也被称为静态备份，是将数据库正常关闭，在停止状态下，将数据库的文件全部备份（复制）下来</td>
+<td>非常快速的备份方法（只需复制文件）；容易归档（简单复制即可）；容易恢复到某个时间点上（只需将文件再复制回去）；能与归档方法相结合，做数据库“最佳状态”的恢复；低度维护，高度安全</td>
+<td>单独使用时，只能提供到某一时间点伤的恢复；在实施备份的全过程中，数据库必须要做备份而不能做其他工作；若磁盘空间有限只能复制到磁带等其他外部存储设备上，速度会很慢；不能按表或按用户恢复</td>
+</tr>
+<tr>
+<td>热备份</td>
+<td>热备份也称为动态备份，是利用备份软件，在数据库正常运行的状态下，将数据库中的数据文件备份出来</td>
+<td>可在表空间或数据库文件级备份，备份的时间短；备份时数据库仍可使用；可达到妙级恢复（恢复到某一时间点上）；可对几乎所有数据库实体做恢复</td>
+<td>不能出错，否则后果严重；若热备份不成功，所得结果不可用于时间点的恢复；因难与维护，所以要特别小心，不允许“已失败告终”</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/c3141c1/" title="【软考中级】数据库系统" target="_blank" rel="external">http://yoursite.com/child/posts/c3141c1/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/c3141c2/" title="【软考中级】计算机网络"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/c3141cd/" title="【软考中级】计算机组成与结构"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

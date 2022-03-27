@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>记录项目OpenAPI服务调用交互 | Ronaldo</title>
+  <meta name="description" content="一、前置准备 第三方系统需要向党建项目组订阅需要调用的API 第三方系统需要向党建项目组提供各环境调用服务器IP 党建项目组通过后向各第三方系统分配clientId和clientSecret  二、全局响应码API每次调用可能获得正确或错误的返回码，调用方可根据返回码信息调试接口或给API提供方反馈错误     响应码 说明     0000 操作成功   0001 服务异常   0002 操作失">
+<meta name="keywords" content="解决方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录项目OpenAPI服务调用交互">
+<meta property="og:url" content="http://yoursite.com/child/posts/92330f4/index.html">
+<meta property="og:site_name" content="Ronaldo">
+<meta property="og:description" content="一、前置准备 第三方系统需要向党建项目组订阅需要调用的API 第三方系统需要向党建项目组提供各环境调用服务器IP 党建项目组通过后向各第三方系统分配clientId和clientSecret  二、全局响应码API每次调用可能获得正确或错误的返回码，调用方可根据返回码信息调试接口或给API提供方反馈错误     响应码 说明     0000 操作成功   0001 服务异常   0002 操作失">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/openapi1.png">
+<meta property="og:image" content="http://yoursite.com/assets/openapi2.png">
+<meta property="og:image" content="http://yoursite.com/assets/openapi3.png">
+<meta property="og:image" content="http://yoursite.com/assets/openapi4.png">
+<meta property="og:updated_time" content="2022-03-27T09:38:32.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记录项目OpenAPI服务调用交互">
+<meta name="twitter:description" content="一、前置准备 第三方系统需要向党建项目组订阅需要调用的API 第三方系统需要向党建项目组提供各环境调用服务器IP 党建项目组通过后向各第三方系统分配clientId和clientSecret  二、全局响应码API每次调用可能获得正确或错误的返回码，调用方可根据返回码信息调试接口或给API提供方反馈错误     响应码 说明     0000 操作成功   0001 服务异常   0002 操作失">
+<meta name="twitter:image" content="http://yoursite.com/assets/openapi1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/child/posts/92330f4/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Ronaldo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ronaldo</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Football Fans &amp; Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China - YueYang</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech="">
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope="" itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope="" itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Wild programmer 😬</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ETL/">ETL</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案/">解决方案</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件安装/">软件安装</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软考笔记/">软考笔记</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flink-es/" style="font-size: 13px;">flink&es</a> <a href="/tags/flink-mq/" style="font-size: 13px;">flink&mq</a> <a href="/tags/flink-mysql/" style="font-size: 13px;">flink&mysql</a> <a href="/tags/hadoop/" style="font-size: 13px;">hadoop</a> <a href="/tags/hive/" style="font-size: 13px;">hive</a> <a href="/tags/小程序/" style="font-size: 13px;">小程序</a> <a href="/tags/解决方案/" style="font-size: 13.67px;">解决方案</a> <a href="/tags/软考软件设计师/" style="font-size: 14px;">软考软件设计师</a>
+    </div>
+  </div>
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-NOTE/记录项目OpenAPI服务调用交互" class="article article-type-post" itemscope="" itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      记录项目OpenAPI服务调用交互
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/posts/92330f4/" class="article-date">
+	  <time datetime="2020-10-22T16:00:00.000Z" itemprop="datePublished">2020-10-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/解决方案/">解决方案</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/解决方案/">解决方案</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/posts/92330f4/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="一、前置准备"><a href="#一、前置准备" class="headerlink" title="一、前置准备"></a>一、前置准备</h3><ul>
+<li>第三方系统需要向党建项目组订阅需要调用的API</li>
+<li>第三方系统需要向党建项目组提供各环境调用服务器IP</li>
+<li>党建项目组通过后向各第三方系统分配clientId和clientSecret</li>
+</ul>
+<h3 id="二、全局响应码"><a href="#二、全局响应码" class="headerlink" title="二、全局响应码"></a>二、全局响应码</h3><center>API每次调用可能获得正确或错误的返回码，调用方可根据返回码信息调试接口或给API提供方反馈错误</center>
+
+<table>
+<thead>
+<tr>
+<th>响应码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000</td>
+<td>操作成功</td>
+</tr>
+<tr>
+<td>0001</td>
+<td>服务异常</td>
+</tr>
+<tr>
+<td>0002</td>
+<td>操作失败</td>
+</tr>
+<tr>
+<td>0003</td>
+<td>空指针</td>
+</tr>
+<tr>
+<td>0004</td>
+<td>系统异常</td>
+</tr>
+<tr>
+<td>0005</td>
+<td>请求方式不支持</td>
+</tr>
+<tr>
+<td>0006</td>
+<td>幂等拦截</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>数据校验失败</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>数据不完整</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>非法数据（与接口所要求的数据不一致）</td>
+</tr>
+<tr>
+<td>1004</td>
+<td>数据未找到</td>
+</tr>
+<tr>
+<td>8003</td>
+<td>身份令牌不存在</td>
+</tr>
+<tr>
+<td>8004</td>
+<td>令牌错误</td>
+</tr>
+<tr>
+<td>8005</td>
+<td>身份令牌超时</td>
+</tr>
+<tr>
+<td>8006</td>
+<td>没有操作权限</td>
+</tr>
+<tr>
+<td>8007</td>
+<td>账号被锁定</td>
+</tr>
+<tr>
+<td>9001</td>
+<td>主键冲突</td>
+</tr>
+<tr>
+<td>9002</td>
+<td>重复键冲突</td>
+</tr>
+<tr>
+<td>9003</td>
+<td>数据过长</td>
+</tr>
+</tbody>
+</table>
+<h3 id="三、API共性说明"><a href="#三、API共性说明" class="headerlink" title="三、API共性说明"></a>三、API共性说明</h3><ul>
+<li>公共请求头</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>请求头名称</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json;charset=utf-8</td>
+</tr>
+<tr>
+<td>x-pb-client</td>
+<td>党建提供的第三方客户端ID</td>
+</tr>
+<tr>
+<td>x-pb-nonce</td>
+<td>32位随机值</td>
+</tr>
+<tr>
+<td>x-pb-sign</td>
+<td>签名</td>
+</tr>
+<tr>
+<td>x-pb-timestamp</td>
+<td>毫秒时间戳（与服务器时间不能相隔180s）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>签名生成<ul>
+<li>获取请求的参数<ul>
+<li>Query方式<ul>
+<li>截取URL问号后面的参数 </li>
+<li>如<a href="https://www.api.com?name=foobar&amp;age=20" target="_blank" rel="noopener">https://www.api.com?name=foobar&amp;age=20</a> 则截取name=foobar&amp;age=20即可</li>
+</ul>
+</li>
+<li>Body方式<ul>
+<li>获取请求体里面全部参数，进行ASCII码排序。0～9&lt;A～Z&lt;a～z。</li>
+<li>如 {age=20, content=foobar, dataId=foobar, publisher=foobar} 去掉原有参数的引号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>构建签名（先使用sha256进行加密再用MD5进行加密后转大写）<ul>
+<li>Java 使用org.apache.commons.codec.digest包</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * clientSecret 客户端秘钥</span></span><br><span class="line"><span class="comment"> * params       请求的参数</span></span><br><span class="line"><span class="comment"> * nonce        随机值</span></span><br><span class="line"><span class="comment"> * timestamp    时间戳</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">generateSign</span><span class="params">(String clientSecret, Object params, String nonce, String timestamp)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> DigestUtils.sha256Hex(clientSecret + params + nonce + timestamp).toUpperCase();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>调用示例</p>
+<ul>
+<li><p>PostMan发送GET请求</p>
+<ul>
+<li><p>Pre-request Script</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 时间戳</span></span><br><span class="line"><span class="keyword">var</span> timestamp = (<span class="built_in">Date</span>.now()).toFixed();</span><br><span class="line"><span class="comment">// 客户端秘钥</span></span><br><span class="line"><span class="keyword">var</span> clientSecret = <span class="string">'your clientSecret'</span>;</span><br><span class="line"><span class="comment">// 36位随机数</span></span><br><span class="line"><span class="keyword">var</span> nonce = randomVal();</span><br><span class="line"><span class="comment">// 签名值</span></span><br><span class="line"><span class="keyword">var</span> sign = CryptoJS.SHA256(clientSecret + <span class="string">'your parameters'</span> + nonce + timestamp).toString(CryptoJS.enc.Hex).toUpperCase();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置到postman全局变量</span></span><br><span class="line">postman.setGlobalVariable(<span class="string">"timestamp"</span>, timestamp)</span><br><span class="line">postman.setGlobalVariable(<span class="string">"nonce"</span>, nonce)</span><br><span class="line">postman.setGlobalVariable(<span class="string">"sign"</span>, sign)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成36位随机数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomVal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'</span>.replace(<span class="regexp">/[xy]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> r = <span class="built_in">Math</span>.random()*<span class="number">16</span>|<span class="number">0</span>, v = c == <span class="string">'x'</span> ? r : (r&amp;<span class="number">0x3</span>|<span class="number">0x8</span>);</span><br><span class="line">        <span class="keyword">return</span> v.toString(<span class="number">16</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>响应结果</p>
+<center><img src="/assets/openapi1.png" alt="image.png"></center>
+</li>
+</ul>
+</li>
+<li><p>Java发送GET请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendGETRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 客户端ID</span></span><br><span class="line">    String clientId = <span class="string">"your clientId"</span>;</span><br><span class="line">    <span class="comment">// 客户端秘钥</span></span><br><span class="line">    String clientSecret = <span class="string">"your clientSecret"</span>;</span><br><span class="line">    <span class="comment">// 时间戳</span></span><br><span class="line">    String timeStamp = String.valueOf(System.currentTimeMillis());</span><br><span class="line">    <span class="comment">// 36位随机数</span></span><br><span class="line">    String nonce = UUID.randomUUID().toString();</span><br><span class="line">    <span class="comment">// signq签名</span></span><br><span class="line">    String sign = DigestUtils.sha256Hex(clientSecret + parameters + nonce + timeStamp).toUpperCase();</span><br><span class="line">    <span class="comment">// 请求参数</span></span><br><span class="line">    String parameters = <span class="string">"pageNum=1&amp;pageSize=20"</span>;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 构建请求头</span></span><br><span class="line">    HttpHeaders headers = <span class="keyword">new</span> HttpHeaders();</span><br><span class="line">    headers.set(<span class="string">"Content-Type"</span>, <span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">    headers.set(<span class="string">"Accept"</span>, <span class="string">"application/json"</span>);</span><br><span class="line">    headers.add(<span class="string">"x-pb-client"</span>, clientId);</span><br><span class="line">    headers.add(<span class="string">"x-pb-nonce"</span>, nonce);</span><br><span class="line">    headers.add(<span class="string">"x-pb-timestamp"</span>, timeStamp);</span><br><span class="line">    headers.add(<span class="string">"x-pb-sign"</span>, sign);</span><br><span class="line">	</span><br><span class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.exchange(<span class="string">"api address"</span>, HttpMethod.GET, <span class="keyword">new</span> HttpEntity&lt;&gt;(<span class="keyword">null</span>, headers), String.class);</span><br><span class="line">    System.out.println(responseEntity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Java发送POST请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendPOSTRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 客户端ID</span></span><br><span class="line">    String clientId = <span class="string">"your clientId"</span>;</span><br><span class="line">    <span class="comment">// 客户端秘钥</span></span><br><span class="line">    String clientSecret = <span class="string">"your clientSecret"</span>;</span><br><span class="line">    <span class="comment">// 时间戳</span></span><br><span class="line">    String timeStamp = String.valueOf(System.currentTimeMillis());</span><br><span class="line">    <span class="comment">// 36位随机数</span></span><br><span class="line">    String nonce = UUID.randomUUID().toString();</span><br><span class="line">    <span class="comment">// signq签名</span></span><br><span class="line">    String sign = DigestUtils.sha256Hex(clientSecret + parameters + nonce + timeStamp).toUpperCase();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 请求参数</span></span><br><span class="line">    SortedMap&lt;String, Object&gt; parameters = <span class="keyword">new</span> TreeMap&lt;&gt;();</span><br><span class="line">    parameters.put(<span class="string">"parameter1"</span>, <span class="number">1</span>);</span><br><span class="line">    parameters.put(<span class="string">"parameter2"</span>, <span class="number">2</span>);</span><br><span class="line">    parameters.put(<span class="string">"parameter3"</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构建请求头</span></span><br><span class="line">    HttpHeaders headers = <span class="keyword">new</span> HttpHeaders();</span><br><span class="line">    headers.set(<span class="string">"Content-Type"</span>, <span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">    headers.set(<span class="string">"Accept"</span>, <span class="string">"application/json"</span>);</span><br><span class="line">    headers.add(<span class="string">"x-pb-client"</span>, clientId);</span><br><span class="line">    headers.add(<span class="string">"x-pb-nonce"</span>, nonce);</span><br><span class="line">    headers.add(<span class="string">"x-pb-timestamp"</span>, timeStamp);</span><br><span class="line">    headers.add(<span class="string">"x-pb-sign"</span>, sign);</span><br><span class="line"></span><br><span class="line">    ResponseEntity&lt;String&gt; responseEntity = restTemplate.exchange(<span class="string">"api address"</span>, HttpMethod.POST, <span class="keyword">new</span> HttpEntity&lt;&gt;(parameters, headers), String.class);</span><br><span class="line">    System.out.println(responseEntity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>正常情况返回的JSON包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"resultCode"</span>: <span class="string">"0000"</span>,</span><br><span class="line">    <span class="string">"resultMessage"</span>: <span class="string">"操作成功"</span>,</span><br><span class="line">    <span class="string">"resultObj"</span>: <span class="keyword">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>出参说明</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>resultCode</td>
+<td>响应码</td>
+</tr>
+<tr>
+<td>resultMessage</td>
+<td>响应信息</td>
+</tr>
+<tr>
+<td>resultObj</td>
+<td>响应对象</td>
+</tr>
+</tbody>
+</table>
+<h3 id="四、第三方系统与本系统跳转交互"><a href="#四、第三方系统与本系统跳转交互" class="headerlink" title="四、第三方系统与本系统跳转交互"></a>四、第三方系统与本系统跳转交互</h3><center>考虑双方系统安全前提，所有跳转交互应基于token。交互流程图及请求示例伪代码如下：</center>
+
+<ul>
+<li><p>交互流程图</p>
+<center><img src="/assets/openapi2.png" alt="image.png"></center>
+</li>
+<li><p>第三方系统前端（触发业务跳转）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">"https://www.api.com/redirects"</span>,</span><br><span class="line">    type: <span class="string">"POST"</span>,</span><br><span class="line">    headers: &#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    data: <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">        token: <span class="string">'token'</span>,</span><br><span class="line">        redirectUrl: <span class="string">'https://target-address.com/index.html'</span></span><br><span class="line">    &#125;),</span><br><span class="line">    dataType: <span class="string">'JSON'</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (res.resultCode === <span class="string">'0000'</span>) &#123;</span><br><span class="line">            <span class="built_in">window</span>.location.href = res.resultObj;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            alert(res);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        alert(err);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目标系统后端（执行逻辑处理）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span>(<span class="string">"/redirects"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">systemRedirect</span><span class="params">(@RequestBody RedirectDTO redirectDTO)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 1、调用第三方系统校验token的接口</span></span><br><span class="line">        ResponseEntity tokenCheckResponse = restTemplate.getForObject(<span class="string">"https://www.other.api.com/token-check"</span>, ResponseEntity.class);</span><br><span class="line">        <span class="keyword">if</span> (HttpStatus.OK.equals(tokenCheckResponse.getStatusCode())) &#123;</span><br><span class="line">            <span class="comment">// 2、调用第三方系统获取用户信息的接口</span></span><br><span class="line">            ResponseEntity getUserResponse = restTemplate.getForObject(<span class="string">"https://www.other.api.com/users/infos"</span>, ResponseEntity.class);</span><br><span class="line">            <span class="keyword">if</span> (HttpStatus.OK.equals(getUserResponse.getStatusCode())) &#123;</span><br><span class="line">                <span class="comment">// 3、得到用户信息</span></span><br><span class="line">                Object body = getUserResponse.getBody();</span><br><span class="line">                <span class="comment">// 4、查询本系统用户信息</span></span><br><span class="line">                UserInfo user = queryDB(body);</span><br><span class="line">                <span class="comment">// 5、构建Token</span></span><br><span class="line">                String token = buildToken(user);</span><br><span class="line">                <span class="comment">// 6、返回给第三方系统前端，由第三方执行跳转</span></span><br><span class="line">                <span class="keyword">return</span> <span class="string">"https://target-address.com?redirectCode="</span> + token + <span class="string">"&amp;redirectUrl="</span> + redirectDTO.getRedirectUrl() + <span class="string">"&amp;tips="</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"跳转异常请重试"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目标系统前端（执行地址跳转）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> token = getQueryVariable(<span class="string">'redirectCode'</span>);</span><br><span class="line"><span class="keyword">let</span> redirectUrl = getQueryVariable(<span class="string">'redirectUrl'</span>);</span><br><span class="line"><span class="keyword">if</span> (token !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">"https://www.api.com/users/infos"</span>,</span><br><span class="line">        type: <span class="string">"GET"</span>,</span><br><span class="line">        headers: &#123;</span><br><span class="line">            <span class="string">'Authorization'</span>: token</span><br><span class="line">        &#125;,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (res.resultCode === <span class="string">'0000'</span>) &#123;</span><br><span class="line">              	<span class="comment">// 1、将用户信息存入本地储存</span></span><br><span class="line">              	<span class="built_in">window</span>.localStorage.setItem(<span class="string">'user'</span>, res.resultObj);</span><br><span class="line">              	<span class="comment">// 2、执行第三方系统要跳转的页面</span></span><br><span class="line">                <span class="built_in">window</span>.location.href = redirectUrl;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                alert(res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">            alert(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关于第三方提供的校验token或获取用户信息API（仅支持GET和POST请求）</p>
+<ul>
+<li><p>Token必须由请求头Authorization传递</p>
+<center><img src="/assets/openapi3.png" alt="image.png"></center>
+</li>
+<li><p>校验tokenJSON包返回格式（需严格遵守程序会根据该固定格式解析）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "code": "0", // 成功必须定义为字符串的0</span><br><span class="line">    "data": true or false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取用户信息JSON包返回格式（需严格遵守程序会根据该固定格式解析）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "code": "0", // 成功必须定义为字符串的0</span><br><span class="line">    "data": 身份证 or 手机号 // 其他情况下返回 null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用示例</p>
+<ul>
+<li><p>Pre-request Script</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 时间戳</span></span><br><span class="line"><span class="keyword">var</span> timestamp = (<span class="built_in">Date</span>.now()).toFixed();</span><br><span class="line"><span class="comment">// 客户端秘钥</span></span><br><span class="line"><span class="keyword">var</span> clientSecret = <span class="string">"your clientSecret"</span>;</span><br><span class="line"><span class="comment">// 36位随机数</span></span><br><span class="line"><span class="keyword">var</span> nonce = randomVal();</span><br><span class="line"><span class="comment">// 参数</span></span><br><span class="line"><span class="keyword">var</span> parameters = <span class="string">'&#123;redirectUrl=https://www.target-address.com, token=your token&#125;'</span>;</span><br><span class="line"><span class="comment">// sign签名</span></span><br><span class="line"><span class="keyword">var</span> sign = CryptoJS.SHA256(clientSecret + parameters + nonce + timestamp).toString(CryptoJS.enc.Hex).toUpperCase();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置到postman全局变量</span></span><br><span class="line">postman.setGlobalVariable(<span class="string">"timestamp"</span>, timestamp)</span><br><span class="line">postman.setGlobalVariable(<span class="string">"nonce"</span>, nonce)</span><br><span class="line">postman.setGlobalVariable(<span class="string">"sign"</span>, sign)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成36位随机数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomVal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'</span>.replace(<span class="regexp">/[xy]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> r = <span class="built_in">Math</span>.random()*<span class="number">16</span>|<span class="number">0</span>, v = c == <span class="string">'x'</span> ? r : (r&amp;<span class="number">0x3</span>|<span class="number">0x8</span>);</span><br><span class="line">        <span class="keyword">return</span> v.toString(<span class="number">16</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>响应结果</p>
+<center><img src="/assets/openapi4.png" alt="image.png"></center></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/child/posts/92330f4/" title="记录项目OpenAPI服务调用交互" target="_blank" rel="external">http://yoursite.com/child/posts/92330f4/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Ronaldo</span><small class="ml-1x">Football Fans &amp; Java Developer</small></a></h3>
+        <div>Cristiano Ronaldo Super Fans</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom="">
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/posts/663210d/" title="微信小程序消息推送开发调用流程"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/posts/e27ae85/" title="使用RequestInterceptor实现Feign向下游服务传递Token"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/hironaldo" target="_blank" title="Github"><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:yoursite.com/child ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
